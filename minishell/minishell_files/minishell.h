@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/04/30 11:49:08 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:06:51 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,15 @@
 
 typedef struct s_data
 {
-	int		fd[2];
-	int		pid1;
-	int		pid2;
-	char	**args1;
-	char	**args2;
-	char	*cmd1;
-	char	*cmd2;
-	char	*infile;
-	char	*outfile;
-}			t_data;
+	int	test;
+}		t_data;
 
-char		**ft_token_split(char *str);
+// front end
+//  ft_token_split
+char	**ft_token_split(char *str, char **env);
+char	**special_char_treatment(char **array, int *str_nb, char **str,
+			char **env);
+char	**split_str(char **array, int *str_nb, char **new_str);
 
 /* *********************************** */
 /*                                     */
