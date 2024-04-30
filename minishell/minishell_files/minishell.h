@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/04/24 15:22:37 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:49:08 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
+# define SPECIAL_CHAR "|<>$\'\""
 
 typedef struct s_data
 {
@@ -45,9 +46,7 @@ typedef struct s_data
 	char	*outfile;
 }			t_data;
 
-int			process1(t_data *d);
-int			process2(t_data *d);
-void		ft_free_data(t_data *d);
+char		**ft_token_split(char *str);
 
 /* *********************************** */
 /*                                     */

@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 15:31:16 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/04/29 11:27:07 by gneto-co         ###   ########.fr       */
+/*   Created: 2024/04/29 10:25:19 by gneto-co          #+#    #+#             */
+/*   Updated: 2024/04/29 10:57:29 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// gets a str and a char
-// if that char is on the str
-//   return the char position on the str
-// if is not
-//   return 0
-char	*ft_strchr(const char *s, int c)
-{
-	char		uc;
-	const char	*str;
+#include "../libft.h"
 
-	uc = (char)c;
-	str = (const char *)s;
-	while (*str)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
+{
+	void	*new_ptr;
+
+	new_ptr = malloc(new_size);
+	if (new_ptr == NULL)
 	{
-		if (*str == uc)
-			return ((char *)str);
-		str++;
+		return (NULL);
 	}
-	if (*str == uc)
-		return ((char *)str);
-	else
-		return (0);
+	ft_memcpy(new_ptr, ptr, old_size);
+	free(ptr);
+	return (new_ptr);
 }

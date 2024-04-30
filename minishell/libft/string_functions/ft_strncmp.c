@@ -6,14 +6,15 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:46:17 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/04/09 09:37:01 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:23:01 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-// if is equal return 0
-// if isn't return the difference
+// that function compare 2 strings
+// if they are equal return 0
+// if they are not return the difference
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -24,8 +25,9 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-// if is equal return 0
-// if isn't return the difference
+// that function compare 2 strings
+// if they are equal return 0
+// if they are not return the difference
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;

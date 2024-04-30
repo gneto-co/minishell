@@ -6,7 +6,7 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/09 10:51:25 by gneto-co          #+#    #+#              #
-#    Updated: 2024/04/09 09:37:51 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/04/29 13:50:04 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,8 @@ ft_memmove \
 ft_memchr \
 ft_memcmp \
 ft_calloc \
+ft_realloc \
+var_size \
 ))
 
 PRINT_FUNCTIONS = $(addprefix print_functions/, $(addsuffix .c, \
@@ -94,6 +96,7 @@ ft_strmapi \
 ft_striteri \
 ft_multi_strjoin \
 ft_free_array \
+ft_char_dup \
 ))
 
 VERIFICATION_FUNCTIONS = $(addprefix verification_functions/, $(addsuffix .c, \

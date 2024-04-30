@@ -6,7 +6,7 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/09 10:51:25 by gneto-co          #+#    #+#              #
-#    Updated: 2024/04/24 15:59:31 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/04/29 11:00:15 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,7 @@ back_end/, \
 ) \
 $(addprefix \
 front_end/, \
-	example_file3 \
-	example_file4 \
+	ft_token_split/ft_token_split \
 ) \
 )
 

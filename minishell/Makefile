@@ -6,7 +6,7 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/04/24 15:59:06 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/04/30 15:53:38 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ $(PROJECT):
 
 CC = cc
 OBJ = $(PROJECT) $(LIBFT)
-CFLAGS = -Wall -Wextra -Werror -g -I$(LIBFT_PATH) -I$(PROJECT_PATH)
+CFLAGS = -Wall -Wextra -Werror -g -I$(LIBFT_PATH) -I$(PROJECT_PATH) -fsanitize=address -fsanitize=leak
 
 #--------------------------------------------------------------------------------
 #---------------------------------MAKEFILE RULES---------------------------------
