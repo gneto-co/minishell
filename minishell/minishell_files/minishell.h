@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/04/30 17:06:51 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:49:56 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ typedef struct s_data
 	int	test;
 }		t_data;
 
-// front end
-//  ft_token_split
+// -minishell_files
+int		ft_error(int nb);
+// --front end
+// ---ft_token_split
 char	**ft_token_split(char *str, char **env);
-char	**special_char_treatment(char **array, int *str_nb, char **str,
-			char **env);
+char	*get_next_text(char *str, int *ii, int mod);
+char	*special_char_treatment(char *str, int *ii, char **env);
 char	**split_str(char **array, int *str_nb, char **new_str);
 
 /* *********************************** */

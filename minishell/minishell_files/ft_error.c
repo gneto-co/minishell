@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/03 16:44:21 by gneto-co         ###   ########.fr       */
+/*   Created: 2024/05/02 17:25:55 by gneto-co          #+#    #+#             */
+/*   Updated: 2024/05/02 17:38:34 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_error(int nb)
 {
-	char	**array;
-	int		i;
-
-	i = 0;
-	array = ft_token_split("'a''a'", env);
-	// array = ft_token_split(">>00> $PAGER 00", env);
-	ft_putstr("\n\n");
-	while (array[i])
-		ft_printf("¦%s¦\n", array[i++]);
-	ft_printf("¦%s¦\n", array[i++]);
-    ft_free_array(array);
+	if (nb == 1)
+		ft_printf("\033[91m%s\033[0m\n", "minishell: parse error,"
+			"quotes are never closed");
+	else
+		ft_printf("\nDeu mrd\n");
+	return (-1);
 }

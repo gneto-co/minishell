@@ -6,7 +6,7 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/09 10:51:25 by gneto-co          #+#    #+#              #
-#    Updated: 2024/04/30 17:16:19 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/05/02 17:32:15 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = minishell.a
 
 PROJECT_SOURCES = $(addsuffix .c, \
 main \
+ft_error \
 \
 $(addprefix \
 back_end/, \

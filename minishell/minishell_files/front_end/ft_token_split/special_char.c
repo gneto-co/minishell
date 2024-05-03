@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/04/30 17:21:59 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:43:26 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,63 +24,168 @@ static char	*get_system_var(char *var_name, char **env)
 	return (ft_strdup(str + ft_strlen(var_name) + 1));
 }
 
-static void	special_char_1_2_3(char **str, char **new_str)
+// | < >
+static char	*special_char_1_2_3(char *str, int *ii)
 {
-	if (**str == '|')
-		*new_str = ft_strdup("|");
-	if (**str == '>')
-	{
-		if (*(*str + 1) == '>')
+	int		i;
+	char	*new_str;
+
+	i = *ii;
+	new_str = NULL;
+	if (str[i] == '|')
+		new_str = ft_strdup("|");
+	if (str[i] == '>')
+		if (str[i + 1] == '>')
 		{
-			*new_str = ft_strdup(">>");
-			(*str)++;
+			new_str = ft_strdup(">>");
+			i++;
 		}
 		else
-			*new_str = ft_strdup(">");
-	}
-	if (**str == '<')
-	{
-		if (*(*str + 1) == '<')
+			new_str = ft_strdup(">");
+	if (str[i] == '<')
+		if (str[i + 1] == '<')
 		{
-			*new_str = ft_strdup("<<");
-			(*str)++;
+			new_str = ft_strdup("<<");
+			i++;
 		}
 		else
-			*new_str = ft_strdup("<");
-	}
+			new_str = ft_strdup("<");
+	*ii = i + 1;
+	return (new_str);
 }
 
-static void	special_char_4(char **str, char **new_str, char **env)
+// $
+static char	*special_char_4(char *str, int *ii, char **env)
 {
+	int		i;
 	char	*var_name;
+	char	*new_str;
 
+	i = *ii;
 	var_name = NULL;
-	if (**str == '$')
+	new_str = NULL;
+	// skip the $
+	i++;
+	// if theres nothing after $ its just a $
+	if (!str[i] || str[i] == ' ')
+		new_str = ft_strdup("$");
+	else
 	{
-		// if theres nothing after $ its just a $
-		if (*(*str + 1) == ' ' || !*(*str + 1))
-			*new_str = ft_strdup("$");
-		else
-		{
-			// get the var name after the $
-			while (*(*str + 1) != ' ' && !ft_strchr(SPECIAL_CHAR, *(*str + 1))
-				&& *(*str + 1))
-			{
-				var_name = ft_str_char_join_free(var_name, *(*str + 1));
-				(*str)++;
-			}
-			// get the text correspondent to $(var_name)
-			// if theres nothing do nothing
-			*new_str = get_system_var(var_name, env);
-			free(var_name);
-		}
+		// get the var name after the $
+		var_name = get_next_text(str, &i, 1);
+		// ft_printf("┼───┤var_name├───┤%s├───\n│\n", var_name);
+		// if theres a var_name: get the text correspondent to $(var_name)
+		// if there is nothing on that name it will be NULL
+		if (var_name)
+			new_str = get_system_var(var_name, env);
+		free(var_name);
 	}
+	*ii = i;
+	return (new_str);
 }
 
-char	**special_char_treatment(char **array, int *str_nb, char **str,
-		char **env)
+// '
+static char	*special_char_5(char *str, int *ii, char **env)
 {
 	char	*new_str;
+	char	*text_read;
+	char	*var_read;
+	int		i;
+
+	i = *ii;
+	new_str = NULL;
+	text_read = NULL;
+	// skip '
+	i++;
+	while (1)
+	{
+		// get text from str
+		text_read = get_next_text(str, &i, 2);
+		// if we got text put it on newstr
+		// ft_printf("┼───┤sc5: text_read├───┤%s├───\n│\n", text_read);
+		if(text_read)
+		{
+			new_str = ft_strjoin_free(new_str, text_read);
+			free(text_read);
+		}
+		// if theres not see why
+		else
+		{
+			if (!str[i])
+			{
+				ft_error(1);
+				if (new_str)
+					free(new_str);
+				new_str = NULL;
+				break ;
+			}
+			else if (str[i] == '\'')
+			{
+				i++;
+				break ;
+			}
+			else if (str[i] == '$')
+			{
+				var_read = special_char_4(str, &i, env);
+				new_str = ft_strjoin_free(new_str, var_read);
+				free(var_read);
+			}
+		}
+		// i++;
+		// ft_printf("┼───┤sc5: new_str├───┤%s├───\n│\n", new_str);
+	}
+	*ii = i;
+	return (new_str);
+}
+
+// "
+static char	*special_char_6(char *str, int *ii, char **env)
+{
+	char	*new_str;
+	char	*text_read;
+	int		i;
+
+	i = *ii;
+	new_str = NULL;
+	text_read = NULL;
+	// skip '
+	i++;
+	while (1)
+	{
+		// get text from str
+		text_read = get_next_text(str, &i, 3);
+		// if we got text put it on newstr
+		if(text_read)
+		{
+			new_str = ft_strjoin_free(new_str, text_read);
+			free(text_read);
+		}
+		// if theres not see why
+		else
+		{
+			if (!str[i])
+			{
+				ft_error(1);
+				if (new_str)
+					free(new_str);
+				new_str = NULL;
+				break ;
+			}
+			else if (str[i] == '\"')
+			{
+				i++;
+				break ;
+			}
+		}
+	}
+	*ii = i;
+	return (new_str);
+}
+
+char	*special_char_treatment(char *str, int *ii, char **env)
+{
+	char	*new_str;
+	int		i;
 
 	/*
 	options:
@@ -94,8 +199,17 @@ char	**special_char_treatment(char **array, int *str_nb, char **str,
 			if there is any $ take their value and use it as part of the str,
 			new str (text)
 	*/
-	special_char_1_2_3(str, &new_str);
-	special_char_4(str, &new_str, env);
-	array = split_str(array, str_nb, &new_str);
-	return (array);
+	i = *ii;
+	new_str = NULL;
+	if (str[i] == '|' || str[i] == '<' || str[i] == '>')
+		new_str = special_char_1_2_3(str, &i);
+	if (str[i] == '$')
+		new_str = special_char_4(str, &i, env);
+	if (str[i] == '\'')
+		new_str = special_char_5(str, &i, env);
+	if (str[i] == '\"')
+		new_str = special_char_6(str, &i, env);
+	*ii = i;
+	// ft_printf("┼──┤new_str├───┤%s├───\n│\n", new_str);
+	return (new_str);
 }
