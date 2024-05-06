@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:15:42 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/03 17:07:36 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/06 16:26:29 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 
 int	ft_exit(char **args)
 {
+	t_tree *current;
+
+	current = tree;
+	while (current && current.next)
+	{
+		if (/* condition */)
+		{
+			/* code */
+		}
+
+		current = current.next;
+	}
+
 	(void)	args;
 	return (0);
 }

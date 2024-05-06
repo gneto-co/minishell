@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/03 11:16:16 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/06 10:22:07 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int	main(int ac, char **av, char **env)
 	ft_printf("'%s'\n", array[i++]);
     ft_free_array(array);
 
-	lsh_loop();
+	lsh_loop(); //NOTE
 }

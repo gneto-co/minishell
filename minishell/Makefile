@@ -6,7 +6,7 @@
 #    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/05/03 14:54:35 by yadereve         ###   ########.fr        #
+#    Updated: 2024/05/06 15:37:28 by yadereve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ main \
 $(addprefix \
 back_end/, \
 	example_file1 \
-	my_command \
+	mini_command \
 ) \
 $(addprefix \
 front_end/, \
