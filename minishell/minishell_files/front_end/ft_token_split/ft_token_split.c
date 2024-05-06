@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_token_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 10:10:45 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/04/30 17:02:43 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:42:40 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	**split_str(char **array, int *str_nb, char **new_str)
 		return (array);
 	temp = NULL;
 	// split new_str
+
 	temp = ft_realloc(array, var_size('s', *str_nb + 1), var_size('s', *str_nb
 				+ 2));
 	if (temp == NULL)

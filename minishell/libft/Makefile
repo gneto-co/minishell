@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/09 10:51:25 by gneto-co          #+#    #+#              #
-#    Updated: 2024/04/29 13:50:04 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/05/03 14:21:24 by yadereve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,7 +126,10 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) 
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJECTS)
 	@ar rcs $(NAME) $(OBJECTS)
 
 clean:

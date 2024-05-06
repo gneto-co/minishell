@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/04/30 17:06:51 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:16:41 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <sys/types.h>
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
@@ -38,12 +39,15 @@ typedef struct s_data
 	int	test;
 }		t_data;
 
+void	lsh_loop(void);
 // front end
 //  ft_token_split
 char	**ft_token_split(char *str, char **env);
 char	**special_char_treatment(char **array, int *str_nb, char **str,
 			char **env);
 char	**split_str(char **array, int *str_nb, char **new_str);
+
+// back_end
 
 /* *********************************** */
 /*                                     */

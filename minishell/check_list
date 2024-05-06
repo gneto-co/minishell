@@ -1,0 +1,64 @@
+
+
+1. Histórico de comandos:
+	* Armazenar o histórico dos comandos introduzidos pelo utilizador.
+	* Permitir que o utilizador veja o histórico.
+
+// TODO <gneto-co>
+2. Processamento de caracteres e construções especiais:
+	* Desenvolver lógica para tratar caracteres especiais e construções como
+	aspas simples e duplas, etc.
+
+
+3. Redireccionamento de entrada e saída:
+	* Implementar o tratamento do redireccionamento da entrada (<), do
+	redireccionamento da saída (>), da anexação da saída (>>) e da entrada
+	através de "here documents" (<<).
+
+
+4. Comandos em pipes:
+	* Desenvolver um mecanismo para execução de comandos em pipes, onde a saída
+	de um comando se torna a entrada para outro comando através do símbolo |.
+
+
+5. Variável $?
+	* Implementar o acesso ao valor do código de saída do último comando frontal
+	 executado usando $?
+
+
+6. Processamento de sinais:
+	* Desenvolver o tratamento de sinais como Ctrl-C, Ctrl-D e Ctrl-\ de acordo
+	com o seu comportamento na Bourne shell (bash).
+
+// TODO <yadereve>
+7. Comandos embutidos:
+	* Implementar comandos embutidos como cd, exit, echo -n, pwd, export, unset
+	e env.
+
+
+8. Exibir resultados de comandos:
+	* Implementar a apresentação dos resultados dos comandos no ecrã (erros,
+	etc.).
+
+
+
+// TODO: todo task
+// FIXME: fix bug
+// MARK: copy this code
+// NOTE: don-t remove
+// LEAK: leak
+// [ ]: Pending
+// [x]: Done
+
+
+External functs:
+readline, rl_clear_history, rl_on_new_line,
+rl_replace_line, rl_redisplay, add_history,
+printf, malloc, free, write, access, open, read,
+close, fork, wait, waitpid, wait3, wait4, signal,
+sigaction, sigemptyset, sigaddset, kill, exit,
+getcwd, chdir, stat, lstat, fstat, unlink, execve,
+dup, dup2, pipe, opendir, readdir, closedir,
+strerror, perror, isatty, ttyname, ttyslot, ioctl,
+getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
+tgetnum, tgetstr, tgoto, tputs

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/04/30 16:39:19 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/05/03 14:54:35 by yadereve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,32 +14,8 @@ NAME = minishell
 GREEN = \033[32m
 NC = \033[0m
 ORANGE = \033[31m\033[33m
+BLUE = \033[1;34m
 PECKED = ----------
-
-#--------------------------------------------------------------------------------
-#-----------------------------LIBFT SOURCE FILES---------------------------------
-#--------------------------------------------------------------------------------
-
-LIBFT_PATH = ./libft
-
-LIBFT = $(LIBFT_PATH)/libft.a
-
-$(LIBFT):
-	@$(MAKE) -C $(LIBFT_PATH) --no-print-directory
-
-
-#--------------------------------------------------------------------------------
-#----------------------------PROJECT SOURCE FILES--------------------------------
-#--------------------------------------------------------------------------------
-
-
-PROJECT_PATH = ./$(NAME)_files
-
-PROJECT = $(PROJECT_PATH)/$(NAME).a
-
-$(PROJECT):
-	@$(MAKE) -C $(PROJECT_PATH) --no-print-directory
-
 
 #--------------------------------------------------------------------------------
 #--------------------------COMPILATION SPECIFICATIONS----------------------------
@@ -47,35 +23,76 @@ $(PROJECT):
 # -fsanitize=address
 
 CC = cc
-OBJ = $(PROJECT) $(LIBFT)
-CFLAGS = -Wall -Wextra -Werror -g -I$(LIBFT_PATH) -I$(PROJECT_PATH)
+CFLAGS = -Wall -Wextra -Werror -g3
+RM = rm -rf
+
+#--------------------------------------------------------------------------------
+#----------------------------PROJECT SOURCE FILES--------------------------------
+#--------------------------------------------------------------------------------
+
+SRC_DIR = minishell_files
+SRC = $(addprefix $(SRC_DIR)/, $(SRCPROJECT_SOURCES))
+SRCPROJECT_SOURCES = $(addsuffix .c, \
+main \
+\
+$(addprefix \
+back_end/, \
+	example_file1 \
+	my_command \
+) \
+$(addprefix \
+front_end/, \
+	$(addprefix ft_token_split, \
+	/ft_token_split \
+	/special_char \
+	) \
+) \
+)
+
+OBJ_DIR = objects
+OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:$(SRC_DIR)/%.c=%.o))
+
+#--------------------------------------------------------------------------------
+#-----------------------------LIBFT FILES----------------------------------------
+#--------------------------------------------------------------------------------
+
+LIBFT = ./libft/libft.a
 
 #--------------------------------------------------------------------------------
 #---------------------------------MAKEFILE RULES---------------------------------
 #--------------------------------------------------------------------------------
-
-.DEFAULT_GOAL := all
+# .DEFAULT_GOAL := all
 
 all: $(NAME)
 
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) $(CFLAGS) -o $(NAME)
-	@clear
+$(NAME): $(OBJ) $(LIBFT)
+	@echo "$(BLUE)           __         __         __           __ __"
+	@echo ".--------.|__|.-----.|__|.-----.|  |--.-----.|  |  |"
+	@echo "|        ||  ||     ||  ||__ --||     |  -__||  |  |"
+	@echo "|__|__|__||__||__|__||__||_____||__|__|_____||__|__|\n$(NC)"
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 	@echo "$(GREEN)\n$(PECKED) $(NAME) compiled and ready! $(PECKED)$(NC)"
 
+$(LIBFT):
+	@$(MAKE) -C ./libft --no-print-directory
+
 clean:
-	@rm -f $(NAME)
-	@$(MAKE) -C $(LIBFT_PATH) clean --no-print-directory
-	@$(MAKE) -C $(PROJECT_PATH) clean --no-print-directory
-	@clear
+	@$(RM) $(OBJ_DIR)
+	@$(MAKE) -C ./libft clean --no-print-directory
+#	@clear
 	@echo "$(ORANGE)\n$(PECKED) program objects cleaned $(PECKED)$(NC)"
 
+
 fclean: clean
-	@rm -f $(NAME)
-	@$(MAKE) -C $(LIBFT_PATH) fclean --no-print-directory
-	@$(MAKE) -C $(PROJECT_PATH) fclean --no-print-directory
-	@clear
+	@$(RM) $(NAME)
+	@$(MAKE) -C ./libft fclean --no-print-directory
+#	@clear
 	@echo "$(ORANGE)\n$(PECKED) program name and objects cleaned $(PECKED)$(NC)"
-	
+
 re: fclean all
+
+.PHONY: all clean fclean re
