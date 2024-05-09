@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/03 15:16:41 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:46:50 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,13 @@ char	**special_char_treatment(char **array, int *str_nb, char **str,
 char	**split_str(char **array, int *str_nb, char **new_str);
 
 // back_end
-
+int	ft_cd(char **args);
+int	ft_exit(char **args);
+int	ft_pwd(char **args);
+int	ft_echo(char **args);
+int	ft_export(char **args);
+int	ft_unset(char **args);
+int	ft_env(char **args);
 /* *********************************** */
 /*                                     */
 /*                 END                 */

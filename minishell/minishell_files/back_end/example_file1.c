@@ -6,15 +6,11 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:04:12 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/06 15:58:42 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:47:47 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	ft_cd(char **args);
-int	ft_exit(char **args);
-int	ft_pwd(char **args);
 
 /*
 	List of builtin commands, followed by their corresponding functions.
@@ -22,13 +18,21 @@ int	ft_pwd(char **args);
 char	*builtin_str[] = {
 	"cd",
 	"exit",
-	"pwd"
+	"pwd",
+	"echo",
+	"export",
+	"unset",
+	"env"
 };
 
 int	(*builtin_func[]) (char **) = {
 	&ft_cd,
 	&ft_exit,
-	&ft_pwd
+	&ft_pwd,
+	&ft_echo,
+	&ft_export,
+	&ft_unset,
+	&ft_env
 };
 
 int lsh_num_builtins() {
