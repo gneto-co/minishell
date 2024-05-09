@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/09 15:09:02 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/09 19:16:14 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <sys/types.h>
 
 // int
 # define INT_MAX 2147483647
@@ -53,6 +54,14 @@ char	*get_next_text(char *str, int *ii, int mod);
 char	*special_char_treatment(char *str, int *ii, char **env);
 char	**split_str(char **array, int *str_nb, char **new_str);
 
+// back_end
+int	ft_cd(char **args);
+int	ft_exit(char **args);
+int	ft_pwd(char **args);
+int	ft_echo(char **args);
+int	ft_export(char **args);
+int	ft_unset(char **args);
+int	ft_env(char **args);
 /* *********************************** */
 /*                                     */
 /*                 END                 */

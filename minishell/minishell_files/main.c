@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/09 15:11:34 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/09 19:20:26 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	main(int ac, char **av, char **env)
 	char	**array;
 	int		i;
 	t_data	data;
+	(void)	ac;
+	(void)	av;
 
 	i = 0;
 	data_init(&data);
@@ -34,4 +36,5 @@ int	main(int ac, char **av, char **env)
 		ft_printf("¦%s¦\n", array[i++]);
 	}
     ft_free_array(array);
+	// lsh_loop(); //NOTE
 }
