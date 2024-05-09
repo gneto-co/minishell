@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/03 11:49:56 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/09 15:09:02 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,26 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+// int
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
+// boll
+# define bool int
+# define true 1
+# define false 0
+// special char
 # define SPECIAL_CHAR "|<>$\'\""
 
 typedef struct s_data
 {
-	int	test;
+	bool	error;
 }		t_data;
 
-// -minishell_files
+// minishell_files
 int		ft_error(int nb);
-// --front end
-// ---ft_token_split
-char	**ft_token_split(char *str, char **env);
+//  front end
+//   ft_token_split
+char	**ft_token_split(char *str, t_data *data, char **env);
 char	*get_next_text(char *str, int *ii, int mod);
 char	*special_char_treatment(char *str, int *ii, char **env);
 char	**split_str(char **array, int *str_nb, char **new_str);

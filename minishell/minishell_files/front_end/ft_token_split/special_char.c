@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/03 16:43:26 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/09 15:19:58 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static char	*special_char_4(char *str, int *ii, char **env)
 	{
 		// get the var name after the $
 		var_name = get_next_text(str, &i, 1);
-		// ft_printf("┼───┤var_name├───┤%s├───\n│\n", var_name);
 		// if theres a var_name: get the text correspondent to $(var_name)
 		// if there is nothing on that name it will be NULL
 		if (var_name)
@@ -102,7 +101,6 @@ static char	*special_char_5(char *str, int *ii, char **env)
 		// get text from str
 		text_read = get_next_text(str, &i, 2);
 		// if we got text put it on newstr
-		// ft_printf("┼───┤sc5: text_read├───┤%s├───\n│\n", text_read);
 		if(text_read)
 		{
 			new_str = ft_strjoin_free(new_str, text_read);
@@ -116,6 +114,8 @@ static char	*special_char_5(char *str, int *ii, char **env)
 				ft_error(1);
 				if (new_str)
 					free(new_str);
+				if (text_read)
+					free(text_read);
 				new_str = NULL;
 				break ;
 			}
@@ -131,8 +131,6 @@ static char	*special_char_5(char *str, int *ii, char **env)
 				free(var_read);
 			}
 		}
-		// i++;
-		// ft_printf("┼───┤sc5: new_str├───┤%s├───\n│\n", new_str);
 	}
 	*ii = i;
 	return (new_str);
@@ -168,6 +166,8 @@ static char	*special_char_6(char *str, int *ii, char **env)
 				ft_error(1);
 				if (new_str)
 					free(new_str);
+				ft_printf("-> %s \n", text_read);
+				free(text_read);
 				new_str = NULL;
 				break ;
 			}
@@ -203,13 +203,12 @@ char	*special_char_treatment(char *str, int *ii, char **env)
 	new_str = NULL;
 	if (str[i] == '|' || str[i] == '<' || str[i] == '>')
 		new_str = special_char_1_2_3(str, &i);
-	if (str[i] == '$')
+	else if (str[i] == '$')
 		new_str = special_char_4(str, &i, env);
-	if (str[i] == '\'')
+	else if (str[i] == '\'')
 		new_str = special_char_5(str, &i, env);
-	if (str[i] == '\"')
+	else if (str[i] == '\"')
 		new_str = special_char_6(str, &i, env);
 	*ii = i;
-	// ft_printf("┼──┤new_str├───┤%s├───\n│\n", new_str);
-	return (new_str);
+	return (new_str); 
 }
