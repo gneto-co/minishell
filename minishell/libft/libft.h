@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:30:24 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/04/29 13:49:45 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/10 11:39:24 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int					ft_printf(const char *str, ...);
 // read_funcitons
 char				*get_next_line(int fd);
 size_t				ft_filelen(char *file_name);
+char				*ft_get_path(void);
+char				*ft_get_folder_name(void);
 
 // string_functions
 int long			ft_strlen(const char *str);

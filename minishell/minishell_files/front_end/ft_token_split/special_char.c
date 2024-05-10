@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   special_char.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/09 19:24:34 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/10 11:33:57 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,25 @@ static char	*special_char_1_2_3(char *str, int *ii)
 	if (str[i] == '|')
 		new_str = ft_strdup("|");
 	if (str[i] == '>')
+	{
 		if (str[i + 1] == '>')
 		{
 			new_str = ft_strdup(">>");
 			i++;
 		}
-		else //FIXME error: add explicit braces to avoid dangling else [-Werror,-Wdangling-else]
+		else
 			new_str = ft_strdup(">");
+	}
 	if (str[i] == '<')
+	{
 		if (str[i + 1] == '<')
 		{
 			new_str = ft_strdup("<<");
 			i++;
 		}
-		else //FIXME error: add explicit braces to avoid dangling else [-Werror,-Wdangling-else]
+		else
 			new_str = ft_strdup("<");
+	}
 	*ii = i + 1;
 	return (new_str);
 }
@@ -101,7 +105,7 @@ static char	*special_char_5(char *str, int *ii, char **env)
 		// get text from str
 		text_read = get_next_text(str, &i, 2);
 		// if we got text put it on newstr
-		if(text_read)
+		if (text_read)
 		{
 			new_str = ft_strjoin_free(new_str, text_read);
 			free(text_read);
@@ -137,7 +141,7 @@ static char	*special_char_5(char *str, int *ii, char **env)
 }
 
 // "
-static char	*special_char_6(char *str, int *ii, char **env) //FIXME error: unused parameter 'env' [-Werror,-Wunused-parameter]
+static char	*special_char_6(char *str, int *ii)
 {
 	char	*new_str;
 	char	*text_read;
@@ -153,7 +157,7 @@ static char	*special_char_6(char *str, int *ii, char **env) //FIXME error: unuse
 		// get text from str
 		text_read = get_next_text(str, &i, 3);
 		// if we got text put it on newstr
-		if(text_read)
+		if (text_read)
 		{
 			new_str = ft_strjoin_free(new_str, text_read);
 			free(text_read);
@@ -208,7 +212,7 @@ char	*special_char_treatment(char *str, int *ii, char **env)
 	else if (str[i] == '\'')
 		new_str = special_char_5(str, &i, env);
 	else if (str[i] == '\"')
-		new_str = special_char_6(str, &i, env);
+		new_str = special_char_6(str, &i);
 	*ii = i;
 	return (new_str);
 }

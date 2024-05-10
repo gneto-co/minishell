@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
+#    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/09 10:51:25 by gneto-co          #+#    #+#              #
-#    Updated: 2024/05/03 14:21:24 by yadereve         ###   ########.fr        #
+#    Updated: 2024/05/10 11:38:41 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,8 @@ $(addprefix get_next_line/, \
 	get_next_line_utils \
 	) \
 ft_filelen \
+ft_get_folder_name \
+ft_get_path \
 ))
 
 STRING_FUNCTIONS = $(addprefix string_functions/, $(addsuffix .c, \

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
+#    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/05/09 19:14:54 by yadereve         ###   ########.fr        #
+#    Updated: 2024/05/10 11:47:11 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ PECKED = ----------
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
+LDFLAGS = -lreadline
 RM = rm -rf
 
 #--------------------------------------------------------------------------------
@@ -68,14 +69,14 @@ all: $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)
 
 $(NAME): $(OBJ) $(LIBFT)
 	@echo "$(BLUE)           __         __         __           __ __"
 	@echo ".--------.|__|.-----.|__|.-----.|  |--.-----.|  |  |"
 	@echo "|        ||  ||     ||  ||__ --||     |  -__||  |  |"
 	@echo "|__|__|__||__||__|__||__||_____||__|__|_____||__|__|\n$(NC)"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(LDFLAGS)
 	@echo "$(GREEN)\n$(PECKED) $(NAME) compiled and ready! $(PECKED)$(NC)"
 
 $(LIBFT):
