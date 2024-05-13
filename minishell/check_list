@@ -37,8 +37,14 @@
 // TODO <yadereve>
 
 8. [ ] Comandos embutidos:
-	* Implementar comandos embutidos como cd, exit, echo -n, pwd, export, unset
-	e env.
+	* Implementar comandos embutidos como
+		[x] exit
+		[x] echo -n
+		[x] pwd
+		[ ] env
+		[ ] cd
+		[ ] unset
+		[ ] export
 
 
 9. [ ] Exibir resultados de comandos:

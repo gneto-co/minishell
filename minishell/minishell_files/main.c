@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/13 15:00:54 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:51:04 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 static void	data_init(t_data *data)
 {
 	data->error = false;
+	data->exit = false;
+	data->exit_code = 0;
 }
 
 // that function will return a str with the prompt
@@ -43,7 +45,7 @@ static void	input_use(char *input, t_data *data, char **env)
 	//
 	// initialize vars
 	//
-	i = 0;
+	// i = 0;
 	//
 	// transform input into tokens
 	//
@@ -56,10 +58,12 @@ static void	input_use(char *input, t_data *data, char **env)
 		//
 		// by now, it is only printing the args
 		//
-		ft_putstr("\n\n");
+		/* ft_putstr("\n\n");
 		while (array[i])
 			ft_printf("%s%s\n", array[i++], "\x1b[7m%\x1b[0m");
 		ft_printf("%s%s\n\n", array[i++], "\x1b[7m%\x1b[0m");
+		*/
+		ft_execute(array, data, env);
 	}
 	//
 	// free stuff
@@ -75,11 +79,9 @@ static void	input_use(char *input, t_data *data, char **env)
 static void	readline_loop(t_data *data, char **env)
 {
 	char	*input;
-	char	*input_str;
-	t_data	data;
+	// char	*input_str;
+	// t_data	data;
 
-	(void)ac;
-	(void)av;
 	// initialize
 	char	*last_input;
 	char	*prompt_str;
@@ -92,7 +94,7 @@ static void	readline_loop(t_data *data, char **env)
 	//
 	// readline loop
 	//
-	while (1)
+	while (!data->exit)
 	{
 		//
 		// read a line from stdin
@@ -126,8 +128,6 @@ static void	readline_loop(t_data *data, char **env)
 		// free input
 		//
 		free(input);
-		if (ft_data()->exit)
-			break ;
 	}
 	//
 	// free stuff
@@ -149,5 +149,5 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	data_init(&data);
 	readline_loop(&data, env);
-	return (1);
+	exit(data.exit_code);
 }

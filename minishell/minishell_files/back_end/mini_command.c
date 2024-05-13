@@ -6,97 +6,94 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:15:42 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/13 14:25:39 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/13 20:08:46 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_env(char **args)
+void	ft_env(char **env)
 {
-	(void)	args;
-	return (0);
-}
+	int i;
 
-int	ft_unset(char **args)
-{
-	(void)	args;
-	return (0);
-}
-
-int	ft_export(char **args)
-{
-	(void)	args;
-	return (0);
-}
-
-int	ft_echo(char **args)
-{
-	int	i;
-
-	i = 1;
-	if (args[1] != NULL)
+	i = 0;
+	while (env[i])
 	{
-		if (!ft_strcmp(args[1], "&?"))
-		{
-			ft_printf("%d", ft_data()->exit_code);
-			return (0);
-		}
+		ft_printf("%s\n", env[i++]);
+	}
+}
+
+void	ft_unset(char **args)
+{
+	(void)	args;
+}
+
+void	ft_export(char **args)
+{
+	(void)	args;
+}
+
+void	ft_echo(char **args)
+{
+	int		i;
+	bool	flag;
+
+	flag = false;
+	i = 1;
+	while (!ft_strcmp(args[i], "-n"))
+	{
+		flag = true;
+		i++;
 	}
 	while (args[i])
 	{
 		ft_printf("%s", args[i]);
 		if (args[++i])
-			ft_putchar(' ');
+			ft_printf(" ");
 	}
-	ft_putchar('\n');
-	return(0);
+	if (flag == false)
+		ft_printf("\n");
 }
 
-int	ft_pwd(char **args)
+void	ft_pwd(void)
 {
-	(void)	args;
 	char	cwd[1024];
 
-	getcwd(cwd, sizeof(cwd));
-	ft_printf("%s\n", cwd);
-	return (0);
-}
-
-int	ft_exit(char **args)
-{
-	/* перевіляти чи останій exit*/
-	// t_tree *current;
-
-	// current = tree;
-	// while (current && current.next)
-	// {
-	// 	if (/* condition */)
-	// 	{
-	// 		/* code */
-	// 	}
-
-	// 	current = current.next;
-	// }
-
-	// (void)	args;
-	if (args[1])
-	{
-		ft_data()->exit = false;
-		return (ft_atoi(args[1]));
-	}
+	if (getcwd(cwd, sizeof(cwd)))
+		ft_printf("%s\n", cwd);
 	else
-	{
-		ft_data()->exit = false;
-		return (0);
-	}
+		perror("getcwd");
 }
 
-int	ft_cd(char **args)
+void	ft_exit(char **args, t_data *data)
+{
+	int i;
+
+	i = -1;
+	ft_printf("exit\n");
+	while (args[1] && args[1][++i])
+	{
+		if (!ft_isdigit(args[1][i]))
+		{
+			ft_putendl_fd(" numeric argument required", STDERR_FILENO);
+			data->exit_code = 255;
+			break ;
+		}
+		else if (args[1][i + 1] == '\0' && args[2])
+		{
+			ft_putendl_fd(" too many arguments", STDERR_FILENO);
+			data->exit_code = 1;
+		}
+		else if (args[1][i + 1] == '\0')
+			data->exit_code = ft_atoi(args[1]);
+	}
+	data->exit = true;
+}
+
+void	ft_cd(char **args)
 {
 	if (args[1] == NULL)
 		ft_printf("minishell: expected argument to \"cd\"\n");
 	else if (chdir(args[1]) != 0)
 		perror("minishell: cd");
-	return (0);
 }
