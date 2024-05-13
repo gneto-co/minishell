@@ -1,5 +1,5 @@
 
-
+// [ ] <gneto-co>
 1. Histórico de comandos:
 	* Armazenar o histórico dos comandos introduzidos pelo utilizador.
 	* Permitir que o utilizador veja o histórico.
@@ -9,23 +9,23 @@
 	* Desenvolver lógica para tratar caracteres especiais e construções como
 	aspas simples e duplas, etc.
 
-
+// [x] <gneto-co>
 3. Redireccionamento de entrada e saída:
 	* Implementar o tratamento do redireccionamento da entrada (<), do
 	redireccionamento da saída (>), da anexação da saída (>>) e da entrada
 	através de "here documents" (<<).
 
-
+// TODO <yadereve>
 4. Comandos em pipes:
 	* Desenvolver um mecanismo para execução de comandos em pipes, onde a saída
 	de um comando se torna a entrada para outro comando através do símbolo |.
 
-
+// TODO <yadereve>
 5. Variável $?
 	* Implementar o acesso ao valor do código de saída do último comando frontal
 	 executado usando $?
 
-
+// [ ] <gneto-co>
 6. Processamento de sinais:
 	* Desenvolver o tratamento de sinais como Ctrl-C, Ctrl-D e Ctrl-\ de acordo
 	com o seu comportamento na Bourne shell (bash).
@@ -34,6 +34,8 @@
 7. Comandos embutidos:
 	* Implementar comandos embutidos como cd, exit, echo -n, pwd, export, unset
 	e env.
+// TODO <yadereve>
+7.1. Função que lê cada coisa e decide o que fazer
 
 
 8. Exibir resultados de comandos:

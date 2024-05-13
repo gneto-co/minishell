@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:15:42 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/09 16:37:38 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:25:39 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,42 @@
 int	ft_env(char **args)
 {
 	(void)	args;
-	return (1);
+	return (0);
 }
 
 int	ft_unset(char **args)
 {
 	(void)	args;
-	return (1);
+	return (0);
 }
 
 int	ft_export(char **args)
 {
 	(void)	args;
-	return (1);
+	return (0);
 }
 
 int	ft_echo(char **args)
 {
-	// (void)	args;
 	int	i;
 
-	i = 0;
-	while (args[++i])
+	i = 1;
+	if (args[1] != NULL)
 	{
-		ft_printf("%s\n", args[i]);
+		if (!ft_strcmp(args[1], "&?"))
+		{
+			ft_printf("%d", ft_data()->exit_code);
+			return (0);
+		}
 	}
-	return(1);
+	while (args[i])
+	{
+		ft_printf("%s", args[i]);
+		if (args[++i])
+			ft_putchar(' ');
+	}
+	ft_putchar('\n');
+	return(0);
 }
 
 int	ft_pwd(char **args)
@@ -50,7 +60,7 @@ int	ft_pwd(char **args)
 
 	getcwd(cwd, sizeof(cwd));
 	ft_printf("%s\n", cwd);
-	return (1);
+	return (0);
 }
 
 int	ft_exit(char **args)
@@ -71,8 +81,15 @@ int	ft_exit(char **args)
 
 	// (void)	args;
 	if (args[1])
-		exit(ft_atoi(args[1]));
-	return (0);
+	{
+		ft_data()->exit = false;
+		return (ft_atoi(args[1]));
+	}
+	else
+	{
+		ft_data()->exit = false;
+		return (0);
+	}
 }
 
 int	ft_cd(char **args)
@@ -81,5 +98,5 @@ int	ft_cd(char **args)
 		ft_printf("minishell: expected argument to \"cd\"\n");
 	else if (chdir(args[1]) != 0)
 		perror("minishell: cd");
-	return (1);
+	return (0);
 }
