@@ -1,42 +1,47 @@
+// TODO <gneto-co>
 
-
-1. Histórico de comandos:
+1. [x] Histórico de comandos:
 	* Armazenar o histórico dos comandos introduzidos pelo utilizador.
 	* Permitir que o utilizador veja o histórico.
 
-// TODO <gneto-co>
-2. Processamento de caracteres e construções especiais:
+2. [x] Processamento de caracteres e construções especiais:
 	* Desenvolver lógica para tratar caracteres especiais e construções como
 	aspas simples e duplas, etc.
 
 
-3. Redireccionamento de entrada e saída:
+3. [ ] Execução do comando:
+	* Criar uma função que recebe um t_cmd_data e executa esse comando
+
+
+4. [ ] Redireccionamento de entrada e saída:
 	* Implementar o tratamento do redireccionamento da entrada (<), do
 	redireccionamento da saída (>), da anexação da saída (>>) e da entrada
 	através de "here documents" (<<).
 
 
-4. Comandos em pipes:
+5. [ ] Comandos em pipes:
 	* Desenvolver um mecanismo para execução de comandos em pipes, onde a saída
 	de um comando se torna a entrada para outro comando através do símbolo |.
 
 
-5. Variável $?
+6. [ ] Variável $?
 	* Implementar o acesso ao valor do código de saída do último comando frontal
 	 executado usando $?
 
 
-6. Processamento de sinais:
+7. [ ] Processamento de sinais:
 	* Desenvolver o tratamento de sinais como Ctrl-C, Ctrl-D e Ctrl-\ de acordo
 	com o seu comportamento na Bourne shell (bash).
 
+
 // TODO <yadereve>
-7. Comandos embutidos:
+
+8. [ ] Comandos embutidos:
 	* Implementar comandos embutidos como cd, exit, echo -n, pwd, export, unset
 	e env.
 
 
-8. Exibir resultados de comandos:
+9. [ ] Exibir resultados de comandos:
 	* Implementar a apresentação dos resultados dos comandos no ecrã (erros,
 	etc.).
 

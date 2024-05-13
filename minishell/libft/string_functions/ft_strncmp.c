@@ -6,19 +6,25 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:46:17 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/04/29 11:23:01 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/13 13:39:40 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
 // that function compare 2 strings
-// if they are equal return 0
-// if they are not return the difference
+// if they are equal: return 0
+// if they are not: return the difference
+// if !s1 and !s2: return 0
+// if !s1 or !s2: return 1
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
+	if (!s1 && !s2)
+		return (0);
+	if (!s1 || !s2)
+		return (1);
 	i = 0;
 	while ((s1[i] == s2[i]) && s1[i] && s2[i])
 		i++;

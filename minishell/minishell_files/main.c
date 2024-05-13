@@ -6,19 +6,20 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/10 11:41:58 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/13 13:54:01 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void data_init(t_data *data)
+// that funtion initializate all vars if t_data
+static void	data_init(t_data *data)
 {
 	data->error = false;
 }
 
-
-static char	*input_text(void)
+// that function will return a str with the prompt
+static char	*get_prompt_text(void)
 {
 	char	*folder_name;
 	char	*input_str;
@@ -33,57 +34,112 @@ static char	*input_text(void)
 	return (input_str);
 }
 
+// that is the function where the input will be used
 static void	input_use(char *input, t_data *data, char **env)
 {
 	char	**array;
 	int		i;
 
+	//
+	// initialize vars
+	//
 	i = 0;
-	data_init(data);
+	//
+	// transform input into tokens
+	//
 	array = ft_token_split(input, data, env);
+	//
+	// if there is no error on t_data: use input
+	//
 	if (data->error == false)
 	{
+		//
+		// by now, it is only printing the args
+		//
 		ft_putstr("\n\n");
 		while (array[i])
 			ft_printf("%s%s\n", array[i++], "\x1b[7m%\x1b[0m");
 		ft_printf("%s%s\n\n", array[i++], "\x1b[7m%\x1b[0m");
 	}
+	//
+	// free stuff
+	//
 	ft_free_array(array);
+	//
+	// end
+	//
 }
 
-// ft_get_user_input()
-int	main(int ac, char **av, char **env)
+// that is the function that will get stdin and then use it
+// readline loop
+static void	readline_loop(t_data *data, char **env)
 {
 	char	*input;
-	char	*input_str;
-	t_data	data;
-	
-	(void)ac;
-	(void)av;
-	// initialize
+	char	*last_input;
+	char	*prompt_str;
+
+	//
+	// initialize vars
+	//
+	last_input = NULL;
 	using_history();
+	//
 	// readline loop
+	//
 	while (1)
 	{
+		//
 		// read a line from stdin
-		input_str = input_text();
-		input = readline(input_str);
+		//
+		prompt_str = get_prompt_text();
+		input = readline(prompt_str);
+		//
 		// if the input is null that means the user press Ctrl+D (EOF)
+		//
 		if (input == NULL)
 		{
 			ft_printf("\n");
 			break ;
 		}
-		// if theres something on input
-		// add a line to history and use input
+		//
+		// if theres something on input: use input
+		//
 		if (input[0])
+			input_use(input, data, env);
+		//
+		// if theres something on input, if input != last_input: add_history
+		//
+		if (input[0] && ft_strcmp(input, last_input))
 		{
 			add_history(input);
-			input_use(input, &data, env);
+			if (last_input)
+				free(last_input);
+			last_input = ft_strdup(input);
 		}
+		//
 		// free input
+		//
 		free(input);
 	}
-	// Limpa o histórico
+	//
+	// free stuff
+	//
+	free(last_input);
+	free(prompt_str);
 	clear_history();
+	//
+	// end
+	//
+}
+
+// ft_get_user_input()
+int	main(int ac, char **av, char **env)
+{
+	t_data	data;
+
+	(void)ac;
+	(void)av;
+	data_init(&data);
+	readline_loop(&data, env);
+	return (1);
 }
