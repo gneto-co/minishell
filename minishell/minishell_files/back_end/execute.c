@@ -6,26 +6,26 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:04:12 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/13 20:05:28 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/14 17:40:33 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_execute(char **args, t_data *data, char **env)
+void	ft_execute(char **args, t_data *data)
 {
 	if (!ft_strcmp(args[0], "cd"))
-		ft_cd(args);
+		ft_cd(args, data);
 	else if (!ft_strcmp(args[0], "env"))
-		ft_env(env);
+		ft_env(data->env, data);
 	else if (!ft_strcmp(args[0], "pwd"))
-		ft_pwd();
+		ft_pwd(data);
 	else if (!ft_strcmp(args[0], "echo"))
-		ft_echo(args);
+		ft_echo(args, data);
 	else if (!ft_strcmp(args[0], "export"))
-		ft_export(args);
+		ft_export(args,data);
 	else if (!ft_strcmp(args[0], "unset"))
-		ft_unset(args);
+		ft_unset(args, data);
 	else if (!ft_strcmp(args[0], "exit"))
 		ft_exit(args, data);
 	else

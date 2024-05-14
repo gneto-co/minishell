@@ -41,7 +41,7 @@
 		[x] exit
 		[x] echo -n
 		[x] pwd
-		[ ] env
+		[x] env
 		[ ] cd
 		[ ] unset
 		[ ] export

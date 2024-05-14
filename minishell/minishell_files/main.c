@@ -6,18 +6,20 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/13 19:51:04 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/14 18:00:08 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // that funtion initializate all vars if t_data
-static void	data_init(t_data *data)
+static void	data_init(t_data *data, char **env)
 {
 	data->error = false;
 	data->exit = false;
 	data->exit_code = 0;
+	data->env = env;
+
 }
 
 // that function will return a str with the prompt
@@ -63,7 +65,7 @@ static void	input_use(char *input, t_data *data, char **env)
 			ft_printf("%s%s\n", array[i++], "\x1b[7m%\x1b[0m");
 		ft_printf("%s%s\n\n", array[i++], "\x1b[7m%\x1b[0m");
 		*/
-		ft_execute(array, data, env);
+		ft_execute(array, data); //NOTE
 	}
 	//
 	// free stuff
@@ -147,7 +149,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	data_init(&data);
+	data_init(&data, env);
 	readline_loop(&data, env);
 	exit(data.exit_code);
 }

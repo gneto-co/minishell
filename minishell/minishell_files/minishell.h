@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/13 19:30:04 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/14 17:40:52 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_data
 	bool	error;
 	bool	exit;
 	int		exit_code;
+	char 	**env;
 }			t_data;
 
 // minishell_files
@@ -59,14 +60,14 @@ char		*special_char_treatment(char *str, int *ii, char **env);
 char		**split_str(char **array, int *str_nb, char **new_str);
 
 // back_end
-void		ft_cd(char **args);
+void		ft_cd(char **args, t_data *data);
 void		ft_exit(char **args, t_data *data);
-void		ft_pwd(void);
-void		ft_echo(char **args);
-void		ft_export(char **args);
-void		ft_unset(char **args);
-void		ft_env(char **args);
-void 		ft_execute(char **args, t_data *data, char **env);
+void		ft_pwd(t_data *data);
+void		ft_echo(char **args, t_data *data);
+void		ft_export(char **args, t_data *data);
+void		ft_unset(char **args, t_data *data);
+void		ft_env(char **env, t_data *data);
+void 		ft_execute(char **args, t_data *data);
 /* *********************************** */
 /*                                     */
 /*                 END                 */
