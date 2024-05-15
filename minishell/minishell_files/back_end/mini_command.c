@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:15:42 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/14 21:02:30 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:48:27 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,14 @@ void	ft_exit(char **args, t_data *data)
 		{
 			ft_putendl_fd(" too many arguments", STDERR_FILENO);
 			data->exit_code = 1;
+			break ;
 		}
 		else if (args[1][i + 1] == '\0')
+		{
 			data->exit_code = ft_atoi(args[1]);
+			data->exit = true;
+		}
 	}
-	data->exit = true;
 }
 
 void	ft_cd_home(char **args, t_data *data)

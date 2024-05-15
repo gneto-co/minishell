@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:04:12 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/14 17:40:33 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:35:23 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ void	ft_execute(char **args, t_data *data)
 		ft_exit(args, data);
 	else
 		perror("command not found ");
-	printf("%d\n", data->exit_code);
+	printf("exit code: %d\n", data->exit_code);
 }
