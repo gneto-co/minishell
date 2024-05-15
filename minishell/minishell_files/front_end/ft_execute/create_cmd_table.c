@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 13:20:59 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/15 13:47:28 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:53:33 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ static int	get_line_type(char **array, int i)
 }
 
 static t_table_data	*get_flags_args(t_table_data *new_line, char **array,
-		int *ii)
+		int *ii, t_data *data)
 {
 	int	i;
 	int	t;
+	char *type;
 
 	//
 	// declarations
@@ -56,7 +57,22 @@ static t_table_data	*get_flags_args(t_table_data *new_line, char **array,
 	//
 	if (t == LESS || t == LESSLESS || t == GREAT || t == GREATGREAT)
 	{
-		// TODO : verify if array[i] is a good argument to redirection
+		//
+		// if array[i] is not a regular str: error
+		//
+		if (get_line_type(array, i) != 1)
+		{
+			if (t == LESS)
+				type = ft_strdup("<");
+			if (t == LESSLESS)
+				type = ft_strdup("<<");
+			if (t == GREAT)
+				type = ft_strdup(">");
+			if (t == GREATGREAT)
+				type = ft_strdup(">>");
+			data->error = true;
+			return (ft_error(2, type), new_line);
+		}
 		new_line->name = array[i++];
 	}
 	else if (t == CMD)
@@ -94,7 +110,7 @@ static t_table_data	*get_flags_args(t_table_data *new_line, char **array,
 	return (new_line);
 }
 
-static t_table_data	*get_new_line(char **array, int *ii)
+static t_table_data	*get_new_line(char **array, int *ii, t_data *data)
 {
 	int				i;
 	t_table_data	*new_line;
@@ -114,7 +130,7 @@ static t_table_data	*get_new_line(char **array, int *ii)
 	//
 	// get flags / args
 	//
-	new_line = get_flags_args(new_line, array, &i);
+	new_line = get_flags_args(new_line, array, &i, data);
 	//
 	// end
 	//
@@ -142,7 +158,7 @@ static t_table_data	**split_table(t_table_data **table, int *table_size,
 	temp = ft_realloc(table, sizeof(t_table_data *) * (*table_size + 1),
 			sizeof(t_table_data *) * (*table_size + 2));
 	if (temp == NULL)
-		return (ft_error(0), NULL);
+		return (ft_error(0, NULL), NULL);
 	else
 		table = temp;
 	//
@@ -159,7 +175,7 @@ static t_table_data	**split_table(t_table_data **table, int *table_size,
 	return (table);
 }
 
-t_table_data	**create_cmd_table(char **array)
+t_table_data	**create_cmd_table(char **array, t_data *data)
 {
 	int				i;
 	int				table_size;
@@ -179,11 +195,11 @@ t_table_data	**create_cmd_table(char **array)
 	while (1)
 	{
 		//
-		// get new line and print !!
+		// get new line
 		//
-		new_line = get_new_line(array, &i);
+		new_line = get_new_line(array, &i, data);
 		//
-		// if there is no more new line: stop
+		// if there is no new_line or is an error: stop
 		//
 		if (!new_line)
 			break ;
@@ -193,8 +209,15 @@ t_table_data	**create_cmd_table(char **array)
 		else
 		{
 			table = split_table(table, &table_size, new_line);
+			if (!table)
+				data->error = true;
 			new_line = NULL;
 		}
+		//
+		// if finds a error: stop
+		//
+		if (data->error == true)
+			break;
 	}
 	return (table);
 }

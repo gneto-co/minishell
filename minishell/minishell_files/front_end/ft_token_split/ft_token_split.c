@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 10:10:45 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/15 10:24:30 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:47:59 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**split_str(char **array, int *str_nb, char *new_str)
 	temp = ft_realloc(array, var_size('s', *str_nb + 1), var_size('s', *str_nb
 				+ 2));
 	if (temp == NULL)
-		return (ft_error(0), NULL);
+		return (ft_error(0, NULL), NULL);
 	else
 		array = temp;
 	(*str_nb)++;

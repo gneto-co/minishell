@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/15 13:37:17 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:15:55 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,12 @@ static void	input_use(char *input, t_data *data, char **env)
 		ft_printf("%s%s\n\n", array[i++], "\x1b[7m%\x1b[0m"); 
 		 */
 		//
-		// execute the comands
+		// execute the commands
 		//
 		ft_execute(array, data, env);
 	}
+	if (data->error == true)
+		data->error = false;
 	//
 	// free stuff
 	//

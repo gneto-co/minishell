@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/15 13:52:45 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:13:38 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,14 @@ int	ft_execute(char **array_user_input, t_data *data, char **env)
 	//
 	// convert user_in to cmd_table
 	//
-	table = create_cmd_table(array_user_input);
-	ft_print_table(table);
+	table = create_cmd_table(array_user_input, data);
 	//
 	// TODO : execute cmd_table
 	//
+	if (data->error == false)
+	{
+		ft_print_table(table);
+	}
 	//
 	// free stuff
 	//

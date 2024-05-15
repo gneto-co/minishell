@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/15 13:23:51 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:46:35 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ typedef struct s_table_data
 //
 // ╭─┤ minishell_files ├─
 // │
-int				ft_error(int nb);
+int				ft_error(int nb, char *str);
 // │
 // ╰───┤ front end ├─
 //   │
 //   ╰─────┤ ft_execute ├─
 //
 int				ft_execute(char **array_user_input, t_data *data, char **env);
-t_table_data	**create_cmd_table(char **array);
+t_table_data	**create_cmd_table(char **array, t_data *data);
 void			ft_print_table(t_table_data **table);
 //   │
 //   ╰─────┤ ft_readline_loop ├─
