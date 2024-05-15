@@ -6,11 +6,25 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/15 13:28:47 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:52:45 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+static	void ft_free_table(t_table_data **table)
+{
+	int	i;
+
+	i = 0;
+	while (table[i])
+	{
+		ft_free_array(table[i]->args);
+		ft_free_array(table[i]->flags);
+		free(table[i]);
+		i++;
+	}
+}
 
 int	ft_execute(char **array_user_input, t_data *data, char **env)
 {
@@ -25,7 +39,6 @@ int	ft_execute(char **array_user_input, t_data *data, char **env)
 	//
 	i = 0;
 	//
-	// LEAK
 	// convert user_in to cmd_table
 	//
 	table = create_cmd_table(array_user_input);
@@ -35,6 +48,11 @@ int	ft_execute(char **array_user_input, t_data *data, char **env)
 	//
 	//
 	// free stuff
+	//
+	ft_free_table(table);
+	free(table);
+	//
+	// end
 	//
 	return (0);
 }

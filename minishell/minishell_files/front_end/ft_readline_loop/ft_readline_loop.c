@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/13 18:07:52 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:37:17 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	ft_readline_loop(t_data *data, char **env)
 		//
 		if (input == NULL)
 		{
+			free(input);
+			free(prompt_str);
 			ft_printf("\n");
 			break ;
 		}
@@ -121,12 +123,12 @@ void	ft_readline_loop(t_data *data, char **env)
 		// free input
 		//
 		free(input);
+		free(prompt_str);
 	}
 	//
 	// free stuff
 	//
 	free(last_input);
-	free(prompt_str);
 	clear_history();
 	//
 	// end

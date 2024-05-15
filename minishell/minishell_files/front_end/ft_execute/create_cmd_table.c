@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 13:20:59 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/15 13:28:14 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:47:28 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ static t_table_data	*get_flags_args(t_table_data *new_line, char **array,
 	// if cmd : look for name, flags and args
 	//
 	if (t == LESS || t == LESSLESS || t == GREAT || t == GREATGREAT)
-    {
-        // TODO : verify if array[i] is a good argument to redirection
+	{
+		// TODO : verify if array[i] is a good argument to redirection
 		new_line->name = array[i++];
-    }
+	}
 	else if (t == CMD)
 	{
 		//
@@ -74,7 +74,7 @@ static t_table_data	*get_flags_args(t_table_data *new_line, char **array,
 			if (ft_strncmp(array[i], "-", 1) != 0)
 				break ;
 			new_line->flags = split_str(new_line->flags,
-					&new_line->flags_amount, array[i]);
+					&new_line->flags_amount, ft_strdup(array[i]));
 			i++;
 		}
 		//
@@ -83,7 +83,7 @@ static t_table_data	*get_flags_args(t_table_data *new_line, char **array,
 		while (get_line_type(array, i) == CMD)
 		{
 			new_line->args = split_str(new_line->args, &new_line->args_amount,
-					array[i]);
+					ft_strdup(array[i]));
 			i++;
 		}
 	}
