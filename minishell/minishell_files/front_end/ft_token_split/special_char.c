@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/15 14:48:15 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:09:42 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,9 @@ static char	*special_char_5(char *str, int *ii, char **env)
 			if (!str[i])
 			{
 				ft_error(1, NULL);
-				if (new_str)
+				// if (new_str)
 					free(new_str);
-				if (text_read)
+				// if (text_read)
 					free(text_read);
 				new_str = NULL;
 				break ;
@@ -168,9 +168,7 @@ static char	*special_char_6(char *str, int *ii)
 			if (!str[i])
 			{
 				ft_error(1, NULL);
-				if (new_str)
-					free(new_str);
-				ft_printf("-> %s \n", text_read);
+				free(new_str);
 				free(text_read);
 				new_str = NULL;
 				break ;

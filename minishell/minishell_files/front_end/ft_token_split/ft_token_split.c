@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 10:10:45 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/15 14:47:59 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:12:27 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,14 @@ char	*get_next_text(char *str, int *ii, int mod)
 		new_str = ft_str_char_join_free(new_str, str[i]);
 		// end check
 		if (!str[i])
-			break ;
-		else
-			i++;
+			break;
+		i++;
+		if (!str[i])
+			break;
+		// if (!str[i])
+			// break ;
+		// else
+			// i++;
 	}
 	*ii = i;
 	return (new_str);
@@ -152,7 +157,11 @@ char	**ft_token_split(char *str, t_data *data, char **env)
 	{
 		temp_str = get_real_next_text(str, &i, data, env);
 		if (!temp_str)
+		{
+			if (new_str)
+				free(new_str);
 			break ;
+		}
 		new_str = ft_strjoin_free(new_str, temp_str);
 		free(temp_str);
 		// if there is no more text followed: split_str
