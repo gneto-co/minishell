@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_token_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 10:10:45 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/09 19:16:41 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:24:30 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ static bool	have_more_text(char *str, int i)
 }
 
 // puts a new_str into the array
-// new_str pointer will return NULL
-char	**split_str(char **array, int *str_nb, char **new_str)
+char	**split_str(char **array, int *str_nb, char *new_str)
 {
 	char	**temp;
 
-	if (!*new_str)
+	if (!new_str)
 		return (array);
 	temp = NULL;
 	// split new_str
@@ -44,9 +43,8 @@ char	**split_str(char **array, int *str_nb, char **new_str)
 	else
 		array = temp;
 	(*str_nb)++;
-	array[*str_nb - 1] = *new_str;
+	array[*str_nb - 1] = new_str;
 	array[*str_nb] = NULL;
-	*new_str = NULL;
 	return (array);
 }
 
@@ -159,7 +157,10 @@ char	**ft_token_split(char *str, t_data *data, char **env)
 		free(temp_str);
 		// if there is no more text followed: split_str
 		if (!have_more_text(str, i))
-			array = split_str(array, &str_nb, &new_str);
+		{
+			array = split_str(array, &str_nb, new_str);
+			new_str = NULL;
+		}
 	}
 	return (array);
 }

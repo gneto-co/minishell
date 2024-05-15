@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 15:54:03 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/14 16:01:33 by gneto-co         ###   ########.fr       */
+/*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
+/*   Updated: 2024/05/15 13:28:47 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "../../minishell.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+int	ft_execute(char **array_user_input, t_data *data, char **env)
 {
-	unsigned char	*d;
-	unsigned char	*s;
-	size_t			i;
+	int				i;
+	t_table_data	**table;
 
-	if (dest == NULL && src == NULL)
-		return (NULL);
+	(void)data;
+	(void)env;
+	(void)i;
+	//
+	// initialize data
+	//
 	i = 0;
-	d = (unsigned char *)dest;
-	s = (unsigned char *)src;
-	while (i < n)
-	{
-		d[i] = s[i];
-		i++;
-	}
-	return (d);
+	//
+	// LEAK
+	// convert user_in to cmd_table
+	//
+	table = create_cmd_table(array_user_input);
+	ft_print_table(table);
+	//
+	// TODO : execute cmd_table
+	//
+	//
+	// free stuff
+	//
+	return (0);
 }

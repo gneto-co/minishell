@@ -6,59 +6,58 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/05/10 11:47:11 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/05/15 13:24:34 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
-GREEN = \033[32m
-NC = \033[0m
-ORANGE = \033[31m\033[33m
-BLUE = \033[1;34m
-PECKED = ----------
+NAME				=	minishell
+GREEN				=	\033[32m
+NC					=	\033[0m
+ORANGE				=	\033[31m\033[33m
+BLUE				=	\033[1;34m
+PECKED				=	----------
 
 #--------------------------------------------------------------------------------
 #--------------------------COMPILATION SPECIFICATIONS----------------------------
 #--------------------------------------------------------------------------------
 # -fsanitize=address
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
-LDFLAGS = -lreadline
-RM = rm -rf
+CC					=	cc
+CFLAGS				=	-Wall -Wextra -Werror -g3 -fsanitize=address
+LDFLAGS				=	-lreadline
+RM					=	rm -rf
 
 #--------------------------------------------------------------------------------
 #----------------------------PROJECT SOURCE FILES--------------------------------
 #--------------------------------------------------------------------------------
 
-SRC_DIR = minishell_files
-SRC = $(addprefix $(SRC_DIR)/, $(SRCPROJECT_SOURCES))
-SRCPROJECT_SOURCES = $(addsuffix .c, \
-main \
-ft_error \
-\
-$(addprefix \
-back_end/, \
-	example_file1 \
-	mini_command \
-) \
-$(addprefix \
-front_end/, \
-	$(addprefix ft_token_split, \
-	/ft_token_split \
-	/special_char \
-	) \
-) \
+SRC_DIR				=	minishell_files
+SRC					=	$(addprefix $(SRC_DIR)/, $(SRCPROJECT_SOURCES))
+SRCPROJECT_SOURCES	=	$(addsuffix .c, \
+						main \
+						ft_error \
+						\
+						back_end/example_file1 \
+						back_end/mini_command \
+						\
+						front_end/ft_token_split/ft_token_split \
+						front_end/ft_token_split/special_char \
+						\
+						front_end/ft_readline_loop/ft_readline_loop \
+						\
+						front_end/ft_execute/ft_execute \
+						front_end/ft_execute/create_cmd_table \
+						front_end/ft_execute/ft_print_table \
 )
 
-OBJ_DIR = objects
-OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:$(SRC_DIR)/%.c=%.o))
+OBJ_DIR				=	objects
+OBJ					=	$(addprefix $(OBJ_DIR)/,$(SRC:$(SRC_DIR)/%.c=%.o))
 
 #--------------------------------------------------------------------------------
 #-----------------------------LIBFT FILES----------------------------------------
 #--------------------------------------------------------------------------------
 
-LIBFT = ./libft/libft.a
+LIBFT				=	./libft/libft.a
 
 #--------------------------------------------------------------------------------
 #---------------------------------MAKEFILE RULES---------------------------------
