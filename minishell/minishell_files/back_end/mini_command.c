@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:15:42 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/14 18:27:31 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/14 21:02:30 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,43 @@ void	ft_exit(char **args, t_data *data)
 	data->exit = true;
 }
 
-void update_env(t_data *data)
+void	ft_cd_home(char **args, t_data *data)
 {
-	(void)data;
+	int i;
+	char *str;
+	char **envs;
+
+	envs = data->env;
+	i = 0;
+	str = NULL;
+	while (envs[i])
+	{
+		if (!ft_strncmp(envs[i], "HOME=", 5))
+		{
+			str = ft_substr(envs[i], 5, ft_strlen(envs[i]));
+			break ;
+		}
+		i++;
+	}
+	args[1] = str;
+	args[2] = NULL;
+	ft_cd(args, data);
+}
+
+void update_env(char **args, t_data *data)
+{
+	char	**envs;
+	// char	*str;
+	int		i;
+
+	(void)args;
+	i = 0;
+	envs = data->env;
+	while (envs[i])
+	{
+		i++;
+	}
+	printf("%d\n", i);
 }
 
 void	ft_cd(char **args, t_data *data)
@@ -110,7 +144,9 @@ void	ft_cd(char **args, t_data *data)
 	data->exit_code = 0;
 	while (args[i])
 		i++;
-	if (i > 2)
+	if (i == 1)
+		ft_cd_home(args, data);
+	else if (i > 2)
 	{
 		ft_putendl_fd("minishell: cd: too meny arguments", STDERR_FILENO);
 		data->exit_code = 1;
@@ -120,5 +156,5 @@ void	ft_cd(char **args, t_data *data)
 		perror("minishell: cd");
 		data->exit_code = 1;
 	}
-	update_env(data);
+	update_env(args, data);
 }
