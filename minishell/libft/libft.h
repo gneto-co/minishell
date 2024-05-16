@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:30:24 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/10 11:39:24 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/16 11:45:54 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include <stdarg.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>

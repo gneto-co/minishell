@@ -6,7 +6,7 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/05/15 13:52:06 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/05/16 15:09:42 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,20 +34,33 @@ RM					=	rm -rf
 SRC_DIR				=	minishell_files
 SRC					=	$(addprefix $(SRC_DIR)/, $(SRCPROJECT_SOURCES))
 SRCPROJECT_SOURCES	=	$(addsuffix .c, \
+						\
+						\
 						main \
 						ft_error \
 						\
+						\
+						front_end/readline_loop/ft_readline_loop \
+						\
+						front_end/token_split/ft_token_split \
+						front_end/token_split/special_char \
+						front_end/token_split/get_next_text \
+						\
+						front_end/cmd_table/create_cmd_table \
+						front_end/cmd_table/ft_print_table \
+						front_end/cmd_table/ft_free_table \
+						\
+						\
+						back_end/ft_execute/ft_execute \
+						back_end/ft_execute/ex_cmd \
+						back_end/ft_execute/ex_great \
+						back_end/ft_execute/ex_greatgreat \
+						back_end/ft_execute/ex_less \
+						back_end/ft_execute/ex_lessless \
+						back_end/ft_execute/ex_pipe \
+						\
 						back_end/example_file1 \
 						back_end/mini_command \
-						\
-						front_end/ft_token_split/ft_token_split \
-						front_end/ft_token_split/special_char \
-						\
-						front_end/ft_readline_loop/ft_readline_loop \
-						\
-						front_end/ft_execute/ft_execute \
-						front_end/ft_execute/create_cmd_table \
-						front_end/ft_execute/ft_print_table \
 )
 
 OBJ_DIR				=	objects

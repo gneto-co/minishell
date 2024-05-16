@@ -3,6 +3,10 @@
         "minishell.h": "c",
         "libft.h": "c",
         "typeinfo": "c",
-        "array": "c"
+        "array": "c",
+        "memory": "c",
+        "functional": "c",
+        "tuple": "c",
+        "utility": "c"
     }
 }

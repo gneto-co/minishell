@@ -6,56 +6,56 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/15 14:56:23 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:52:05 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static	void ft_free_table(t_table_data **table)
+/* first loop : prepare pipes and redirection */
+static void	first_loop(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (table[i])
+	while (data->table[i])
 	{
-		ft_free_array(table[i]->args);
-		ft_free_array(table[i]->flags);
-		free(table[i]);
+		if (data->table[i]->type == PIPE)
+			ex_pipe(data, i);
+		else if (data->table[i]->type == LESS)
+			ex_less(data, i);
+		else if (data->table[i]->type == GREAT)
+			ex_great(data, i);
+		else if (data->table[i]->type == GREATGREAT)
+			ex_greatgreat(data, i);
+		else if (data->table[i]->type == LESSLESS)
+			ex_lessless(data, i);
 		i++;
 	}
 }
 
-int	ft_execute(char **array_user_input, t_data *data, char **env)
+/* second loop : execute commands */
+static void	second_loop(t_data *data)
 {
-	int				i;
-	t_table_data	**table;
+	int	i;
 
-	(void)data;
-	(void)env;
-	(void)i;
-	//
-	// initialize data
-	//
 	i = 0;
-	//
-	// convert user input to a command table
-	//
-	table = create_cmd_table(array_user_input, data);
-	//
-	// TODO : execute cmd_table
-	//
+	while (data->table[i])
+	{
+		if (data->table[i]->type == CMD)
+			ex_cmd(data, i);
+		i++;
+	}
+}
+
+/* receive data and execute commands from commands table */
+int	ft_execute(t_data *data)
+{
 	if (data->error == false)
 	{
-		ft_print_table(table);
+		ft_print_table(data->table);
 	}
-	//
-	// free stuff
-	//
-	ft_free_table(table);
-	free(table);
-	//
-	// end
-	//
+	first_loop(data);
+	second_loop(data);
 	return (0);
 }

@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_free_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/16 14:22:54 by gneto-co         ###   ########.fr       */
+/*   Created: 2024/05/16 11:34:43 by gneto-co          #+#    #+#             */
+/*   Updated: 2024/05/16 11:36:24 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../minishell.h"
 
-/* initialize data and start reading from terminal */
-int	main(int ac, char **av, char **env)
+void ft_free_table(t_table_data **table)
 {
-	t_data	data;
+	int	i;
 
-	(void)ac;
-	(void)av;
-	data.env = env;
-	data.error = false;
-	data.table = NULL;
-	ft_readline_loop(&data);
-	return (1);
+	i = 0;
+	while (table[i])
+	{
+		ft_free_array(table[i]->args);
+		ft_free_array(table[i]->flags);
+		free(table[i]);
+		i++;
+	}
 }
