@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:30:24 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/16 11:45:54 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:56:28 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,14 @@ void				ft_putstr_newline(char *s);
 int					ft_put_unsigned_nbr(unsigned int n, int total);
 int					ft_putpt(unsigned long int nbr, char *base, int total);
 int					ft_printf(const char *str, ...);
+void				ft_print_array(char **array);
 
 // read_funcitons
 char				*get_next_line(int fd);
 size_t				ft_filelen(char *file_name);
 char				*ft_get_path(void);
 char				*ft_get_folder_name(void);
+char				*ft_get_system_var(char *var_name, char **env);
 
 // string_functions
 int long			ft_strlen(const char *str);

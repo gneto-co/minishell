@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/16 15:10:12 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:46:53 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void				ft_readline_loop(t_data *data);
 /*  ft_token_split  */
 char				**ft_token_split(char *str, t_data *data);
 char				*get_next_text(char *str, int *ii, int mod);
-char				*special_char_treatment(char *str, int *ii, char **env);
+char				*special_char_manager(char *str, int *ii, t_data *data);
 char				**split_str(char **array, int *str_nb, char *new_str);
 char				*get_real_next_text(char *str, int *ii, t_data *data);
 

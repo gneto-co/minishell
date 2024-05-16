@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:08:40 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/16 15:26:18 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:46:53 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*get_next_text(char *str, int *ii, int mod)
  *	str is on a..
  * 		· end '\0' : break
  * 		· space ' ' : skip spaces
- * 		· special_char : new_str = special_char_treatment
+ * 		· special_char : new_str = special_char_manager
  * 			· if !new_str : error
  */
 static bool	str_problem_check(t_data *data, char *str, char **new_str, int *ii)
@@ -75,11 +75,11 @@ static bool	str_problem_check(t_data *data, char *str, char **new_str, int *ii)
 			i++;
 	else if (ft_strchr(SPECIAL_CHAR, str[i]))
 	{
-		*new_str = special_char_treatment(str, &i, data->env);
-		if (!new_str)
+		*new_str = special_char_manager(str, &i, data);
+		if (data->error == true)
 		{
+			ft_printf("\n new_str -> %p\n", new_str);
 			// LEAK existe um memleak quando input: a"a
-			data->error = true;
 			return (false);
 		}
 	}

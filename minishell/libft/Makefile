@@ -6,7 +6,7 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/09 10:51:25 by gneto-co          #+#    #+#              #
-#    Updated: 2024/05/10 11:38:41 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/05/16 17:56:17 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ $(addprefix ft_printf/, \
 	ft_print_type \
 	ft_print_type2 \
 	) \
+ft_print_array \
 ))
 
 READ_FUNCTIONS = $(addprefix read_functions/, $(addsuffix .c, \
@@ -76,6 +77,7 @@ $(addprefix get_next_line/, \
 ft_filelen \
 ft_get_folder_name \
 ft_get_path \
+ft_get_system_var \
 ))
 
 STRING_FUNCTIONS = $(addprefix string_functions/, $(addsuffix .c, \

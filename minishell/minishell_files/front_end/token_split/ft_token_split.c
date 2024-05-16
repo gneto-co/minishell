@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 10:10:45 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/16 15:20:31 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:45:25 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static bool	have_more_text(char *str, int i)
 		return (false);
 	if (str[i] == '$' || str[i] == '\'' || str[i] == '\"')
 		return (true);
-	else if (ft_strchr(SPECIAL_CHAR, str[i]) || str[i] == ' ' || str[i] == '\0')
+	else if (ft_strchr(SPECIAL_CHAR, str[i])
+		|| str[i] == ' ' || str[i] == '\0')
 		return (false);
 	else
 		return (true);
@@ -66,6 +67,14 @@ static void	data_initialize(int *i, int *str_nb, char **new_str, char ***array)
 	*str_nb = 0;
 	*new_str = NULL;
 	*array = malloc(var_size('s', 1));
+	*array[0] = NULL;
+}
+
+/* that function only exists do decrease function lines */
+static void	free_new_str(char **new_str)
+{
+	if (*new_str)
+		free(*new_str);
 }
 
 /*
@@ -97,7 +106,7 @@ char	**ft_token_split(char *str, t_data *data)
 	{
 		temp_str = get_real_next_text(str, &i, data);
 		if (!temp_str)
-			break ;
+			return (free_new_str(&new_str), array);
 		new_str = ft_strjoin_free(new_str, temp_str);
 		free(temp_str);
 		if (!have_more_text(str, i))
