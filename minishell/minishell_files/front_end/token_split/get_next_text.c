@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:08:40 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/16 17:46:53 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 10:51:51 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
  *	function: get the next next of str
  *	work with mods:
  *		1 - stop on: special chars, ' ', '\0'
- *		2 - stop on: $, '\0', '
- *		3 - stop on: '\0', "
+ *		' - stop on: $, '\0', '
+ *		" - stop on: '\0', "
  *
  *	· start char loop
  *		· depending on the mode break loop if find a certain character
@@ -39,9 +39,9 @@ char	*get_next_text(char *str, int *ii, int mod)
 			break ;
 		else if (ft_strchr(SPECIAL_CHAR, str[i]) && mod == 1)
 			break ;
-		else if ((str[i] == '$' || str[i] == '\'') && mod == 2)
+		else if ((str[i] == '$' || str[i] == '\'') && mod == '\'')
 			break ;
-		else if (str[i] == '\"' && mod == 3)
+		else if (str[i] == '\"' && mod == '\"')
 			break ;
 		new_str = ft_str_char_join_free(new_str, str[i]);
 		if (!str[i])
@@ -77,11 +77,7 @@ static bool	str_problem_check(t_data *data, char *str, char **new_str, int *ii)
 	{
 		*new_str = special_char_manager(str, &i, data);
 		if (data->error == true)
-		{
-			ft_printf("\n new_str -> %p\n", new_str);
-			// LEAK existe um memleak quando input: a"a
 			return (false);
-		}
 	}
 	*ii = i;
 	return (true);
