@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 18:20:08 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:59:45 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_table_data
 {
 	int				type;
 	char			*name;
+
+	int				pipe_fd[2];
 
 	char			**args;
 	int				args_amount;

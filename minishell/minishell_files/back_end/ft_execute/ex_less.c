@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:28 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 18:47:23 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:03:18 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *
  * 	function : open file to read and put it on std_in
- * 	>
+ * 	<
  *
  * 	· open in file
  * 	· if !in file
@@ -28,10 +28,10 @@
 void	ex_less(t_data *data, int i)
 {
 	int				fd;
-	t_table_data	*great;
+	t_table_data	*less;
 
-	great = data->table[i];
-	fd = open(great->name, O_RDONLY);
+	less = data->table[i];
+	fd = open(less->name, O_RDONLY);
 	if (fd == -1)
 	{
 		data->error = true;
