@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 17:35:35 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:45:30 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 
 static void	cmd_process(t_data *data, t_table_data *cmd)
 {
+	char	*envp[2];
+
+	envp[0] = ft_strdup("TERM=xterm");
+	envp[1] = NULL;
+	// test
+	// cmd->in_fd = open("in1", O_RDONLY);
+	// if (cmd->in_fd == -1)
+	// {
+	// 	perror("open file error");
+	// }
+	// test end
 	(void)data;
-	
 	cmd->pid = fork();
 	if (cmd->pid == -1)
 	{
@@ -24,14 +34,21 @@ static void	cmd_process(t_data *data, t_table_data *cmd)
 	}
 	else if (cmd->pid == 0)
 	{
-		execve(cmd->path, cmd->args, NULL);
+		if (cmd->in_fd)
+		{
+			dup2(cmd->in_fd, STDIN_FILENO);
+			close(cmd->in_fd);
+		}
+		if (cmd->out_fd)
+		{
+			dup2(cmd->out_fd, STDOUT_FILENO);
+			close(cmd->out_fd);
+		}
+		execve(cmd->path, cmd->args, envp);
 		perror("command process error");
 		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		// waitpid(cmd->pid, NULL, 0);
-	}
+	free(envp[0]);
 }
 
 /*
@@ -53,7 +70,11 @@ void	ex_cmd(t_data *data, int i)
 	cmd->path = ft_find_cmd_path(cmd->name, data->env);
 	if (cmd->path)
 	{
-		ft_printf("\n cmd_path : %s\n\n", cmd->path);
+		// ft_printf("\n cmd_path : %s\n\n", cmd->path);
+		if (data->in_fd)
+			cmd->in_fd = data->in_fd;
+		if (data->out_fd)
+			cmd->out_fd = data->out_fd;
 		cmd_process(data, cmd);
 	}
 	else
@@ -61,6 +82,5 @@ void	ex_cmd(t_data *data, int i)
 		data->error = true;
 		ft_error(3, cmd->name);
 	}
-	// free stuff
 	free(cmd->path);
 }
