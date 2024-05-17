@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 14:17:01 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:36:55 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,29 @@ static void	second_loop(t_data *data)
 	}
 }
 
+static void wait_pid_loop(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->table[i])
+	{
+		if (data->table[i]->type == CMD)
+			if(data->table[i]->pid)
+				waitpid(data->table[i]->pid, NULL, 0);
+		i++;
+	}
+}
+
 /* receive data and execute commands from commands table */
 int	ft_execute(t_data *data)
 {
 	if (data->error == false)
 	{
-		ft_print_table(data->table);
+		// ft_print_table(data->table);
+		first_loop(data);
+		second_loop(data);
+		wait_pid_loop(data);
 	}
-	first_loop(data);
-	second_loop(data);
 	return (0);
 }

@@ -6,29 +6,61 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 16:00:13 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:35:35 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ex_cmd(t_data *data, int i)
+static void	cmd_process(t_data *data, t_table_data *cmd)
 {
-	char	*cmd_path;
-
-	cmd_path = ft_find_cmd_path(data->table[i]->name, data->env);
 	(void)data;
-	(void)i;
-	ft_printf("\n ex_cmd : %s\n", data->table[i]->name);
-	ft_printf("\n cmd_name p : %p\n", data->table[i]->name);
-	if (!cmd_path)
+	
+	cmd->pid = fork();
+	if (cmd->pid == -1)
 	{
-		data->error = true;
-		ft_error(3, data->table[i]->name);
+		perror("command process error");
+		exit(EXIT_FAILURE);
+	}
+	else if (cmd->pid == 0)
+	{
+		execve(cmd->path, cmd->args, NULL);
+		perror("command process error");
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		ft_printf("\n cmd_path : %s\n", cmd_path);
+		// waitpid(cmd->pid, NULL, 0);
 	}
-	free(cmd_path);
+}
+
+/*
+ *
+ * 	function : execute command on table[i] position
+ *
+ * 	· get command path
+ * 	· if command is valid
+ * 		· print command
+ * 	· if is not
+ * 		· error
+ * 	· free stuff
+ */
+void	ex_cmd(t_data *data, int i)
+{
+	t_table_data	*cmd;
+
+	cmd = data->table[i];
+	cmd->path = ft_find_cmd_path(cmd->name, data->env);
+	if (cmd->path)
+	{
+		ft_printf("\n cmd_path : %s\n\n", cmd->path);
+		cmd_process(data, cmd);
+	}
+	else
+	{
+		data->error = true;
+		ft_error(3, cmd->name);
+	}
+	// free stuff
+	free(cmd->path);
 }

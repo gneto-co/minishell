@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 13:20:59 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 11:17:27 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:42:02 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	get_line_type(char **array, int i)
  *
  * 	· error manager, initialize / alloc vars
  * 	· get new line type
- * 	· get name / flags / args
+ * 	· get name / args
  */
 static t_table_data	*get_new_line(char **array, int *ii, t_data *data)
 {
@@ -48,7 +48,7 @@ static t_table_data	*get_new_line(char **array, int *ii, t_data *data)
 		return (NULL);
 	new_line = malloc(sizeof(t_table_data));
 	new_line->type = get_line_type(array, i);
-	new_line = get_name_flags_args(new_line, array, &i, data);
+	new_line = get_name_args(new_line, array, &i, data);
 	*ii = i;
 	return (new_line);
 }
@@ -87,7 +87,7 @@ static t_table_data	**split_table(t_table_data **table, int *table_size,
  *
  * 	· initialize data
  * 	· read all tokens loop
- * 		· get_new_line (new line is a command/operator and is args/flags)
+ * 		· get_new_line (new line is a command/operator and is args)
  * 		· if !new_line : break
  * 		· else : put new_line on table
  * 	· return table

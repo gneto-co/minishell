@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_name_flags_args.c                              :+:      :+:    :+:   */
+/*   get_name_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:12:43 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 16:00:03 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:35:26 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,19 @@
 static void	new_line_initialize_data(t_table_data *new_line)
 {
 	new_line->name = NULL;
-	new_line->flags = malloc(sizeof(char *));
-	new_line->flags[0] = NULL;
-	new_line->flags_amount = 0;
 	new_line->args = malloc(sizeof(char *));
 	new_line->args[0] = NULL;
 	new_line->args_amount = 0;
 	new_line->in_fd = 0;
 	new_line->out_fd = 0;
+	new_line->path = NULL;
+	new_line->pid = 0;
 }
 
 /*
  * 	function : will transform tokens into a command
  *
  * 	· first token : name
- * 	· next tokens - started : flags
  * 	· next tokens : args
  */
 static void	cmd_manager(t_table_data *new_line, char **array, int *ii)
@@ -39,14 +37,8 @@ static void	cmd_manager(t_table_data *new_line, char **array, int *ii)
 	i = *ii;
 	if (new_line->type == CMD)
 		new_line->name = ft_strdup(array[i - 1]);
-	while (get_line_type(array, i) == CMD)
-	{
-		if (ft_strncmp(array[i], "-", 1) != 0)
-			break ;
-		new_line->flags = split_str(new_line->flags, &new_line->flags_amount,
-				ft_strdup(array[i]));
-		i++;
-	}
+	new_line->args = split_str(new_line->args, &new_line->args_amount,
+			ft_strdup(new_line->name));
 	while (get_line_type(array, i) == CMD)
 	{
 		new_line->args = split_str(new_line->args, &new_line->args_amount,
@@ -93,17 +85,17 @@ static void	redirection_manager(t_data *data, t_table_data *new_line,
 
 /*
  * 	function : will see tokens and put correspondent name,
-		args and flags on new_line
+		args on new_line
  *
  * 	if <, <<, > or >> : get the file name
  * 	if | : do nothing
- * 	if cmd : look for name, flags and args
+ * 	if cmd : look for name and args
  *
  * 	· initialize vars
  * 	· if is a redirection : redirection_manager
  * 	· if is a command : cmd_manager
  */
-t_table_data	*get_name_flags_args(t_table_data *new_line, char **array,
+t_table_data	*get_name_args(t_table_data *new_line, char **array,
 		int *ii, t_data *data)
 {
 	int	i;

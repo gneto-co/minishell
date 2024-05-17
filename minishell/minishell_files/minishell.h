@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 14:32:32 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:33:56 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,12 @@ typedef struct s_table_data
 	int				type;
 	char			*name;
 
-	char			**flags;
-	int				flags_amount;
 	char			**args;
 	int				args_amount;
-
 	int				in_fd;
 	int				out_fd;
+	char			*path;
+	int				pid;
 }					t_table_data;
 
 typedef struct s_data
@@ -91,7 +90,7 @@ char				*get_real_next_text(char *str, int *ii, t_data *data);
 /*  ft_table  */
 t_table_data		**create_cmd_table(char **array, t_data *data);
 
-t_table_data		*get_name_flags_args(t_table_data *new_line, char **array,
+t_table_data		*get_name_args(t_table_data *new_line, char **array,
 						int *ii, t_data *data);
 int					get_line_type(char **array, int i);
 void				ft_print_table(t_table_data **table);

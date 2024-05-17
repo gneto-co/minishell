@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 13:23:19 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 11:34:42 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:46:39 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,20 @@ void ft_print_table(t_table_data **table)
 	
 	type = NULL;
 	i = 0;
-	ft_printf("\n╔═══════════════╦═══════════════╦═══════════════╦═══════════════╦═══════════════╗");
-	ft_printf("\n║      POS      ║      TYPE     ║  NAME / FILE  ║     FLAGS     ║      ARGS     ║");
-	ft_printf("\n╚═══════════════╩═══════════════╩═══════════════╩═══════════════╩═══════════════╝");
+	ft_printf("\n╔═══════════════╦═══════════════╦═══════════════╦═══════════════╗");
+	ft_printf("\n║      POS      ║      TYPE     ║  NAME / FILE  ║      ARGS     ║");
+	ft_printf("\n╚═══════════════╩═══════════════╩═══════════════╩═══════════════╝");
 	while (table[i])
 	{
-		ft_printf("\n┌───────────────┬───────────────┬───────────────┬───────────────┬───────────────┐");
+		ft_printf("\n┌───────────────┬───────────────┬───────────────┬───────────────┐");
 		if (table[i]->type == CMD)
 		{
-			ft_printf("\n│\t%d\t│\tcmd\t│\t%s\t│\t%d\t│\t%d\t│", i, table[i]->name, table[i]->flags_amount, table[i]->args_amount);
-			j = 0;
-			while (table[i]->flags[j])
-			{
-				ft_printf("\n├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤");
-				ft_printf("\n│\t\t│\t\t│\t\t│\t%s\t│\t\t│", table[i]->flags[j]);
-				j++;
-			}
+			ft_printf("\n│\t%d\t│\tcmd\t│\t%s\t│\t%d\t│", i, table[i]->name, table[i]->args_amount);
 			j = 0;
 			while (table[i]->args[j])
 			{
-				ft_printf("\n├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤");
-				ft_printf("\n│\t\t│\t\t│\t\t│\t\t│\t%s\t│", table[i]->args[j]);
+				ft_printf("\n├───────────────┼───────────────┼───────────────┼───────────────┤");
+				ft_printf("\n│\t\t│\t\t│\t\t│\t%s\t│", table[i]->args[j]);
 				j++;
 			}
 		}
@@ -56,10 +49,10 @@ void ft_print_table(t_table_data **table)
 				type = ft_strdup("    lessless   ");
 			else if (table[i]->type == GREATGREAT)
 				type = ft_strdup("   greatgreat  ");
-			ft_printf("\n│\t%d\t│%s│\t%s\t│\t\t│\t\t│", i, type, table[i]->name);
+			ft_printf("\n│\t%d\t│%s│\t%s\t│\t\t│", i, type, table[i]->name);
 			free(type);
 		}
-		ft_printf("\n└───────────────┴───────────────┴───────────────┴───────────────┴───────────────┘");
+		ft_printf("\n└───────────────┴───────────────┴───────────────┴───────────────┘");
 		i++;
 	}
 	ft_printf("\n");
