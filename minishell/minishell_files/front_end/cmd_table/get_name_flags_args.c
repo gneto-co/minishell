@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:12:43 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 11:32:50 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:00:03 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	new_line_initialize_data(t_table_data *new_line)
 	new_line->args = malloc(sizeof(char *));
 	new_line->args[0] = NULL;
 	new_line->args_amount = 0;
+	new_line->in_fd = 0;
+	new_line->out_fd = 0;
 }
 
 /*
@@ -36,7 +38,7 @@ static void	cmd_manager(t_table_data *new_line, char **array, int *ii)
 
 	i = *ii;
 	if (new_line->type == CMD)
-		new_line->name = array[i - 1];
+		new_line->name = ft_strdup(array[i - 1]);
 	while (get_line_type(array, i) == CMD)
 	{
 		if (ft_strncmp(array[i], "-", 1) != 0)
@@ -69,6 +71,7 @@ static void	redirection_manager(t_data *data, t_table_data *new_line,
 
 	t = new_line->type;
 	i = *ii;
+	type = NULL;
 	if (get_line_type(array, i) != 1)
 	{
 		if (t == LESS)
@@ -81,9 +84,10 @@ static void	redirection_manager(t_data *data, t_table_data *new_line,
 			type = ft_strdup(">>");
 		data->error = true;
 		ft_error(2, type);
+		free(type);
 		return ;
 	}
-	new_line->name = array[i++];
+	new_line->name = ft_strdup(array[i++]);
 	*ii = i;
 }
 

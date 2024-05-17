@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 11:17:35 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 14:32:32 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # define SPECIAL_CHAR "|<>$\'\""
 
 // table_type
-# define TYPE int
 # define CMD 1
 # define PIPE 2
 # define LESS 3
@@ -46,12 +45,16 @@
 
 typedef struct s_table_data
 {
-	TYPE			type;
+	int				type;
 	char			*name;
+
 	char			**flags;
 	int				flags_amount;
 	char			**args;
 	int				args_amount;
+
+	int				in_fd;
+	int				out_fd;
 }					t_table_data;
 
 typedef struct s_data
@@ -59,6 +62,8 @@ typedef struct s_data
 	bool			error;
 	t_table_data	**table;
 	char			**env;
+	int				in_fd;
+	int				out_fd;
 }					t_data;
 
 /* *********************************** */
@@ -104,6 +109,7 @@ void				ex_less(t_data *data, int i);
 void				ex_great(t_data *data, int i);
 void				ex_lessless(t_data *data, int i);
 void				ex_greatgreat(t_data *data, int i);
+char				*ft_find_cmd_path(char *cmd, char **env);
 
 /*  commands  */
 int					ft_cd(char **args);

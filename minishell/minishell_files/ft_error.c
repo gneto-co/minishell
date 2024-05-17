@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:25:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/15 14:47:17 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:00:18 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ int	ft_error(int nb, char *str)
 	else if (nb == 2)
 		ft_printf("\033[91m%s '%s'\033[0m\n", "minishell: parse error, "
 			"unexpected token", str);
+	else if (nb == 3)
+		ft_printf("\033[91m%s %s\033[0m\n", "minishell: execute error, "
+			"command not found:", str);
 	else
 		ft_printf("\nDeu mrd\n");
-	if (str)
-		free(str);
 	return (-1);
 }

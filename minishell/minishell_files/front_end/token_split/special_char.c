@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 10:53:46 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:14:17 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ static bool	problem_check(t_data *data, t_temp temp, char c)
 	i = *(temp.ii);
 	if (!temp.str[i])
 	{
-		*(temp.new_str) = NULL;
 		ft_error(1, NULL);
 		data->error = true;
 		free(*(temp.new_str));
 		free(*(temp.text_read));
+		*(temp.new_str) = NULL;
 		b = (true);
 	}
 	else if (temp.str[i] == c)
@@ -141,8 +141,11 @@ static char	*special_char_5_6(char *str, int *ii, t_data *data, char c)
 			free(text_read);
 		}
 		else
+		{
+
 			b = problem_check(data, (t_temp){&i, str, &new_str, &text_read,
 					&var_read}, c);
+		}
 	}
 	*ii = i;
 	return (new_str);

@@ -6,7 +6,7 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/05/17 11:13:47 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/05/17 14:34:08 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCPROJECT_SOURCES	=	$(addsuffix .c, \
 						back_end/ft_execute/ex_less \
 						back_end/ft_execute/ex_lessless \
 						back_end/ft_execute/ex_pipe \
+						back_end/ft_execute/ft_find_cmd_path \
 						\
 						back_end/example_file1 \
 						back_end/mini_command \

@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:25 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/16 13:22:55 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 14:19:01 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,5 @@ void	ex_lessless(t_data *data, int i)
 {
 	(void)data;
 	(void)i;
+	ft_printf("\n ex_lessless \n");
 }

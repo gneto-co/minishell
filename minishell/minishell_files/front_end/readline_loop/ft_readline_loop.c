@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 11:33:50 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:01:25 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static void	input_use(char *input, t_data *data)
 	if (data->error == false)
 	{
 		data->table = create_cmd_table(input_array, data);
-		ft_execute(data);
+		if (data->error == false)
+			ft_execute(data);
 		ft_free_table(data->table);
 		free(data->table);
 	}
