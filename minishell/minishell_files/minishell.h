@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/16 17:46:53 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 11:17:35 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ char				*get_real_next_text(char *str, int *ii, t_data *data);
 
 /*  ft_table  */
 t_table_data		**create_cmd_table(char **array, t_data *data);
+
+t_table_data		*get_name_flags_args(t_table_data *new_line, char **array,
+						int *ii, t_data *data);
+int					get_line_type(char **array, int i);
 void				ft_print_table(t_table_data **table);
 void				ft_free_table(t_table_data **table);
 

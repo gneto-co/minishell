@@ -6,13 +6,13 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:34:43 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/16 11:36:24 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 11:34:15 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void ft_free_table(t_table_data **table)
+void	ft_free_table(t_table_data **table)
 {
 	int	i;
 

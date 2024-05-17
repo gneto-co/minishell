@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/16 17:35:07 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/17 11:33:50 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static char	*get_prompt_text(void)
 
 	folder_name = ft_get_folder_name();
 	input_str = ft_multi_strjoin("\n"
-									"╭─┤ /%s ├─\n"
-									"│\n"
-									"╰─────────► ",
-									folder_name);
+			"╭─┤ /%s ├─\n"
+			"│\n"
+			"╰─────────► ",
+			folder_name);
 	free(folder_name);
 	return (input_str);
 }
@@ -51,7 +51,6 @@ static void	input_use(char *input, t_data *data)
 	}
 	data->error = false;
 	ft_free_array(input_array);
-	
 }
 
 /*
