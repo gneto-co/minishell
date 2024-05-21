@@ -6,12 +6,18 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 19:41:19 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:05:28 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/*
+ *
+ * 	· configure pipe / redirection
+ * 	· execute cmd
+ * 	· error management
+ */
 static void	pid_success(t_data *data, t_table_data *cmd, char **envp)
 {
 	if (cmd->in_fd)
@@ -30,6 +36,16 @@ static void	pid_success(t_data *data, t_table_data *cmd, char **envp)
 	exit(EXIT_FAILURE);
 }
 
+/*
+ *
+ * 	· init envp
+ * 	· start process (pid = fork)
+ * 	· if pid = -1
+ * 		· error
+ * 	· else 
+ * 		· pid_success()
+ * 	· free and close stuff
+ */
 static void	cmd_process(t_data *data, t_table_data *cmd)
 {
 	char	*envp[2];
@@ -58,7 +74,8 @@ static void	cmd_process(t_data *data, t_table_data *cmd)
  *
  * 	· get command path
  * 	· if command is valid
- * 		· print command
+ * 		· check for redirection
+ * 		· execute cmd
  * 	· if is not
  * 		· error
  * 	· free stuff
@@ -72,9 +89,9 @@ void	ex_cmd(t_data *data, int i)
 	if (cmd->path)
 	{
 		// ft_printf("\n cmd_path : %s\n\n", cmd->path);
-		if (data->in_fd)
+		if (!cmd->in_fd && data->in_fd)
 			cmd->in_fd = data->in_fd;
-		if (data->out_fd)
+		if (!cmd->out_fd && data->out_fd)
 			cmd->out_fd = data->out_fd;
 		cmd_process(data, cmd);
 	}

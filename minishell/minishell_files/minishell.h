@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 18:59:45 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:06:35 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@
 # define GREAT 4
 # define LESSLESS 5
 # define GREATGREAT 6
+
+// lessless temp file name
+# define LESSLESS_TEMP_FILE ".lessless"
 
 typedef struct s_table_data
 {

@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 19:47:28 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:08:33 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,10 @@ static void	second_loop(t_data *data)
 		if (data->table[i]->type == CMD)
 			ex_cmd(data, i);
 		i++;
-		if (data->error == true)
-			break ;
 	}
 }
 
-/* waitpid loop : wait for all processes */
+/* waitpid loop : wait for all processes and close pipes */
 static void	wait_pid_loop(t_data *data)
 {
 	int	i;
@@ -61,22 +59,6 @@ static void	wait_pid_loop(t_data *data)
 		if (data->table[i]->type == CMD)
 			if (data->table[i]->pid)
 				waitpid(data->table[i]->pid, NULL, 0);
-		i++;
-		if (data->error == true)
-			break ;
-	}
-}
-
-static void	reset_loop(t_data *data)
-{
-	data->in_fd = 0;
-	data->out_fd = 0;
-
-	int	i;
-
-	i = 0;
-	while (data->table[i])
-	{
 		if (data->table[i]->type == PIPE)
 		{
 			close(data->table[i]->pipe_fd[0]);
@@ -86,18 +68,24 @@ static void	reset_loop(t_data *data)
 	}
 }
 
+/* reset std in/out */
+static void	reset_loop(t_data *data)
+{
+	data->in_fd = 0;
+	data->out_fd = 0;
+}
+
 /* receive data and execute commands from commands table */
 int	ft_execute(t_data *data)
 {
 	if (data->error == false)
 	{
-		// ft_print_table(data->table);
 		first_loop(data);
 		second_loop(data);
 		wait_pid_loop(data);
 		reset_loop(data);
 	}
-	// TODO : redirection + pipe error
-	// TODO : error case stop all loops
+	// TODO : important error manage
+	// less, lessless
 	return (0);
 }
