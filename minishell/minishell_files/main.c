@@ -6,13 +6,13 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 11:42:04 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:49:58 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void data_init(t_data *data, char **env)
+static void	data_init(t_data *data, char **env)
 {
 	data->env = env;
 	data->error = false;

@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 12:05:28 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:50:49 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	pid_success(t_data *data, t_table_data *cmd, char **envp)
  * 	· start process (pid = fork)
  * 	· if pid = -1
  * 		· error
- * 	· else 
+ * 	· else
  * 		· pid_success()
  * 	· free and close stuff
  */
@@ -88,7 +88,6 @@ void	ex_cmd(t_data *data, int i)
 	cmd->path = ft_find_cmd_path(cmd->name, data->env);
 	if (cmd->path)
 	{
-		// ft_printf("\n cmd_path : %s\n\n", cmd->path);
 		if (!cmd->in_fd && data->in_fd)
 			cmd->in_fd = data->in_fd;
 		if (!cmd->out_fd && data->out_fd)

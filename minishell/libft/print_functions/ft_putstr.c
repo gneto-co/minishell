@@ -6,13 +6,13 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:28:10 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/16 17:24:32 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:52:24 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void		ft_putstr(char *s)
+void	ft_putstr(char *s)
 {
 	while (*s)
 	{

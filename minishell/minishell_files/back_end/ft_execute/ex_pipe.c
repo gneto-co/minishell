@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:58 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 19:28:02 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:51:13 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ void	ex_pipe(t_data *data, int i)
 	if (i == 0)
 	{
 		data->error = (ft_error(2, "|"), true);
-		return;
+		return ;
 	}
 	prev_cmd = data->table[i - 1];
 	pipe_line = data->table[i];
 	next_cmd = data->table[i + 1];
-	if (prev_cmd->type != CMD || !next_cmd
-		|| next_cmd->type != CMD)
+	if (prev_cmd->type != CMD || !next_cmd || next_cmd->type != CMD)
 		data->error = (ft_error(2, "|"), true);
 	else if (pipe(pipe_line->pipe_fd) == -1)
 		data->error = (perror("pipe failed"), true);

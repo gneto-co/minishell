@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 16:01:25 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:48:34 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static char	*get_prompt_text(void)
 
 	folder_name = ft_get_folder_name();
 	input_str = ft_multi_strjoin("\n"
-			"╭─┤ /%s ├─\n"
+			"╭─┤ %s ├─\n"
 			"│\n"
-			"╰─────────► ",
+			"╰┤ ",
 			folder_name);
 	free(folder_name);
 	return (input_str);

@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 16:14:17 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:57:30 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	*special_char_4(char *str, int *ii, t_data *data)
 	return (new_str);
 }
 
-/* that struct and function only exist because of norminette */
+/* this 2 struct and function only exist because of norminette */
 typedef struct s_temp
 {
 	int		*ii;
@@ -85,6 +85,12 @@ typedef struct s_temp
 	char	**text_read;
 	char	**var_read;
 }			t_temp;
+typedef struct s_temp2
+{
+	char	*new_str;
+	char	*text_read;
+	char	*var_read;
+}			t_temp2;
 
 static bool	problem_check(t_data *data, t_temp temp, char c)
 {
@@ -122,33 +128,30 @@ static bool	problem_check(t_data *data, t_temp temp, char c)
  */
 static char	*special_char_5_6(char *str, int *ii, t_data *data, char c)
 {
-	char	*new_str;
-	char	*text_read;
-	char	*var_read;
+	t_temp2	temp;
 	int		i;
 	bool	b;
 
 	b = false;
 	i = *ii + 1;
-	text_read = NULL;
-	new_str = NULL;
+	temp.text_read = NULL;
+	temp.new_str = NULL;
 	while (b == false)
 	{
-		text_read = get_next_text(str, &i, c);
-		if (text_read)
+		temp.text_read = get_next_text(str, &i, c);
+		if (temp.text_read)
 		{
-			new_str = ft_strjoin_free(new_str, text_read);
-			free(text_read);
+			temp.new_str = ft_strjoin_free(temp.new_str, temp.text_read);
+			free(temp.text_read);
 		}
 		else
 		{
-
-			b = problem_check(data, (t_temp){&i, str, &new_str, &text_read,
-					&var_read}, c);
+			b = problem_check(data, (t_temp){&i, str, &temp.new_str,
+					&temp.text_read, &temp.var_read}, c);
 		}
 	}
 	*ii = i;
-	return (new_str);
+	return (temp.new_str);
 }
 
 /*
