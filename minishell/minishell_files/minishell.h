@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 13:06:35 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:02:47 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_table_data
 typedef struct s_data
 {
 	bool			error;
+	bool			infile_error;
 	t_table_data	**table;
 	char			**env;
 	int				in_fd;

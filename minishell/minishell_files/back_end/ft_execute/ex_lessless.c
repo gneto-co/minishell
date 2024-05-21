@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:25 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 13:38:07 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:04:08 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ex_lessless(t_data *data, int i)
 	lessless = data->table[i];
 	fd = open(LESSLESS_TEMP_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
-		data->error = (perror("open file error"), true);
+		data->infile_error = (perror("open file error"), true);
 	else
 	{
 		str = get_write_text(lessless->name);
@@ -74,7 +74,7 @@ void	ex_lessless(t_data *data, int i)
 	}
 	fd = open(LESSLESS_TEMP_FILE, O_RDONLY);
 	if (fd == -1)
-		data->error = (perror("open file error"), true);
+		data->infile_error = (perror("open file error"), true);
 	else
 	{
 		if (data->in_fd)

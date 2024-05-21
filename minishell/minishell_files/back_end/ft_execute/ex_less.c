@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:28 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 19:03:18 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:03:46 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ex_less(t_data *data, int i)
 	fd = open(less->name, O_RDONLY);
 	if (fd == -1)
 	{
-		data->error = true;
+		data->infile_error = true;
 		perror("open file error");
 	}
 	else

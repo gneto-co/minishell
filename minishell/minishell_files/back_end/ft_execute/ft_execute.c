@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 13:08:33 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:07:04 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static void	first_loop(t_data *data)
 			ex_pipe(data, i);
 		else if (data->table[i]->type == LESS)
 			ex_less(data, i);
+		else if (data->table[i]->type == LESSLESS)
+			ex_lessless(data, i);
 		else if (data->table[i]->type == GREAT)
 			ex_great(data, i);
 		else if (data->table[i]->type == GREATGREAT)
 			ex_greatgreat(data, i);
-		else if (data->table[i]->type == LESSLESS)
-			ex_lessless(data, i);
 		i++;
 	}
 }
@@ -85,7 +85,5 @@ int	ft_execute(t_data *data)
 		wait_pid_loop(data);
 		reset_loop(data);
 	}
-	// TODO : important error manage
-	// less, lessless
 	return (0);
 }

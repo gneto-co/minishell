@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 13:50:49 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:06:07 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ void	ex_cmd(t_data *data, int i)
 
 	cmd = data->table[i];
 	cmd->path = ft_find_cmd_path(cmd->name, data->env);
-	if (cmd->path)
+	if (data->infile_error == true)
+		data->infile_error = false;
+	else if (cmd->path)
 	{
 		if (!cmd->in_fd && data->in_fd)
 			cmd->in_fd = data->in_fd;
