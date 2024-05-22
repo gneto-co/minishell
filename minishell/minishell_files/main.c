@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 13:49:58 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:13:37 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	data_init(t_data *data, char **env)
 {
 	data->env = env;
 	data->error = false;
+	data->infile_error = false;
 	data->table = NULL;
 	data->in_fd = 0;
 	data->out_fd = 0;

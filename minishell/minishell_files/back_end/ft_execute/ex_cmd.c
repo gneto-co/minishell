@@ -6,11 +6,23 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 14:06:07 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:13:56 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
+{
+	// if is a built in command execute, else execve
+	if (1 == 0)
+		;
+	else
+		execve(cmd->path, cmd->args, envp);
+	perror("command process error");
+	data->error = true;
+	exit(EXIT_FAILURE);
+}
 
 /*
  *
@@ -30,10 +42,7 @@ static void	pid_success(t_data *data, t_table_data *cmd, char **envp)
 		dup2(cmd->out_fd, STDOUT_FILENO);
 		close(cmd->out_fd);
 	}
-	execve(cmd->path, cmd->args, envp);
-	perror("command process error");
-	data->error = true;
-	exit(EXIT_FAILURE);
+	final_cmd_execute(data, cmd, envp);
 }
 
 /*
