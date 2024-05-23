@@ -6,7 +6,7 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/05/17 16:41:39 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/05/23 10:12:11 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCPROJECT_SOURCES	=	$(addsuffix .c, \
 						\
 						\
 						front_end/readline_loop/ft_readline_loop \
+						front_end/readline_loop/handle_signals \
 						\
 						front_end/token_split/ft_token_split \
 						front_end/token_split/special_char \

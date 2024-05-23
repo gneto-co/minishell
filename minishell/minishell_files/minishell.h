@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 14:02:47 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/23 10:36:59 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <math.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -85,6 +86,9 @@ int					ft_error(int nb, char *str);
 
 /*  ft_readline_loop  */
 void				ft_readline_loop(t_data *data);
+void				handle_sigint(int sig);
+void				handle_sigquit(int sig);
+char				*get_prompt_text(void);
 
 /*  ft_token_split  */
 char				**ft_token_split(char *str, t_data *data);

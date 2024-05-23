@@ -6,24 +6,24 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 13:48:34 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/23 10:47:12 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 /* allocate and return a str with the prompt */
-static char	*get_prompt_text(void)
+char	*get_prompt_text(void)
 {
 	char	*folder_name;
 	char	*input_str;
 
 	folder_name = ft_get_folder_name();
 	input_str = ft_multi_strjoin("\n"
-			"╭─┤ %s ├─\n"
-			"│\n"
-			"╰┤ ",
-			folder_name);
+									"╭─┤ %s ├─\n"
+									"│\n"
+									"╰┤ ",
+									folder_name);
 	free(folder_name);
 	return (input_str);
 }
@@ -71,7 +71,9 @@ static void	history_manager(char *input, char **last_input)
 }
 
 /*
- *	· start a readline() loop with functional history
+ *
+ * 	· configure signal handlers
+ * 	· start a readline() loop with functional history
  *		· get prompt, get input, free prompt
  *		· if !input (Ctr+D)
  *			· free() input, prompt
@@ -88,8 +90,9 @@ void	ft_readline_loop(t_data *data)
 	char	*last_input;
 	char	*prompt_str;
 
-	last_input = NULL;
-	using_history();
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
+	last_input = (using_history(), NULL);
 	while (1)
 	{
 		prompt_str = get_prompt_text();
