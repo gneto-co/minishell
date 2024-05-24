@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:04:12 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/15 14:35:23 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:12:08 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_execute(char **args, t_data *data)
 {
+	if (!ft_strcmp(args[0], "ls"))
+		ft_ls();
 	if (!ft_strcmp(args[0], "cd"))
 		ft_cd(args, data);
 	else if (!ft_strcmp(args[0], "env"))
@@ -30,5 +32,5 @@ void	ft_execute(char **args, t_data *data)
 		ft_exit(args, data);
 	else
 		perror("command not found ");
-	printf("exit code: %d\n", data->exit_code);
+	printf("\n\nexit code: %d\n", data->exit_code);
 }
