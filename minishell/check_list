@@ -9,27 +9,27 @@
 	aspas simples e duplas, etc.
 
 
-3. [ ] Execução do comando:
+3. [x] Execução do comando:
 	* Criar uma função que recebe um t_cmd_data e executa esse comando
 
 
-4. [ ] Redireccionamento de entrada e saída:
+4. [x] Redireccionamento de entrada e saída:
 	* Implementar o tratamento do redireccionamento da entrada (<), do
 	redireccionamento da saída (>), da anexação da saída (>>) e da entrada
 	através de "here documents" (<<).
 
 
-5. [ ] Comandos em pipes:
+5. [x] Comandos em pipes:
 	* Desenvolver um mecanismo para execução de comandos em pipes, onde a saída
 	de um comando se torna a entrada para outro comando através do símbolo |.
 
 
-6. [ ] Variável $?
+6. [x] Variável $?
 	* Implementar o acesso ao valor do código de saída do último comando frontal
 	 executado usando $?
 
 
-7. [ ] Processamento de sinais:
+7. [x] Processamento de sinais:
 	* Desenvolver o tratamento de sinais como Ctrl-C, Ctrl-D e Ctrl-\ de acordo
 	com o seu comportamento na Bourne shell (bash).
 
