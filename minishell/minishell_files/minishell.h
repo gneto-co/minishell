@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/23 10:36:59 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:41:10 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_data
 	char			**env;
 	int				in_fd;
 	int				out_fd;
+	int				process_status;
 }					t_data;
 
 /* *********************************** */

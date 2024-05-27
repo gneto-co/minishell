@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 13:57:30 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:43:01 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ static char	*special_char_4(char *str, int *ii, t_data *data)
 	i++;
 	if (!str[i] || str[i] == ' ')
 		new_str = ft_strdup("$");
+	else if (str[i] == '?')
+	{
+		new_str = ft_itoa(data->process_status);
+		i++;
+	}
 	else
 	{
 		var_name = get_next_text(str, &i, 1);

@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 14:07:04 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:44:00 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,20 @@ static void	second_loop(t_data *data)
 static void	wait_pid_loop(t_data *data)
 {
 	int	i;
+	int	status;
 
 	i = 0;
 	while (data->table[i])
 	{
 		if (data->table[i]->type == CMD)
+		{
 			if (data->table[i]->pid)
-				waitpid(data->table[i]->pid, NULL, 0);
+				waitpid(data->table[i]->pid, &status, 0);
+			if (WIFEXITED(status))
+				data->process_status = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+				data->process_status = 128 + WTERMSIG(status);
+		}
 		if (data->table[i]->type == PIPE)
 		{
 			close(data->table[i]->pipe_fd[0]);
@@ -73,6 +80,7 @@ static void	reset_loop(t_data *data)
 {
 	data->in_fd = 0;
 	data->out_fd = 0;
+	unlink(LESSLESS_TEMP_FILE);
 }
 
 /* receive data and execute commands from commands table */

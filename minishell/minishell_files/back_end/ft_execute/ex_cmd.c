@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/22 16:13:56 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:41:36 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
 	if (1 == 0)
 		;
 	else
-		execve(cmd->path, cmd->args, envp);
+		data->process_status = execve(cmd->path, cmd->args, envp);
 	perror("command process error");
 	data->error = true;
 	exit(EXIT_FAILURE);
