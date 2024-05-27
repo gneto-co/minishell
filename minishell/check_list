@@ -42,7 +42,7 @@
 		[x] echo -n
 		[x] pwd
 		[x] env
-		[ ] cd
+		[x] cd
 		[ ] unset
 		[ ] export
 

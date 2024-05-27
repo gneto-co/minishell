@@ -6,19 +6,19 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:15:42 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/23 11:25:25 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:49:59 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <dirent.h>
 
 //MARK ft_ls
-int	ft_ls(void)
+void	ft_ls(t_data *data)
 {
 	DIR *d;
 	struct dirent *dir;
 
+	data->exit_code = 0;
 	d = opendir(".");
 	if (d)
 	{
@@ -29,9 +29,8 @@ int	ft_ls(void)
 	else
 	{
 		perror("minishell: opendir");
-		return EXIT_FAILURE;
+		data->exit_code = EXIT_FAILURE;
 	}
-	return EXIT_SUCCESS;
 }
 
 //MARK print_array
@@ -56,7 +55,7 @@ void	ft_env(char **env, t_data *data)
 	while (env && env[i])
 	{
 		if (ft_strchr(env[i], '='))
-			ft_putendl_fd(env[i++], STDOUT_FILENO);
+			ft_printf(env[i++]);
 	}
 }
 
@@ -66,10 +65,60 @@ void	ft_unset(char **args, t_data *data)
 	data->exit_code = 0;
 }
 
+void	ft_swap(char **a, char **b)
+{
+	char *temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+char	**ft_sort_env(char **env)
+{
+	char	**sort_env;
+	int		len;
+	int		i;
+	int		j;
+
+	i = -1;
+	len = ft_arraylen(env);
+	sort_env = (char **)ft_calloc(len, sizeof(char*));
+	while(env[++i])
+		sort_env[i] = ft_strdup(env[i]);
+	sort_env[len] = NULL;
+	i = 0;
+	while (i < len - 1)
+	{
+		j = 0;
+		while (j < len - 1 - i)
+		{
+			if (ft_strcmp(sort_env[j], sort_env[j + 1]) > 0)
+				ft_swap(&sort_env[j], &sort_env[j + 1]);
+			j++;
+		}
+		i++;
+	}
+	return (sort_env);
+}
+
+void	ft_print_export(char **env)
+{
+	char	**sort_env;
+	int		i;
+
+	i = 0;
+	sort_env = ft_sort_env(env);
+	while (sort_env[i])
+		ft_printf("declare -x %s\n", sort_env[i++]);
+	ft_free_array(sort_env);
+}
+
 void	ft_export(char **args, t_data *data)
 {
-	(void)	args;
 	data->exit_code = 0;
+	if (!args[1])
+		ft_print_export(data->env);
 }
 
 /**
@@ -92,12 +141,12 @@ void	ft_echo(char **args, t_data *data)
 	}
 	while (args[i])
 	{
-		ft_putstr_fd(args[i], STDOUT_FILENO);
+		ft_printf(args[i]);
 		if (args[++i])
-			ft_putstr_fd(" ", STDOUT_FILENO);
+			ft_printf(" ");
 	}
 	if (flag == false)
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		ft_printf("\n");
 }
 
 /**
@@ -107,11 +156,11 @@ void	ft_echo(char **args, t_data *data)
  */
 void	ft_pwd(t_data *data)
 {
-	char	cwd[1024];
+	char	cwd[PATH_MAX];
 
 	data->exit_code = 0;
 	if (getcwd(cwd, sizeof(cwd)))
-		ft_putendl_fd(cwd, STDOUT_FILENO);
+		ft_printf(cwd);
 	else
 		perror("minishell: getcwd");
 }
@@ -134,7 +183,7 @@ void	ft_exit(char **args, t_data *data)
 
 	i = -1;
 	data->exit_code = 0;
-	ft_putendl_fd("exit", STDOUT_FILENO);
+	ft_printf("exit");
 	while (args[1] && args[1][++i])
 	{
 		if (!ft_isdigit(args[1][i]))
@@ -163,14 +212,14 @@ void	ft_exit(char **args, t_data *data)
  * Updates the environment variables for the current working directory (PWD)
  * and the previous working directory (OLDPWD).
  */
-// TODO не продумані всі варіанти помилок
+// FIXME not fix all error
 void	cd_update_env(t_data *data)
 {
 	char	**env;
 	char	*buff;
 	char	*new_oldpwd;
 	int		i;
-	char	cwd[1024];
+	char	cwd[PATH_MAX];
 
 	i = 0;
 	env = data->env;
@@ -251,7 +300,6 @@ void	ft_cd(char **args, t_data *data)
 	i = 0;
 	data->exit_code = 0;
 
-	// ft_print_array(args); //MARK ft_cd
 	while (args[i])
 		i++;
 	if (i > 2)

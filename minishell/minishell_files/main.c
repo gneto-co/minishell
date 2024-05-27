@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/14 18:00:08 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:25:04 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ static void	readline_loop(t_data *data, char **env)
 	//
 }
 
+// FIXME run .minishell, SHLVL= (+1); exit, SHLVL= (-1)
 // ft_get_user_input()
 int	main(int ac, char **av, char **env)
 {

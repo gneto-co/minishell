@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:04:12 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/22 17:12:08 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:29:17 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_execute(char **args, t_data *data)
 {
 	if (!ft_strcmp(args[0], "ls"))
-		ft_ls();
+		ft_ls(data);
 	if (!ft_strcmp(args[0], "cd"))
 		ft_cd(args, data);
 	else if (!ft_strcmp(args[0], "env"))

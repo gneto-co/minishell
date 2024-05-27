@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/22 16:57:38 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/25 11:35:40 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,10 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <limits.h>
+# include <dirent.h>
+# include <stdbool.h>
 
-// int
-# define INT_MAX 2147483647
-# define INT_MIN -2147483648
-// boll
-# define bool int
-# define true 1
-# define false 0
 // special char
 # define SPECIAL_CHAR "|<>$\'\""
 
@@ -60,7 +56,7 @@ char		*special_char_treatment(char *str, int *ii, char **env);
 char		**split_str(char **array, int *str_nb, char **new_str);
 
 // back_end
-int			ft_ls(void);
+void		ft_ls(t_data *data);
 void		ft_cd(char **args, t_data *data);
 void		ft_exit(char **args, t_data *data);
 void		ft_pwd(t_data *data);
