@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:15:42 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/27 14:49:59 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/27 20:36:57 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_env(char **env, t_data *data)
 	while (env && env[i])
 	{
 		if (ft_strchr(env[i], '='))
-			ft_printf(env[i++]);
+			ft_printf("%s\n", env[i++]);
 	}
 }
 
@@ -114,11 +114,103 @@ void	ft_print_export(char **env)
 	ft_free_array(sort_env);
 }
 
+bool	is_valid_identifier(const char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_isalpha(str[0]) || str[0] == '_')
+		return (false);
+	while (str[i] && str[i] != '=')
+	{
+		if (!ft_isalnum(str[i]) || str[i] == '_')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+char	*get_env_var(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	return (ft_substr(str, 0, i));
+}
+
+int	find_var(char **env, char *var)
+{
+	int		i;
+	char	*env_var;
+
+	i = 0;
+	while (env[i])
+	{
+		env_var = get_env_var(env[i]);
+		if (ft_strcmp(env_var, var) == 0)
+			return (i);
+		free(env_var);
+		i++;
+	}
+	return (-1);
+}
+
+void	update_env_str(char **str, char *new_var)
+{
+	// free(*str); //LEAK maybe
+	*str = ft_strdup(new_var);
+}
+
+void	add_new_arg(char **env, char *new_var)
+{
+	int	len;
+
+	len = ft_arraylen(env);
+	env = ft_realloc(env, len, len + 2); //FIXME error malloc()
+	env[len] = ft_strdup(new_var);
+	env[len + 1] = NULL;
+}
+
+void	update_env(char **env, char *arg)
+{
+	char	*var_name;
+	int		index;
+
+	var_name = get_env_var(arg);
+	index = find_var(env, var_name);
+	free(var_name);
+	if (index >= 0)
+		update_env_str(&env[index], arg);
+	else
+		add_new_arg(env, arg);
+}
+
 void	ft_export(char **args, t_data *data)
 {
+	int	i;
+
+	i = 1;
 	data->exit_code = 0;
 	if (!args[1])
 		ft_print_export(data->env);
+	else
+	{
+		while (args[i])
+		{
+			if (is_valid_identifier(args[i]))
+				update_env(data->env, args[i]);
+			else
+			{
+				ft_putstr_fd("minishell: export: '", STDERR_FILENO);
+				ft_putstr_fd(args[i], STDERR_FILENO);
+				ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+				data->exit_code = 1;
+			}
+			i++;
+		}
+	}
 }
 
 /**
@@ -160,7 +252,7 @@ void	ft_pwd(t_data *data)
 
 	data->exit_code = 0;
 	if (getcwd(cwd, sizeof(cwd)))
-		ft_printf(cwd);
+		ft_printf("%s\n", cwd);
 	else
 		perror("minishell: getcwd");
 }
