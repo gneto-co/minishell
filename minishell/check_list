@@ -36,18 +36,18 @@
 
 // TODO <yadereve>
 
-8. [ ] Comandos embutidos:
+8. [x] Comandos embutidos:
 	* Implementar comandos embutidos como
 		[x] exit
 		[x] echo -n
 		[x] pwd
 		[x] env
 		[x] cd
-		[ ] unset
-		[ ] export
+		[x] unset
+		[x] export
 
 
-9. [ ] Exibir resultados de comandos:
+9. [x] Exibir resultados de comandos:
 	* Implementar a apresentação dos resultados dos comandos no ecrã (erros,
 	etc.).
 
