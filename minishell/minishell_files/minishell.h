@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/25 11:35:40 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:08:41 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,22 @@ void		ft_export(char **args, t_data *data);
 void		ft_unset(char **args, t_data *data);
 void		ft_env(char **env, t_data *data);
 void 		ft_execute(char **args, t_data *data);
+void		ft_array_n_delone(char ***array, int index);
+void		ft_swap(char **a, char **b);
+char		**ft_sort_env(char **env);
+void		ft_print_export(char **env);
+bool		is_valid_identifier(const char *str);
+char		*get_env_var(char *str);
+int			find_var(char **env, char *var);
+void		update_env_str(char **str, char *new_var);
+char		**ft_create_env(char *new_var);
+void		free_array(char ***array);
+void		add_new_arg(char ***env, char *new_var);
+void		update_env(char ***env, char *arg);
+void		cd_update_env(t_data *data);
+void		ft_chdir(char *path, t_data *data);
+void		cd_dir(char **args, t_data *data);
+
 /* *********************************** */
 /*                                     */
 /*                 END                 */

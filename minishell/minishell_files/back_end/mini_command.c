@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:15:42 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/27 20:36:57 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:14:43 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,76 @@ void	ft_env(char **env, t_data *data)
 	}
 }
 
-void	ft_unset(char **args, t_data *data)
+/**
+ * This function removes the element at the specified index from the array and
+ * updates the array accordingly. It dynamically allocates a new array with
+ * enough space to hold the remaining elements and copies them over. The old
+ * array is then freed.
+ */
+void	ft_array_n_delone(char ***array, int index)
 {
-	(void)	args;
-	data->exit_code = 0;
+	int		i;
+	int		j;
+	int		len;
+	char	**new_array;
+
+	i = 0;
+	j = 0;
+	len = ft_arraylen((*array));
+	new_array = malloc(len * sizeof(char*));
+	if (!new_array)
+		return ;
+	while ((*array)[i])
+	{
+		if (i != index)
+		{
+			new_array[j] = ft_strdup((*array)[i]);
+			j++;
+		}
+		i++;
+	}
+	// free_array(array); //LEAK maybe, error malloc()
+	*array = new_array;
 }
 
+/**
+ * This function takes an array of arguments and a pointer to a data structure.
+ * It iterates through the arguments and checks if each argument contains an
+ * equal sign. If an argument contains an equal sign, it prints an error
+ * message and sets the exit code to 1. If an argument does not contain an
+ * equal sign, it searches for the variable in the environment array.
+ * If the variable is found, it removes it from the environment array.
+ */
+void	ft_unset(char **args, t_data *data)
+{
+	int		i;
+	int		index_env;
+
+	i = 1;
+	data->exit_code = 0;
+	while (args[i])
+	{
+		if (ft_strchr(args[i], '='))
+		{
+			ft_printf("unset: %s: invalid parameter name", args[i]); //FIXME
+			data->exit_code = 1;
+		}
+		else
+		{
+			index_env = find_var(data->env, args[i]);
+			if (index_env >= 0)
+			{
+				ft_array_n_delone(&(data->env), index_env);
+				continue ;
+			}
+		}
+		i++;
+	}
+}
+
+/**
+ * Swaps the values of two pointers to strings.
+ */
 void	ft_swap(char **a, char **b)
 {
 	char *temp;
@@ -74,6 +138,9 @@ void	ft_swap(char **a, char **b)
 	*b = temp;
 }
 
+/**
+ * Sorts the given environment variable array in lexicographical order.
+ */
 char	**ft_sort_env(char **env)
 {
 	char	**sort_env;
@@ -102,10 +169,13 @@ char	**ft_sort_env(char **env)
 	return (sort_env);
 }
 
-void	ft_print_export(char **env)
+/**
+ * Prints the environment variables in a sorted order.
+ */
+void ft_print_export(char **env)
 {
-	char	**sort_env;
-	int		i;
+	char **sort_env;
+	int i;
 
 	i = 0;
 	sort_env = ft_sort_env(env);
@@ -159,30 +229,81 @@ int	find_var(char **env, char *var)
 
 void	update_env_str(char **str, char *new_var)
 {
-	// free(*str); //LEAK maybe
+	// if (*str)
+	// 	free(*str); //LEAK maybe
 	*str = ft_strdup(new_var);
 }
 
-void	add_new_arg(char **env, char *new_var)
+char	**ft_create_env(char *new_var) //TODO static
 {
-	int	len;
+	char	**new_env;
 
-	len = ft_arraylen(env);
-	env = ft_realloc(env, len, len + 2); //FIXME error malloc()
-	env[len] = ft_strdup(new_var);
-	env[len + 1] = NULL;
+	new_env = malloc(2 * sizeof(char *));
+	if (!new_env)
+		return (NULL);
+	new_env[0] = ft_strdup(new_var);
+	if (new_env[0] == NULL)
+		return (NULL);
+	new_env[1] = NULL;
+	return (new_env);
 }
 
-void	update_env(char **env, char *arg)
+void	free_array(char ***array)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	if (!(*array))
+		return ;
+	while ((*array)[len])
+		len++;
+	while (i < len)
+	{
+		free((*array)[i]);
+		i++;
+	}
+	free((*array));
+}
+
+void	add_new_arg(char ***env, char *new_var)
+{
+	int		len;
+	char	**new_env;
+	int		i;
+
+	if (!(*env))
+		*env = ft_create_env(new_var);
+	else
+	{
+		i = 0;
+		len = ft_arraylen(*env);
+		new_env = malloc((len + 2) * sizeof(char*));
+		if (!new_env)
+			return ;
+		while ((*env)[i])
+		{
+			new_env[i] = ft_strdup((*env)[i]);
+			i++;
+		}
+		new_env[i] = ft_strdup(new_var);
+		new_env[i + 1] = NULL;
+		// free_array(env); //LEAK maybe, error malloc()
+		*env = new_env;
+	}
+}
+
+void	update_env(char ***env, char *arg)
 {
 	char	*var_name;
 	int		index;
 
 	var_name = get_env_var(arg);
-	index = find_var(env, var_name);
+	index = find_var((*env), var_name);
 	free(var_name);
 	if (index >= 0)
-		update_env_str(&env[index], arg);
+		update_env_str(&(*env)[index], arg);
 	else
 		add_new_arg(env, arg);
 }
@@ -200,7 +321,7 @@ void	ft_export(char **args, t_data *data)
 		while (args[i])
 		{
 			if (is_valid_identifier(args[i]))
-				update_env(data->env, args[i]);
+				update_env(&(data->env), args[i]);
 			else
 			{
 				ft_putstr_fd("minishell: export: '", STDERR_FILENO);
@@ -331,7 +452,7 @@ void	cd_update_env(t_data *data)
  * Changes the current working directory to the specified path.
  * If the path does not exist, an error message is printed to stderr.
  */
-void ft_chdir(char *path, t_data *data)
+void	ft_chdir(char *path, t_data *data)
 {
 	if (chdir(path) != 0)
 	{
