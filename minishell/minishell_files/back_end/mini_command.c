@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:15:42 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/28 15:14:43 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:23:26 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,9 @@ void ft_print_export(char **env)
 	ft_free_array(sort_env);
 }
 
+/**
+ * Checks if a given string is a valid identifier.
+ */
 bool	is_valid_identifier(const char *str)
 {
 	int	i;
@@ -200,6 +203,13 @@ bool	is_valid_identifier(const char *str)
 	return (true);
 }
 
+/**
+ * Retrieves the environment variable from a given string.
+ * This function searches for the first occurrence of the '=' character in the
+ * input string and returns a substring of the input string from the beginning
+ * up to (but not including) the '=' character. The returned substring
+ * represents the environment variable.
+ */
 char	*get_env_var(char *str)
 {
 	int	i;
@@ -210,6 +220,9 @@ char	*get_env_var(char *str)
 	return (ft_substr(str, 0, i));
 }
 
+/**
+ * Finds the index of a given variable in the environment array.
+ */
 int	find_var(char **env, char *var)
 {
 	int		i;
@@ -227,6 +240,13 @@ int	find_var(char **env, char *var)
 	return (-1);
 }
 
+/**
+ * Updates the value of a string pointer with a new variable.
+ * This function takes a string pointer and a new variable as input.
+ * It updates the value of the string pointer by duplicating the new variable.
+ * If the string pointer was previously pointing to a string, it frees the
+ * memory allocated for that string before duplicating the new variable.
+ */
 void	update_env_str(char **str, char *new_var)
 {
 	// if (*str)
@@ -234,6 +254,9 @@ void	update_env_str(char **str, char *new_var)
 	*str = ft_strdup(new_var);
 }
 
+/**
+ * Creates a new environment variable with the given value.
+ */
 char	**ft_create_env(char *new_var) //TODO static
 {
 	char	**new_env;
@@ -248,6 +271,9 @@ char	**ft_create_env(char *new_var) //TODO static
 	return (new_env);
 }
 
+/**
+ * Frees the memory allocated for a 3-dimensional array.
+ */
 void	free_array(char ***array)
 {
 	int	i;
@@ -267,6 +293,16 @@ void	free_array(char ***array)
 	free((*array));
 }
 
+/**
+ * @brief Adds a new argument to the environment variable array.
+ *
+ * This function takes a pointer to a pointer to the environment variable array
+ * and a new variable as input. It adds the new variable to the array,
+ * reallocating memory if necessary. If the array is empty, it creates a new
+ * array with the new variable. If the array is not empty, it creates a new a
+ * rray with the new variable appended to the existing array.
+ * The old array is freed and the pointer is updated to point to the new array.
+ */
 void	add_new_arg(char ***env, char *new_var)
 {
 	int		len;
@@ -294,6 +330,11 @@ void	add_new_arg(char ***env, char *new_var)
 	}
 }
 
+/**
+ * Updates the environment variable with the given argument.
+ * If the variable already exists, its value is updated.
+ * If the variable does not exist, a new variable is added to the environment.
+ */
 void	update_env(char ***env, char *arg)
 {
 	char	*var_name;
@@ -308,6 +349,12 @@ void	update_env(char ***env, char *arg)
 		add_new_arg(env, arg);
 }
 
+/**
+ * This function exports environment variables based on the provided arguments.
+ * If no arguments are provided, it prints all the exported variables.
+ * If an argument is not a valid identifier, it prints an error message and
+ * sets the exit code to 1.
+ */
 void	ft_export(char **args, t_data *data)
 {
 	int	i;
