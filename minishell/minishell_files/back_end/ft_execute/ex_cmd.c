@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/27 14:41:36 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:05:18 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,28 @@
 
 static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
 {
-	// if is a built in command execute, else execve
-	if (1 == 0)
-		;
+	if (!ft_strcmp(cmd->name, "cd"))
+		ft_cd(cmd->args, data);
+	else if (!ft_strcmp(cmd->name, "env"))
+		ft_env(data->env, data);
+	else if (!ft_strcmp(cmd->name, "pwd"))
+		ft_pwd(data);
+	else if (!ft_strcmp(cmd->name, "echo"))
+		ft_echo(cmd->args, data);
+	else if (!ft_strcmp(cmd->name, "export"))
+		ft_export(cmd->args, data);
+	else if (!ft_strcmp(cmd->name, "unset"))
+		ft_unset(cmd->args, data);
+	else if (!ft_strcmp(cmd->name, "exit"))
+		ft_exit(cmd->args, data);
 	else
+	{
+		ft_printf("CHECK\n");
 		data->process_status = execve(cmd->path, cmd->args, envp);
-	perror("command process error");
-	data->error = true;
-	exit(EXIT_FAILURE);
+		perror("command process error");
+		data->error = true;
+	}
+	exit(0);
 }
 
 /*
@@ -45,8 +59,24 @@ static void	pid_success(t_data *data, t_table_data *cmd, char **envp)
 	final_cmd_execute(data, cmd, envp);
 }
 
+static bool	pipe_on_table(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->table[i])
+	{
+		if (data->table[i]->type == PIPE)
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 /*
  *
+ * 	· if cmd = exit
+ * 		· do exit stuff
  * 	· init envp
  * 	· start process (pid = fork)
  * 	· if pid = -1
@@ -59,6 +89,11 @@ static void	cmd_process(t_data *data, t_table_data *cmd)
 {
 	char	*envp[2];
 
+	if (!ft_strcmp(cmd->name, "exit") && pipe_on_table(data) == false)
+	{
+		ft_exit(cmd->args, data);
+		return ;
+	}
 	envp[0] = ft_strdup("TERM=xterm");
 	envp[1] = NULL;
 	cmd->pid = fork();
@@ -70,11 +105,15 @@ static void	cmd_process(t_data *data, t_table_data *cmd)
 	}
 	else if (cmd->pid == 0)
 		pid_success(data, cmd, envp);
-	if (cmd->in_fd)
-		close(cmd->in_fd);
-	if (cmd->out_fd)
-		close(cmd->out_fd);
-	free(envp[0]);
+	else
+	{
+		waitpid(cmd->pid, &data->process_status, 0);
+		if (cmd->in_fd)
+			close(cmd->in_fd);
+		if (cmd->out_fd)
+			close(cmd->out_fd);
+		free(envp[0]);
+	}
 }
 
 /*
@@ -109,6 +148,7 @@ void	ex_cmd(t_data *data, int i)
 	{
 		data->error = true;
 		ft_error(3, cmd->name);
+		data->process_status = 127;
 	}
 	free(cmd->path);
 }

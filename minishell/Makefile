@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
+#    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/05/31 11:17:38 by yadereve         ###   ########.fr        #
+#    Updated: 2024/05/31 12:02:40 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ SRCPROJECT_SOURCES	=	$(addsuffix .c, \
 						back_end/ft_execute/ft_find_cmd_path \
 						\
 						back_end/mini_command \
-=======
+)
 SRC_DIR = minishell_files
 
 OBJ_DIR				=	objects

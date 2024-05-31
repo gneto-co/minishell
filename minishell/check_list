@@ -1,56 +1,7 @@
-// TODO <gneto-co>
+ 
+ falta:
 
-1. [x] Histórico de comandos:
-	* Armazenar o histórico dos comandos introduzidos pelo utilizador.
-	* Permitir que o utilizador veja o histórico.
-
-2. [x] Processamento de caracteres e construções especiais:
-	* Desenvolver lógica para tratar caracteres especiais e construções como
-	aspas simples e duplas, etc.
-
-
-3. [x] Execução do comando:
-	* Criar uma função que recebe um t_cmd_data e executa esse comando
-
-
-4. [x] Redireccionamento de entrada e saída:
-	* Implementar o tratamento do redireccionamento da entrada (<), do
-	redireccionamento da saída (>), da anexação da saída (>>) e da entrada
-	através de "here documents" (<<).
-
-
-5. [x] Comandos em pipes:
-	* Desenvolver um mecanismo para execução de comandos em pipes, onde a saída
-	de um comando se torna a entrada para outro comando através do símbolo |.
-
-
-6. [x] Variável $?
-	* Implementar o acesso ao valor do código de saída do último comando frontal
-	 executado usando $?
-
-
-7. [x] Processamento de sinais:
-	* Desenvolver o tratamento de sinais como Ctrl-C, Ctrl-D e Ctrl-\ de acordo
-	com o seu comportamento na Bourne shell (bash).
-
-
-// TODO <yadereve>
-
-8. [x] Comandos embutidos:
-	* Implementar comandos embutidos como
-		[x] exit
-		[x] echo -n
-		[x] pwd
-		[x] env
-		[x] cd
-		[x] unset
-		[x] export
-
-
-9. [x] Exibir resultados de comandos:
-	* Implementar a apresentação dos resultados dos comandos no ecrã (erros,
-	etc.).
-
+ FIXME ls
 
 
 // TODO: todo task
@@ -60,16 +11,3 @@
 // LEAK: leak
 // [ ]: Pending
 // [x]: Done
-
-
-External functs:
-readline, rl_clear_history, rl_on_new_line,
-rl_replace_line, rl_redisplay, add_history,
-printf, malloc, free, write, access, open, read,
-close, fork, wait, waitpid, wait3, wait4, signal,
-sigaction, sigemptyset, sigaddset, kill, exit,
-getcwd, chdir, stat, lstat, fstat, unlink, execve,
-dup, dup2, pipe, opendir, readdir, closedir,
-strerror, perror, isatty, ttyname, ttyslot, ioctl,
-getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
-tgetnum, tgetstr, tgoto, tputs

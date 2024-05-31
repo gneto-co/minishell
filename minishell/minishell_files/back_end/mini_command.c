@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   mini_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:15:42 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/28 15:23:26 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:52:12 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//MARK ft_ls
+// MARK ft_ls
 void	ft_ls(t_data *data)
 {
-	DIR *d;
-	struct dirent *dir;
+	DIR				*d;
+	struct dirent	*dir;
 
-	data->exit_code = 0;
+	data->process_status = 0;
 	d = opendir(".");
 	if (d)
 	{
@@ -29,14 +29,14 @@ void	ft_ls(t_data *data)
 	else
 	{
 		perror("minishell: opendir");
-		data->exit_code = EXIT_FAILURE;
+		data->process_status = EXIT_FAILURE;
 	}
 }
 
-//MARK print_array
+// MARK print_array
 void	ft_print_array(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i])
@@ -48,10 +48,10 @@ void	ft_print_array(char **array)
  */
 void	ft_env(char **env, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	data->exit_code = 0;
+	data->process_status = 0;
 	while (env && env[i])
 	{
 		if (ft_strchr(env[i], '='))
@@ -75,7 +75,7 @@ void	ft_array_n_delone(char ***array, int index)
 	i = 0;
 	j = 0;
 	len = ft_arraylen((*array));
-	new_array = malloc(len * sizeof(char*));
+	new_array = malloc(len * sizeof(char *));
 	if (!new_array)
 		return ;
 	while ((*array)[i])
@@ -101,17 +101,17 @@ void	ft_array_n_delone(char ***array, int index)
  */
 void	ft_unset(char **args, t_data *data)
 {
-	int		i;
-	int		index_env;
+	int	i;
+	int	index_env;
 
 	i = 1;
-	data->exit_code = 0;
+	data->process_status = 0;
 	while (args[i])
 	{
 		if (ft_strchr(args[i], '='))
 		{
-			ft_printf("unset: %s: invalid parameter name", args[i]); //FIXME
-			data->exit_code = 1;
+			ft_printf("unset: %s: invalid parameter name", args[i]); // FIXME
+			data->process_status = 1;
 		}
 		else
 		{
@@ -131,7 +131,7 @@ void	ft_unset(char **args, t_data *data)
  */
 void	ft_swap(char **a, char **b)
 {
-	char *temp;
+	char	*temp;
 
 	temp = *a;
 	*a = *b;
@@ -150,8 +150,8 @@ char	**ft_sort_env(char **env)
 
 	i = -1;
 	len = ft_arraylen(env);
-	sort_env = (char **)ft_calloc(len, sizeof(char*));
-	while(env[++i])
+	sort_env = (char **)ft_calloc(len, sizeof(char *));
+	while (env[++i])
 		sort_env[i] = ft_strdup(env[i]);
 	sort_env[len] = NULL;
 	i = 0;
@@ -172,10 +172,10 @@ char	**ft_sort_env(char **env)
 /**
  * Prints the environment variables in a sorted order.
  */
-void ft_print_export(char **env)
+void	ft_print_export(char **env)
 {
-	char **sort_env;
-	int i;
+	char	**sort_env;
+	int		i;
 
 	i = 0;
 	sort_env = ft_sort_env(env);
@@ -257,9 +257,9 @@ void	update_env_str(char **str, char *new_var)
 /**
  * Creates a new environment variable with the given value.
  */
-char	**ft_create_env(char *new_var) //TODO static
+char	**ft_create_env(char *new_var) // TODO static
 {
-	char	**new_env;
+	char **new_env;
 
 	new_env = malloc(2 * sizeof(char *));
 	if (!new_env)
@@ -315,7 +315,7 @@ void	add_new_arg(char ***env, char *new_var)
 	{
 		i = 0;
 		len = ft_arraylen(*env);
-		new_env = malloc((len + 2) * sizeof(char*));
+		new_env = malloc((len + 2) * sizeof(char *));
 		if (!new_env)
 			return ;
 		while ((*env)[i])
@@ -360,7 +360,7 @@ void	ft_export(char **args, t_data *data)
 	int	i;
 
 	i = 1;
-	data->exit_code = 0;
+	data->process_status = 0;
 	if (!args[1])
 		ft_print_export(data->env);
 	else
@@ -374,7 +374,7 @@ void	ft_export(char **args, t_data *data)
 				ft_putstr_fd("minishell: export: '", STDERR_FILENO);
 				ft_putstr_fd(args[i], STDERR_FILENO);
 				ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
-				data->exit_code = 1;
+				data->process_status = 1;
 			}
 			i++;
 		}
@@ -393,7 +393,7 @@ void	ft_echo(char **args, t_data *data)
 
 	i = 1;
 	flag = false;
-	data->exit_code = 0;
+	data->process_status = 0;
 	while (!ft_strcmp(args[i], "-n"))
 	{
 		flag = true;
@@ -418,7 +418,7 @@ void	ft_pwd(t_data *data)
 {
 	char	cwd[PATH_MAX];
 
-	data->exit_code = 0;
+	data->process_status = 0;
 	if (getcwd(cwd, sizeof(cwd)))
 		ft_printf("%s\n", cwd);
 	else
@@ -439,28 +439,28 @@ void	ft_pwd(t_data *data)
  */
 void	ft_exit(char **args, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
-	data->exit_code = 0;
-	ft_printf("exit");
+	data->process_status = 0;
+	ft_printf("exit\n");
 	while (args[1] && args[1][++i])
 	{
 		if (!ft_isdigit(args[1][i]))
 		{
 			ft_putendl_fd(" numeric argument required", STDERR_FILENO);
-			data->exit_code = 255;
+			data->process_status = 255;
 			break ;
 		}
 		else if (args[1][i + 1] == '\0' && args[2])
 		{
 			ft_putendl_fd(" too many arguments", STDERR_FILENO);
-			data->exit_code = 1;
+			data->process_status = 1;
 			break ;
 		}
 		else if (args[1][i + 1] == '\0')
 		{
-			data->exit_code = ft_atoi(args[1]);
+			data->process_status = ft_atoi(args[1]);
 			data->exit = true;
 		}
 	}
@@ -506,7 +506,7 @@ void	ft_chdir(char *path, t_data *data)
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		ft_putstr_fd("no such file or directory: ", STDERR_FILENO);
 		ft_putendl_fd(path, STDERR_FILENO);
-		data->exit_code = 1;
+		data->process_status = 1;
 	}
 	else
 		cd_update_env(data);
@@ -517,7 +517,7 @@ void	ft_chdir(char *path, t_data *data)
  */
 void	cd_dir(char **args, t_data *data)
 {
-	char *path;
+	char	*path;
 
 	path = NULL;
 	if (args[1] == NULL || !ft_strcmp(args[1], "~"))
@@ -526,7 +526,7 @@ void	cd_dir(char **args, t_data *data)
 		if (!path)
 		{
 			ft_putstr_fd("minishel: cd: HOME not set", STDERR_FILENO);
-			data->exit_code = 1;
+			data->process_status = 1;
 		}
 	}
 	else if (!ft_strcmp(args[1], "-"))
@@ -535,7 +535,7 @@ void	cd_dir(char **args, t_data *data)
 		if (!path)
 		{
 			ft_putstr_fd("minishel: cd: OLDPWD not set", STDERR_FILENO);
-			data->exit_code = 1;
+			data->process_status = 1;
 		}
 	}
 	else
@@ -555,17 +555,16 @@ void	cd_dir(char **args, t_data *data)
  */
 void	ft_cd(char **args, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	data->exit_code = 0;
-
+	data->process_status = 0;
 	while (args[i])
 		i++;
 	if (i > 2)
 	{
 		ft_putendl_fd("minishell: cd: too meny arguments", STDERR_FILENO);
-		data->exit_code = 1;
+		data->process_status = 1;
 	}
 	else
 		cd_dir(args, data);

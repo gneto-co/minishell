@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/27 14:44:00 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:06:47 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,21 @@ static void	wait_pid_loop(t_data *data)
 	int	status;
 
 	i = 0;
+	// ft_printf("1 - process_status: %d\n", data->process_status);
 	while (data->table[i])
 	{
 		if (data->table[i]->type == CMD)
 		{
 			if (data->table[i]->pid)
 				waitpid(data->table[i]->pid, &status, 0);
+			// ft_printf("wifsignaled: %d\n", WIFSIGNALED(status));
 			if (WIFEXITED(status))
 				data->process_status = WEXITSTATUS(status);
-			else if (WIFSIGNALED(status))
-				data->process_status = 128 + WTERMSIG(status);
+			// else if (WIFSIGNALED(status))
+			// {
+			// 	data->process_status = 128 + WTERMSIG(status);
+			// 	ft_printf("CHECK\n");
+			// }
 		}
 		if (data->table[i]->type == PIPE)
 		{
@@ -73,6 +78,7 @@ static void	wait_pid_loop(t_data *data)
 		}
 		i++;
 	}
+	// ft_printf("2 - process_status: %d\n", data->process_status);
 }
 
 /* reset std in/out */
@@ -86,6 +92,7 @@ static void	reset_loop(t_data *data)
 /* receive data and execute commands from commands table */
 int	ft_execute(t_data *data)
 {
+	// ft_print_table(data->table);
 	if (data->error == false)
 	{
 		first_loop(data);

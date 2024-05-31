@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/27 14:45:25 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:52:17 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ char	*get_prompt_text(void)
 
 	folder_name = ft_get_folder_name();
 	input_str = ft_multi_strjoin("\n"
-			"╭─┤ %s ├─\n"
-			"│\n"
-			"╰┤ ",
-			folder_name);
+									"╭─┤ %s ├─\n"
+									"│\n"
+									"╰┤ ",
+									folder_name);
 	free(folder_name);
 	return (input_str);
 }
@@ -93,7 +93,7 @@ void	ft_readline_loop(t_data *data)
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
 	last_input = (using_history(), NULL);
-	while (1)
+	while (!data->exit)
 	{
 		prompt_str = get_prompt_text();
 		input = readline(prompt_str);
