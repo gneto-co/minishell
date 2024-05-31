@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/31 16:05:18 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:23:05 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
 		ft_exit(cmd->args, data);
 	else
 	{
-		ft_printf("CHECK\n");
 		data->process_status = execve(cmd->path, cmd->args, envp);
 		perror("command process error");
 		data->error = true;
@@ -44,7 +43,7 @@ static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
  * 	· execute cmd
  * 	· error management
  */
-static void	pid_success(t_data *data, t_table_data *cmd, char **envp)
+static void	child_process(t_data *data, t_table_data *cmd, char **envp)
 {
 	if (cmd->in_fd)
 	{
@@ -82,7 +81,7 @@ static bool	pipe_on_table(t_data *data)
  * 	· if pid = -1
  * 		· error
  * 	· else
- * 		· pid_success()
+ * 		· child_process()
  * 	· free and close stuff
  */
 static void	cmd_process(t_data *data, t_table_data *cmd)
@@ -104,7 +103,7 @@ static void	cmd_process(t_data *data, t_table_data *cmd)
 		exit(EXIT_FAILURE);
 	}
 	else if (cmd->pid == 0)
-		pid_success(data, cmd, envp);
+		child_process(data, cmd, envp);
 	else
 	{
 		waitpid(cmd->pid, &data->process_status, 0);

@@ -6,7 +6,7 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/05/31 12:02:40 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/05/31 17:48:51 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,8 +61,15 @@ SRCPROJECT_SOURCES	=	$(addsuffix .c, \
 						back_end/ft_execute/ex_pipe \
 						back_end/ft_execute/ft_find_cmd_path \
 						\
-						back_end/mini_command \
+						back_end/built_in/ft_cd \
+						back_end/built_in/ft_echo \
+						back_end/built_in/ft_env \
+						back_end/built_in/ft_exit \
+						back_end/built_in/ft_pwd \
+						back_end/built_in/ft_unset \
+						back_end/built_in/functions \
 )
+
 SRC_DIR = minishell_files
 
 OBJ_DIR				=	objects

@@ -6,17 +6,15 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:24:13 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/31 13:09:58 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:11:10 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char *is_built_in(char *name)
+char	*is_built_in(char *name)
 {
-	if (!ft_strcmp(name, "ls"))
-		return (ft_strdup("ls"));
-	else if (!ft_strcmp(name, "cd"))
+	if (!ft_strcmp(name, "cd"))
 		return (ft_strdup("cd"));
 	else if (!ft_strcmp(name, "env"))
 		return (ft_strdup("env"));
@@ -56,8 +54,7 @@ char	*ft_find_cmd_path(char *cmd, char **env)
 		temp = ft_multi_strjoin("%s/%s", path_array[i], cmd);
 		if (access(temp, F_OK) != -1)
 			r = ft_strdup(temp);
-		free(temp);
-		i++;
+		i = (free(temp), i + 1);
 	}
 	ft_free_array(path_array);
 	return (r);
