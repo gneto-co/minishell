@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/31 17:23:05 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:26:53 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
 		perror("command process error");
 		data->error = true;
 	}
+	// TODO : temp_file = data->env
 	exit(0);
 }
 
@@ -112,6 +113,7 @@ static void	cmd_process(t_data *data, t_table_data *cmd)
 		if (cmd->out_fd)
 			close(cmd->out_fd);
 		free(envp[0]);
+		// TODO : data->env = tempfile
 	}
 }
 

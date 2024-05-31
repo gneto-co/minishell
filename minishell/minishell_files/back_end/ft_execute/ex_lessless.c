@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:25 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 14:04:08 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:06:35 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*get_write_text(char *stop_str)
  *
  * 	function : create and get a msg to a temp file,
 		then open file to read and put it on std_in
- * 	<
+ * 	<<
  *
  * 	· create/open temp file
  * 	· if !temp file
