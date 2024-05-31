@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/22 16:13:37 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/31 11:24:02 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ static void	data_init(t_data *data, char **env)
 	data->table = NULL;
 	data->in_fd = 0;
 	data->out_fd = 0;
+	data->exit = false;
+	data->exit_code = 0;
+
 }
 
-/* initialize data and start reading from terminal */
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
@@ -31,5 +33,5 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	data_init(&data, env);
 	ft_readline_loop(&data);
-	return (1);
+	exit(data.exit_code);
 }

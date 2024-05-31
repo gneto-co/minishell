@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/05/23 10:12:11 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/05/31 11:17:38 by yadereve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ RM					=	rm -rf
 #--------------------------------------------------------------------------------
 #----------------------------PROJECT SOURCE FILES--------------------------------
 #--------------------------------------------------------------------------------
-
 SRC_DIR				=	minishell_files
 SRC					=	$(addprefix $(SRC_DIR)/, $(SRCPROJECT_SOURCES))
 SRCPROJECT_SOURCES	=	$(addsuffix .c, \
@@ -62,9 +61,9 @@ SRCPROJECT_SOURCES	=	$(addsuffix .c, \
 						back_end/ft_execute/ex_pipe \
 						back_end/ft_execute/ft_find_cmd_path \
 						\
-						back_end/example_file1 \
 						back_end/mini_command \
-)
+=======
+SRC_DIR = minishell_files
 
 OBJ_DIR				=	objects
 OBJ					=	$(addprefix $(OBJ_DIR)/,$(SRC:$(SRC_DIR)/%.c=%.o))
@@ -84,7 +83,7 @@ all: $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(LIBFT)
 	@echo "$(BLUE)           __         __         __           __ __"

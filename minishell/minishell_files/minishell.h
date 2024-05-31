@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/27 14:41:10 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/31 11:28:40 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <limits.h>
+# include <dirent.h>
+# include <stdbool.h>
 
 // special char
 # define SPECIAL_CHAR "|<>$\'\""
@@ -71,7 +74,9 @@ typedef struct s_data
 	int				in_fd;
 	int				out_fd;
 	int				process_status;
-}					t_data;
+	bool			exit;
+	int				exit_code;
+}			t_data;
 
 /* *********************************** */
 /*                                     */
@@ -119,16 +124,32 @@ void				ex_less(t_data *data, int i);
 void				ex_great(t_data *data, int i);
 void				ex_lessless(t_data *data, int i);
 void				ex_greatgreat(t_data *data, int i);
-char				*ft_find_cmd_path(char *cmd, char **env);
 
-/*  commands  */
-int					ft_cd(char **args);
-int					ft_exit(char **args);
-int					ft_pwd(char **args);
-int					ft_echo(char **args);
-int					ft_export(char **args);
-int					ft_unset(char **args);
-int					ft_env(char **args);
+/*  cmd  */
+char				*ft_find_cmd_path(char *cmd, char **env);
+void				ft_ls(t_data *data);
+void				ft_cd(char **args, t_data *data);
+void				ft_exit(char **args, t_data *data);
+void				ft_pwd(t_data *data);
+void				ft_echo(char **args, t_data *data);
+void				ft_export(char **args, t_data *data);
+void				ft_unset(char **args, t_data *data);
+void				ft_env(char **env, t_data *data);
+void				ft_array_n_delone(char ***array, int index);
+void				ft_swap(char **a, char **b);
+char				**ft_sort_env(char **env);
+void				ft_print_export(char **env);
+bool				is_valid_identifier(const char *str);
+char				*get_env_var(char *str);
+int					find_var(char **env, char *var);
+void				update_env_str(char **str, char *new_var);
+char				**ft_create_env(char *new_var);
+void				free_array(char ***array);
+void				add_new_arg(char ***env, char *new_var);
+void				update_env(char ***env, char *arg);
+void				cd_update_env(t_data *data);
+void				ft_chdir(char *path, t_data *data);
+void				cd_dir(char **args, t_data *data);
 
 /* *********************************** */
 /*                                     */
