@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/05/31 17:48:51 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/06/03 09:04:50 by yadereve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,9 @@ PECKED				=	----------
 
 CC					=	cc
 CFLAGS				=	-Wall -Wextra -Werror -g3 -fsanitize=address
-LDFLAGS				=	-lreadline
+LDFLAGS				=	-L/opt/homebrew/opt/readline/lib -lreadline
 RM					=	rm -rf
+CFLAGS 				+= -I/opt/homebrew/opt/readline/include
 
 #--------------------------------------------------------------------------------
 #----------------------------PROJECT SOURCE FILES--------------------------------
@@ -67,7 +68,9 @@ SRCPROJECT_SOURCES	=	$(addsuffix .c, \
 						back_end/built_in/ft_exit \
 						back_end/built_in/ft_pwd \
 						back_end/built_in/ft_unset \
-						back_end/built_in/functions \
+						back_end/built_in/ft_export \
+						back_end/built_in/ft_export_2 \
+						back_end/built_in/ft_export_3 \
 )
 
 SRC_DIR = minishell_files

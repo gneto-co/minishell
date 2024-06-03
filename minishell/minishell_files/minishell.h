@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/31 17:53:15 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/03 08:42:07 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ void				ex_greatgreat(t_data *data, int i);
 
 /*  cmd  */
 char				*ft_find_cmd_path(char *cmd, char **env);
-void				ft_ls(t_data *data);
 void				ft_cd(char **args, t_data *data);
 void				ft_exit(char **args, t_data *data);
 void				ft_pwd(t_data *data);
