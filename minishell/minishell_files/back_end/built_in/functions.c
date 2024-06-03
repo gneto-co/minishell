@@ -6,21 +6,11 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 16:15:42 by yadereve          #+#    #+#             */
-/*   Updated: 2024/05/31 17:49:09 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:09:20 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-// MARK print_array
-void	ft_print_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-		printf("array: %s\n", array[i++]);
-}
 
 /**
  * Swaps the values of two pointers to strings.
@@ -223,7 +213,7 @@ void	add_new_arg(char ***env, char *new_var)
 		}
 		new_env[i] = ft_strdup(new_var);
 		new_env[i + 1] = NULL;
-		// free_array(env); //LEAK maybe, error malloc()
+		free_array(env); //LEAK maybe, error malloc()
 		*env = new_env;
 	}
 }

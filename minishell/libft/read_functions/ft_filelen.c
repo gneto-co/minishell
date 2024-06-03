@@ -6,12 +6,18 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 14:23:24 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/02/08 20:22:22 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/01 11:45:12 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
+/*
+ *
+ *  Function : return the amount of lines in a file
+ *
+ *
+ */
 size_t	ft_filelen(char *file_name)
 {
 	int		i;

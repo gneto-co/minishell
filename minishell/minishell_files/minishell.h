@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/31 17:53:15 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/01 12:28:48 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 
 // lessless temp file name
 # define LESSLESS_TEMP_FILE ".lessless"
+
+# define ENV_FILE ".env_file"
 
 typedef struct s_table_data
 {

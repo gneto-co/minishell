@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:30:24 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/16 17:56:28 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/01 12:29:06 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ size_t				ft_filelen(char *file_name);
 char				*ft_get_path(void);
 char				*ft_get_folder_name(void);
 char				*ft_get_system_var(char *var_name, char **env);
+void				ft_array_to_file(char **array, char *file_name);
+char				**ft_file_to_array(char *file_name);
 
 // string_functions
 int long			ft_strlen(const char *str);
@@ -108,8 +110,9 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strtrim(char const *s1, char const *set);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
-char				*ft_strdup(const char *src);
 char				*ft_char_dup(const char c);
+char				*ft_strdup(const char *src);
+char				**ft_array_dup(char **array);
 char				**ft_split(char const *str, char c);
 void				ft_free_array(char **array);
 void				ft_free_array_content(char **array);
