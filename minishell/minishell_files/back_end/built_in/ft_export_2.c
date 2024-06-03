@@ -6,12 +6,19 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:28:28 by yadereve          #+#    #+#             */
-/*   Updated: 2024/06/03 09:06:19 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/03 09:23:51 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/**
+ * Updates the value of a string pointer with a new variable.
+ * This function takes a string pointer and a new variable as input.
+ * It updates the value of the string pointer by duplicating the new variable.
+ * If the string pointer was previously pointing to a string, it frees the
+ * memory allocated for that string before duplicating the new variable.
+ */
 void	update_env_str(char **str, char *new_var)
 {
 	// if (*str)
