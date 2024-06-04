@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 17:37:58 by yadereve          #+#    #+#             */
-/*   Updated: 2024/06/02 18:20:41 by yadereve         ###   ########.fr       */
+/*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
+/*   Updated: 2024/06/04 22:33:39 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void	cd_update_env(t_data *data)
  */
 void	ft_chdir(char *path, t_data *data)
 {
-	if (chdir(path) != 0)
+	int	result;
+
+	result = chdir(path);
+	if (result != 0)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		ft_putstr_fd("no such file or directory: ", STDERR_FILENO);

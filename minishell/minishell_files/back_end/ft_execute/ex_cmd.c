@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ex_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/03 11:12:25 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/04 22:04:38 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
 		perror("command process error");
 		data->error = true;
 	}
-	if ((!ft_strcmp(cmd->name, "cd"))|(!ft_strcmp(cmd->name, "env"))|(!ft_strcmp(cmd->name, "export"))|(!ft_strcmp(cmd->name, "unset")))
+	if ((!ft_strcmp(cmd->name, "cd")) || (!ft_strcmp(cmd->name, "env"))
+		|| (!ft_strcmp(cmd->name, "export"))
+		|| (!ft_strcmp(cmd->name, "unset")))
 		ft_array_to_file(data->env, ENV_FILE);
-		
 	exit(0);
 }
 
@@ -115,8 +116,10 @@ static void	cmd_process(t_data *data, t_table_data *cmd)
 		if (cmd->out_fd)
 			close(cmd->out_fd);
 		free(envp[0]);
-		// 	
-		if ((access(ENV_FILE, F_OK) != -1) && ((!ft_strcmp(cmd->name, "cd"))|(!ft_strcmp(cmd->name, "env"))|(!ft_strcmp(cmd->name, "export"))|(!ft_strcmp(cmd->name, "unset"))))
+		//
+		if ((access(ENV_FILE, F_OK) != -1) && ((!ft_strcmp(cmd->name, "cd"))
+		|| (!ft_strcmp(cmd->name, "env")) || (!ft_strcmp(cmd->name, "export"))
+		|| (!ft_strcmp(cmd->name, "unset"))))
 		{
 			ft_free_array(data->env);
 			data->env = ft_file_to_array(ENV_FILE);

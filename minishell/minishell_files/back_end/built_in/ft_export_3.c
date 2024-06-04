@@ -6,20 +6,20 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:33:15 by yadereve          #+#    #+#             */
-/*   Updated: 2024/06/02 19:03:31 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:04:52 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_print_array(char **array)
-{
-	int	i;
+// void	ft_print_array(char **array)
+// {
+// 	int	i;
 
-	i = 0;
-	while (array[i])
-		printf("array: %s\n", array[i++]);
-}
+// 	i = 0;
+// 	while (array[i])
+// 		printf("array: %s\n", array[i++]);
+// }
 
 /**
  * Frees the memory allocated for a 3-dimensional array.

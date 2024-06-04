@@ -6,7 +6,7 @@
 #    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/06/04 14:21:46 by yadereve         ###   ########.fr        #
+#    Updated: 2024/06/04 22:50:33 by yadereve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,8 @@ SRCPROJECT_SOURCES	=	$(addsuffix .c, \
 						back_end/built_in/ft_export \
 						back_end/built_in/ft_export_2 \
 						back_end/built_in/ft_export_3 \
+						\
+						back_end/utils \
 )
 
 SRC_DIR = minishell_files

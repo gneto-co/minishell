@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 17:37:58 by yadereve          #+#    #+#             */
-/*   Updated: 2024/06/02 19:08:26 by yadereve         ###   ########.fr       */
+/*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
+/*   Updated: 2024/06/04 22:08:23 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ void	ft_unset(char **args, t_data *data)
 		{
 			index_env = find_var(data->env, args[i]);
 			if (index_env >= 0)
-			{
 				ft_array_n_delone(&(data->env), index_env);
-				continue ;
-			}
 		}
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/02 20:37:53 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/04 22:45:49 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	data_init(t_data *data, char **env)
 	data->out_fd = 0;
 	data->exit = false;
 	data->exit_code = 0;
+	init_or_exit_update_env(&(data->env), "init");
 }
 
 static void	data_free(t_data *data)
@@ -38,7 +39,7 @@ int	main(int ac, char **av, char **env)
 	data_init(&data, env);
 	ft_readline_loop(&data);
 	data_free(&data);
-	exit(data.process_status);
+	exit(data.process_status); //FIXME "exit 3" não funciona
 }
 
 /* int	main(void)

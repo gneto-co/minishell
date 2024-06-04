@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 17:37:58 by yadereve          #+#    #+#             */
-/*   Updated: 2024/06/02 18:21:16 by yadereve         ###   ########.fr       */
+/*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
+/*   Updated: 2024/06/04 22:47:32 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ void	ft_exit(char **args, t_data *data)
 	}
 	if (args[0])
 		data->exit = true;
+	init_or_exit_update_env(&(data->env), "exit");
 }
