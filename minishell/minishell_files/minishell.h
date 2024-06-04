@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/03 08:42:07 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:22:19 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 
 // lessless temp file name
 # define LESSLESS_TEMP_FILE ".lessless"
+
+# define ENV_FILE ".env_file"
 
 typedef struct s_table_data
 {

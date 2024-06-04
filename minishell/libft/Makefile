@@ -6,7 +6,7 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/09 10:51:25 by gneto-co          #+#    #+#              #
-#    Updated: 2024/05/16 17:56:17 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/06/01 11:58:32 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ ft_filelen \
 ft_get_folder_name \
 ft_get_path \
 ft_get_system_var \
+array_file \
 ))
 
 STRING_FUNCTIONS = $(addprefix string_functions/, $(addsuffix .c, \
