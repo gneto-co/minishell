@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 15:03:17 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:38:13 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	cd_dir(char **args, t_data *data)
 	path = NULL;
 	if (args[1] == NULL || !ft_strcmp(args[1], "~"))
 	{
-		path = getenv("HOME");
+		path = ft_getenv("HOME", data->env);
 		if (!path)
 		{
 			ft_putstr_fd("minishel: cd: HOME not set", STDERR_FILENO);
@@ -79,7 +79,7 @@ void	cd_dir(char **args, t_data *data)
 	}
 	else if (!ft_strcmp(args[1], "-"))
 	{
-		path = getenv("OLDPWD");
+		path = ft_getenv("OLDPWD", data->env);
 		if (!path)
 		{
 			ft_putstr_fd("minishel: cd: OLDPWD not set", STDERR_FILENO);
@@ -90,6 +90,7 @@ void	cd_dir(char **args, t_data *data)
 		path = args[1];
 	if (path)
 		ft_chdir(path, data);
+	free(path);
 }
 
 /**

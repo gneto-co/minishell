@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 17:27:47 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:31:19 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	ft_unset(char **args, t_data *data)
 	{
 		if (ft_strchr(args[i], '='))
 		{
-			ft_putstr_fd("unset:", STDERR_FILENO);
+			ft_putstr_fd("minishell: unset:", STDERR_FILENO);
 			ft_putstr_fd(args[i], STDERR_FILENO);
-			ft_putstr_fd(": invalid parameter name", STDERR_FILENO);
+			ft_putendl_fd(": invalid parameter name", STDERR_FILENO);
 			data->process_status = 1;
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 16:45:33 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:33:03 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,8 @@ void				cd_dir(char **args, t_data *data);
 
 void				init_or_exit_update_env(char ***env, char *cmd);
 void				ft_putout(char *str, t_data *data);
+char				*ft_getenv(char *name, char **env);
+
 
 
 /* *********************************** */
