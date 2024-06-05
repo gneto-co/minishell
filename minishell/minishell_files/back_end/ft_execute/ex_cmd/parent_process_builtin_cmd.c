@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 15:46:04 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:17:27 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,22 @@ static void	final_cmd_execute(t_data *data, t_table_data *cmd)
 
 static void	output_manager(t_data *data, t_table_data *cmd)
 {
-	if (!cmd->out_fd)
-		cmd->out_fd = 1;
-	ft_print_array_fd(data->output_array, cmd->out_fd);
-	free(data->output_array);
-	if (cmd->in_fd)
-		close(cmd->in_fd);
-	if (cmd->out_fd)
-		close(cmd->out_fd);
+	// if (!ft_strcmp(cmd->name, "pwd"))
+	// {
+	// 	data->output_string = ft_strdup("batatinhas fritas");
+	// }
+	if (!ft_strcmp(cmd->name, "echo") || !ft_strcmp(cmd->name, "pwd")
+		|| !ft_strcmp(cmd->name, "export") || !ft_strcmp(cmd->name, "env"))
+	{
+		if (!cmd->out_fd)
+			cmd->out_fd = 1;
+		ft_putstr_fd(data->output_string, cmd->out_fd);
+		free(data->output_string);
+		if (cmd->in_fd)
+			close(cmd->in_fd);
+		if (cmd->out_fd && cmd->out_fd != 1)
+			close(cmd->out_fd);
+	}
 }
 
 /*

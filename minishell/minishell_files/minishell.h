@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 15:21:19 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:13:58 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_data
 	int				process_status;
 	bool			exit;
 	
-	char			**output_array;
+	char			*output_string;
 }					t_data;
 
 /* *********************************** */
