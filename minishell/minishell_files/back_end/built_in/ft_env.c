@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/04 22:06:38 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:21:08 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	ft_env(char **env, t_data *data)
 	while (env && env[i])
 	{
 		if (ft_strchr(env[i], '='))
-			ft_printf("%s\n", env[i++]);
+		{
+			ft_putout(env[++i], data);
+			ft_putout("\n", data);
+		}
 	}
 }

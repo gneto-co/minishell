@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 16:13:58 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:45:33 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_data
 	int				out_fd;
 	int				process_status;
 	bool			exit;
-	
+
 	char			*output_string;
 }					t_data;
 
@@ -142,7 +142,7 @@ void				ft_env(char **env, t_data *data);
 void				ft_array_n_delone(char ***array, int index);
 void				ft_swap(char **a, char **b);
 char				**ft_sort_env(char **env);
-void				ft_print_export(char **env);
+void				ft_print_export(char **env, t_data *data);
 bool				is_valid_identifier(const char *str);
 char				*get_env_var(char *str);
 int					find_var(char **env, char *var);
@@ -156,6 +156,8 @@ void				ft_chdir(char *path, t_data *data);
 void				cd_dir(char **args, t_data *data);
 
 void				init_or_exit_update_env(char ***env, char *cmd);
+void				ft_putout(char *str, t_data *data);
+
 
 /* *********************************** */
 /*                                     */

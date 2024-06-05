@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parent_process_builtin_cmd.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 16:33:54 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:58:31 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	output_manager(t_data *data, t_table_data *cmd)
 			cmd->out_fd = 1;
 		ft_putstr_fd(data->output_string, cmd->out_fd);
 		free(data->output_string);
+		data->output_string = NULL;
 		if (cmd->in_fd)
 			close(cmd->in_fd);
 		if (cmd->out_fd && cmd->out_fd != 1)

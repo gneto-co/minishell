@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:20:02 by yadereve          #+#    #+#             */
-/*   Updated: 2024/06/04 22:23:53 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:26:56 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**ft_sort_env(char **env)
 /**
  * Prints the environment variables in a sorted order.
  */
-void	ft_print_export(char **env)
+void	ft_print_export(char **env, t_data *data)
 {
 	char	**sort_env;
 	int		i;
@@ -67,7 +67,9 @@ void	ft_print_export(char **env)
 	sort_env = ft_sort_env(env);
 	while (sort_env[i])
 	{
-		ft_printf("declare -x %s\n", sort_env[i++]);
+		ft_putout("declare -x ", data);
+		ft_putout(sort_env[i++], data);
+		ft_putout("\n", data);
 	}
 	ft_free_array(sort_env);
 }
@@ -85,7 +87,7 @@ void	ft_export(char **args, t_data *data)
 	i = 1;
 	data->process_status = 0;
 	if (!args[1])
-		ft_print_export(data->env);
+		ft_print_export(data->env, data);
 	else
 	{
 		while (args[i])

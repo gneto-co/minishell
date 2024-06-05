@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/04 22:06:24 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:18:30 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	ft_echo(char **args, t_data *data)
 	}
 	while (args[i])
 	{
-		ft_printf(args[i]);
+		ft_putout(args[i], data);
 		if (args[++i])
-			ft_printf(" ");
+			ft_putout(" ", data);
 	}
 	if (flag == false)
-		ft_printf("\n");
+		ft_putout("\n", data);
 }
