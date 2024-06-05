@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 14:38:57 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:03:17 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,15 @@ void	cd_update_env(t_data *data)
 	int		i;
 	char	cwd[PATH_MAX];
 
-	i = 0;
 	env = data->env;
-	while (env[i] && ft_strncmp(env[i], "PWD=", 4))
-		i++;
-	if (env[i])
+	i = find_var(env, "PWD");
+	if (env[i] && i >= 0)
 	{
 		buff = env[i];
 		env[i] = ft_strjoin("PWD=", getcwd(cwd, sizeof(cwd)));
 	}
-	i = 0;
-	while (env[i] && ft_strncmp(env[i], "OLDPWD=", 7))
-		i++;
-	if (env[i])
+	i = find_var(env, "OLDPWD");
+	if (env[i] && i >= 0)
 	{
 		free(env[i]);
 		new_oldpwd = ft_substr(buff, 4, ft_strlen(buff));
