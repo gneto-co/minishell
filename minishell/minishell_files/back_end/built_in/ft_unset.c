@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/04 22:08:23 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 07:57:57 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ft_array_n_delone(char ***array, int index)
 	int		len;
 	char	**new_array;
 
+	if (!(*array))
+		return ;
 	i = 0;
 	j = 0;
 	len = ft_arraylen((*array));
@@ -40,8 +42,8 @@ void	ft_array_n_delone(char ***array, int index)
 		}
 		i++;
 	}
-	// free_array(array); //LEAK maybe, error malloc()
-	*array = new_array;
+	new_array[j] = NULL;
+	(*array) = new_array;
 }
 
 /**

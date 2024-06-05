@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/04 22:33:39 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 08:54:52 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,23 @@ void	cd_update_env(t_data *data)
 
 	i = 0;
 	env = data->env;
-	while (ft_strncmp(env[i], "PWD=", 4))
+	while (env[i] && ft_strncmp(env[i], "PWD=", 4))
 		i++;
-	buff = env[i];
-	env[i] = ft_strjoin("PWD=", getcwd(cwd, sizeof(cwd)));
-	new_oldpwd = ft_substr(buff, 4, ft_strlen(buff));
+	if (env[i])
+	{
+		buff = env[i];
+		env[i] = ft_strjoin("PWD=", getcwd(cwd, sizeof(cwd)));
+		free(buff);
+	}
 	i = 0;
-	while (ft_strncmp(env[i], "OLDPWD=", 7))
+	while (env[i] && ft_strncmp(env[i], "OLDPWD=", 7))
 		i++;
-	env[i] = ft_strjoin("OLDPWD=", new_oldpwd);
-	free(new_oldpwd);
+	if (env[i])
+	{
+		new_oldpwd = ft_substr(buff, 4, ft_strlen(buff));
+		env[i] = ft_strjoin("OLDPWD=", new_oldpwd);
+		free(new_oldpwd);
+	}
 }
 
 /**
@@ -45,10 +52,7 @@ void	cd_update_env(t_data *data)
  */
 void	ft_chdir(char *path, t_data *data)
 {
-	int	result;
-
-	result = chdir(path);
-	if (result != 0)
+	if (chdir(path) != 0)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		ft_putstr_fd("no such file or directory: ", STDERR_FILENO);
