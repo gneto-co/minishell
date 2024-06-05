@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 10:30:24 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/01 12:29:06 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:36:18 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int					ft_put_unsigned_nbr(unsigned int n, int total);
 int					ft_putpt(unsigned long int nbr, char *base, int total);
 int					ft_printf(const char *str, ...);
 void				ft_print_array(char **array);
+void				ft_print_array_fd(char **array, int fd);
 
 // read_funcitons
 char				*get_next_line(int fd);
