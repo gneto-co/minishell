@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:33:15 by yadereve          #+#    #+#             */
-/*   Updated: 2024/06/04 17:04:52 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 17:19:25 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	add_new_arg(char ***env, char *new_var)
 		}
 		new_env[i] = ft_strdup(new_var);
 		new_env[i + 1] = NULL;
-		// free_array(env); //LEAK maybe, error malloc()
+		free_array(env); //LEAK maybe, error malloc()
 		*env = new_env;
 	}
 }

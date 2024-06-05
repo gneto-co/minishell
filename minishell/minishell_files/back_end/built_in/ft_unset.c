@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 16:47:22 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 17:27:47 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_array_n_delone(char ***array, int index)
 		i++;
 	}
 	new_array[j] = NULL;
+	ft_free_array((*array));
 	(*array) = new_array;
 }
 
