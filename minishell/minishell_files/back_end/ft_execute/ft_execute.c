@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 12:27:39 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:58:15 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ static void	second_loop(t_data *data)
 	while (data->table[i])
 	{
 		if (data->table[i]->type == CMD)
+		{
 			ex_cmd(data, i);
+		}
 		i++;
 	}
 }

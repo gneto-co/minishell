@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 12:26:07 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:43:28 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
 {
-	if (!ft_strcmp(cmd->name, "cd"))
-		ft_cd(cmd->args, data);
-	else if (!ft_strcmp(cmd->name, "env"))
+	if (!ft_strcmp(cmd->name, "env"))
 		ft_env(data->env, data);
 	else if (!ft_strcmp(cmd->name, "export"))
 		ft_export(cmd->args, data);
@@ -34,9 +32,7 @@ static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
 		perror("command process error");
 		data->error = true;
 	}
-	if ((!ft_strcmp(cmd->name, "cd")) || (!ft_strcmp(cmd->name, "env"))
-		|| (!ft_strcmp(cmd->name, "export")) || (!ft_strcmp(cmd->name,
-				"unset")))
+	if ((!ft_strcmp(cmd->name, "export")) || (!ft_strcmp(cmd->name, "unset")))
 		ft_array_to_file(data->env, ENV_FILE);
 	exit(data->process_status);
 }
@@ -97,6 +93,11 @@ static void	cmd_process(t_data *data, t_table_data *cmd)
 		ft_exit(cmd->args, data);
 		return ;
 	}
+	else if (!ft_strcmp(cmd->name, "cd"))
+	{
+		ft_cd(cmd->args, data);
+		return ;
+	}
 	envp[0] = ft_strdup("TERM=xterm");
 	envp[1] = NULL;
 	cmd->pid = fork();
@@ -118,8 +119,8 @@ static void	cmd_process(t_data *data, t_table_data *cmd)
 		free(envp[0]);
 		//
 		if ((access(ENV_FILE, F_OK) != -1) && ((!ft_strcmp(cmd->name, "cd"))
-				|| (!ft_strcmp(cmd->name, "env")) || (!ft_strcmp(cmd->name,
-						"export")) || (!ft_strcmp(cmd->name, "unset"))))
+				|| (!ft_strcmp(cmd->name, "export")) || (!ft_strcmp(cmd->name,
+						"unset"))))
 		{
 			ft_free_array(data->env);
 			data->env = ft_file_to_array(ENV_FILE);
