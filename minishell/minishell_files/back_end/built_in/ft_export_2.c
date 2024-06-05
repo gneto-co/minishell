@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:28:28 by yadereve          #+#    #+#             */
-/*   Updated: 2024/06/04 16:54:39 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:09:48 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
  */
 void	update_env_str(char **str, char *new_var)
 {
-	// if (*str)
-	// 	free(*str); //LEAK maybe, error malloc()
+	if (*str)
+		free(*str); // LEAK maybe, error malloc()
 	*str = ft_strdup(new_var);
 }
 
@@ -56,7 +56,7 @@ int	find_var(char **env, char *var)
 	{
 		env_var = get_env_var(env[i]);
 		if (ft_strcmp(env_var, var) == 0)
-			return (i);
+			return (free(env_var), i);
 		free(env_var);
 		i++;
 	}

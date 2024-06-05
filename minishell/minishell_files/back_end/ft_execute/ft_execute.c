@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/31 17:32:28 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:27:39 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	wait_pid_loop(t_data *data)
 		{
 			if (data->table[i]->pid)
 				waitpid(data->table[i]->pid, &status, 0);
-			if (WIFEXITED(status))
+			if (WIFEXITED(status) && !data->process_status)
 				data->process_status = WEXITSTATUS(status);
 		}
 		if (data->table[i]->type == PIPE)
