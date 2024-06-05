@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/04 22:44:54 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:21:19 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@
 /* *********************************** */
 
 # include "../libft/libft.h"
+# include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <limits.h>
 # include <math.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include <limits.h>
-# include <dirent.h>
-# include <stdbool.h>
 
 // special char
 # define SPECIAL_CHAR "|<>$\'\""
@@ -77,8 +77,9 @@ typedef struct s_data
 	int				out_fd;
 	int				process_status;
 	bool			exit;
-	int				exit_code;
-}			t_data;
+	
+	char			**output_array;
+}					t_data;
 
 /* *********************************** */
 /*                                     */
@@ -126,6 +127,8 @@ void				ex_less(t_data *data, int i);
 void				ex_great(t_data *data, int i);
 void				ex_lessless(t_data *data, int i);
 void				ex_greatgreat(t_data *data, int i);
+void				parent_process_basic_cmd(t_data *data, t_table_data *cmd);
+void				parent_process_builtin_cmd(t_data *data, t_table_data *cmd);
 
 /*  cmd  */
 char				*ft_find_cmd_path(char *cmd, char **env);

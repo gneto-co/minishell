@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
+#    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/06/05 07:37:58 by yadereve         ###   ########.fr        #
+#    Updated: 2024/06/05 15:10:42 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,13 +54,15 @@ SRCPROJECT_SOURCES	=	$(addsuffix .c, \
 						\
 						\
 						back_end/ft_execute/ft_execute \
-						back_end/ft_execute/ex_cmd \
+						back_end/ft_execute/ex_cmd/ex_cmd \
+						back_end/ft_execute/ex_cmd/ft_find_cmd_path \
+						back_end/ft_execute/ex_cmd/parent_process_basic_cmd \
+						back_end/ft_execute/ex_cmd/parent_process_builtin_cmd \
 						back_end/ft_execute/ex_great \
 						back_end/ft_execute/ex_greatgreat \
 						back_end/ft_execute/ex_less \
 						back_end/ft_execute/ex_lessless \
 						back_end/ft_execute/ex_pipe \
-						back_end/ft_execute/ft_find_cmd_path \
 						\
 						back_end/built_in/ft_cd \
 						back_end/built_in/ft_echo \

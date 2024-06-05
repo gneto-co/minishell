@@ -6,11 +6,11 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:24:13 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/31 17:11:10 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:11:19 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../../minishell.h"
 
 char	*is_built_in(char *name)
 {
