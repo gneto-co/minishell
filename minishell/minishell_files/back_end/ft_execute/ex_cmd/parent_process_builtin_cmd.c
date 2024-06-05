@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 16:17:27 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:33:54 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	final_cmd_execute(t_data *data, t_table_data *cmd)
 {
+	// data->output_string = ft_strdup("\033[1;34m ---- output temporário ---- \033[0m"); // !
 	if (!ft_strcmp(cmd->name, "env"))
 		ft_env(data->env, data);
 	else if (!ft_strcmp(cmd->name, "export"))
@@ -32,10 +33,6 @@ static void	final_cmd_execute(t_data *data, t_table_data *cmd)
 
 static void	output_manager(t_data *data, t_table_data *cmd)
 {
-	// if (!ft_strcmp(cmd->name, "pwd"))
-	// {
-	// 	data->output_string = ft_strdup("batatinhas fritas");
-	// }
 	if (!ft_strcmp(cmd->name, "echo") || !ft_strcmp(cmd->name, "pwd")
 		|| !ft_strcmp(cmd->name, "export") || !ft_strcmp(cmd->name, "env"))
 	{

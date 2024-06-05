@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 15:21:23 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:27:43 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	data_init(t_data *data, char **env)
 	data->in_fd = 0;
 	data->out_fd = 0;
 	data->exit = false;
-	data->output_array = NULL;
+	data->output_string = NULL;
 	init_or_exit_update_env(&(data->env), "init");
 }
 
