@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 14:13:58 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/05 14:38:57 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	cd_update_env(t_data *data)
 		i++;
 	if (env[i])
 	{
+		free(env[i]);
 		new_oldpwd = ft_substr(buff, 4, ft_strlen(buff));
 		env[i] = ft_strjoin("OLDPWD=", new_oldpwd);
 		free(buff);
