@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:28:28 by yadereve          #+#    #+#             */
-/*   Updated: 2024/06/05 12:09:48 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/05 14:18:09 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 void	update_env_str(char **str, char *new_var)
 {
 	if (*str)
-		free(*str); // LEAK maybe, error malloc()
+		free(*str);
 	*str = ft_strdup(new_var);
 }
 
