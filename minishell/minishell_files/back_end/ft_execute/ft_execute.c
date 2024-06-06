@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/06 12:54:08 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:24:33 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ static void	reset_loop(t_data *data)
 /* receive data and execute commands from commands table */
 int	ft_execute(t_data *data)
 {
-	// ft_print_table(data->table);
 	if (data->error == false)
 	{
 		first_loop(data);

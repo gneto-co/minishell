@@ -4,8 +4,8 @@
  [x] env
  [x] pwd
  [x] echo
- [ ] export
- [ ] unset
+ [x] export
+ [x] unset
  [x] exit
 
 
