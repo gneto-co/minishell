@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 12:19:20 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:52:46 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,4 @@ void	ft_exit(char **args, t_data *data)
 	}
 	if (args[0])
 		data->exit = true;
-	init_or_exit_update_env(&(data->env), "exit");
 }

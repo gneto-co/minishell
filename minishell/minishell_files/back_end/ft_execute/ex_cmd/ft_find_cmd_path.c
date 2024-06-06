@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 14:24:13 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 17:45:48 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:20:21 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*ft_find_cmd_path(char *cmd, char **env)
 	r = is_built_in(cmd);
 	if (r)
 		return (r);
+	// 
 	path_str = ft_n_find_on_array(env, "PATH", 4);
 	path_array = ft_split(path_str, ':');
 	temp = path_array[0];

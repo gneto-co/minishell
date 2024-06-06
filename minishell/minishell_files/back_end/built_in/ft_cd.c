@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 19:38:13 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:02:05 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	cd_dir(char **args, t_data *data)
 		path = args[1];
 	if (path)
 		ft_chdir(path, data);
-	free(path);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 15:07:14 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:54:08 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static void	reset_loop(t_data *data)
 	data->in_fd = 0;
 	data->out_fd = 0;
 	unlink(LESSLESS_TEMP_FILE);
+	ft_array_to_file(data->env, ENV_FILE);
 }
 
 /* receive data and execute commands from commands table */

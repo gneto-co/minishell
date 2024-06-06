@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/31 15:52:17 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:52:50 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ft_readline_loop(t_data *data)
 		if (!input)
 		{
 			free(input);
-			ft_printf("\n");
+			ft_printf("exit\n");
 			break ;
 		}
 		if (input[0])
