@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/27 14:43:01 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:20:37 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,12 @@ static char	*special_char_4(char *str, int *ii, t_data *data)
 	{
 		var_name = get_next_text(str, &i, 1);
 		if (var_name)
+		{
 			new_str = ft_get_system_var(var_name, data->env);
+			
+			// MARK
+			// dar split
+		}
 		free(var_name);
 	}
 	*ii = i;
@@ -115,7 +120,7 @@ static bool	problem_check(t_data *data, t_temp temp, char c)
 	}
 	else if (temp.str[i] == c)
 		b = (i++, true);
-	else if (c == '\'' && temp.str[i] == '$')
+	else if (c == '\"' && temp.str[i] == '$')
 	{
 		*(temp.var_read) = special_char_4(temp.str, &i, data);
 		*(temp.new_str) = ft_strjoin_free(*(temp.new_str), *(temp.var_read));
@@ -191,110 +196,3 @@ char	*special_char_manager(char *str, int *ii, t_data *data)
 	*ii = i;
 	return (new_str);
 }
-
-// /*
-//  * 	works for:
-//  * 	· ''
-//  *
-//  */
-// static char	*special_char_5(char *str, int *ii, t_data *data)
-// {
-// 	char	*new_str;
-// 	char	*text_read;
-// 	char	*var_read;
-// 	int		i;
-
-// 	i = *ii;
-// 	new_str = NULL;
-// 	text_read = NULL;
-// 	// skip '
-// 	i++;
-// 	while (1)
-// 	{
-// 		// get text from str
-// 		text_read = get_next_text(str, &i, 2);
-// 		// if we got text put it on newstr
-// 		if (text_read)
-// 		{
-// 			new_str = ft_strjoin_free(new_str, text_read);
-// 			free(text_read);
-// 		}
-// 		// if theres not see why
-// 		else
-// 		{
-// 			if (!str[i])
-// 			{
-// 				ft_error(1, NULL);
-// 				data->error = true;
-// 				free(new_str);
-// 				free(text_read);
-// 				new_str = NULL;
-// 				break ;
-// 			}
-// 			else if (str[i] == '\'')
-// 			{
-// 				i++;
-// 				break ;
-// 			}
-// 			else if (str[i] == '$')
-// 			{
-// 				var_read = special_char_4(str, &i, data);
-// 				new_str = ft_strjoin_free(new_str, var_read);
-// 				free(var_read);
-// 			}
-// 		}
-// 	}
-// 	*ii = i;
-// 	return (new_str);
-// }
-
-// /*
-//  * 	works for:
-//  * 	· ""
-//  *
-//  */
-// static char	*special_char_6(char *str, int *ii, t_data *data)
-// {
-// 	char	*new_str;
-// 	char	*text_read;
-// 	int		i;
-
-// 	i = *ii;
-// 	new_str = NULL;
-// 	text_read = NULL;
-// 	// skip '
-// 	i++;
-// 	while (1)
-// 	{
-// 		// get text from str
-// 		text_read = get_next_text(str, &i, 3);
-// 		// if we got text put it on newstr
-// 		if (text_read)
-// 		{
-// 			new_str = ft_strjoin_free(new_str, text_read);
-// 			free(text_read);
-// 		}
-// 		// if theres not see why
-// 		else
-// 		{
-// 			if (!str[i])
-// 			{
-// 				ft_error(1, NULL);
-// 				data->error = true;
-// 				free(new_str);
-// 				free(text_read);
-// 				new_str = NULL;
-// 				break ;
-// 			}
-// 			else if (str[i] == '\"')
-// 			{
-// 				i++;
-// 				break ;
-// 			}
-// 		}
-// 	}
-// 	*ii = i;
-// 	return (new_str);
-// }
-
-// */

@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/06 14:29:12 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/06 14:53:06 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	data_init(t_data *data)
 
 static void	data_free(t_data *data)
 {
-	// init_or_exit_update_env(&(data->env), "exit"); // lvl-- // MARK
+	// init_or_exit_update_env(&(data->env), "exit"); // lvl-- MARK
 	unlink(ENV_FILE);
 	ft_free_array(data->env);
 }

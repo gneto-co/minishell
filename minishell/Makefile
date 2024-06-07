@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
+#    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/06/05 19:24:20 by yadereve         ###   ########.fr        #
+#    Updated: 2024/06/06 14:58:16 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ PECKED				=	----------
 # -fsanitize=address
 
 CC					=	cc
-CFLAGS				=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS				=	-Wall -Wextra -Werror -g3
 LDFLAGS				=	-L/opt/homebrew/opt/readline/lib -lreadline
 RM					=	rm -rf
 CFLAGS 				+= -I/opt/homebrew/opt/readline/include

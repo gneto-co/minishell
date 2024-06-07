@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:08:40 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 10:51:51 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:07:51 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ char	*get_next_text(char *str, int *ii, int mod)
 			break ;
 		else if (ft_strchr(SPECIAL_CHAR, str[i]) && mod == 1)
 			break ;
-		else if ((str[i] == '$' || str[i] == '\'') && mod == '\'')
+		else if ((str[i] == '$' || str[i] == '\"') && mod == '\"')
 			break ;
-		else if (str[i] == '\"' && mod == '\"')
+		else if (str[i] == '\'' && mod == '\'')
 			break ;
 		new_str = ft_str_char_join_free(new_str, str[i]);
 		if (!str[i])

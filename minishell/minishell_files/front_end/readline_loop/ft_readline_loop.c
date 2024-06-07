@@ -6,27 +6,11 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/06 12:52:50 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:15:10 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-/* allocate and return a str with the prompt */
-char	*get_prompt_text(void)
-{
-	char	*folder_name;
-	char	*input_str;
-
-	folder_name = ft_get_folder_name();
-	input_str = ft_multi_strjoin("\n"
-									"╭─┤ %s ├─\n"
-									"│\n"
-									"╰┤ ",
-									folder_name);
-	free(folder_name);
-	return (input_str);
-}
 
 /*
  *	· use the raw input:
@@ -42,9 +26,13 @@ static void	input_use(char *input, t_data *data)
 	char	**input_array;
 
 	input_array = ft_token_split(input, data);
+	// MARK
+	ft_print_array_tester(input_array);
 	if (data->error == false)
 	{
 		data->table = create_cmd_table(input_array, data);
+		// MARK
+		// ft_print_table(data->table);
 		if (data->error == false)
 			ft_execute(data);
 		ft_free_table(data->table);
@@ -88,20 +76,17 @@ void	ft_readline_loop(t_data *data)
 {
 	char	*input;
 	char	*last_input;
-	char	*prompt_str;
 
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
 	last_input = (using_history(), NULL);
 	while (!data->exit)
 	{
-		prompt_str = get_prompt_text();
-		input = readline(prompt_str);
-		free(prompt_str);
+		input = readline(PROMPT_STR);
 		if (!input)
 		{
 			free(input);
-			ft_printf("exit\n");
+			// ft_printf("exit\n"); MARK
 			break ;
 		}
 		if (input[0])
