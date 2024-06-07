@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 17:15:23 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/06 12:56:53 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static void	final_cmd_execute(t_data *data, t_table_data *cmd)
 {
-	// data->output_string = ft_strdup("\033[1;34m ---- output temporário ---- \033[0m");
-	// !
 	if (!ft_strcmp(cmd->name, "env"))
 		ft_env(data->env, data);
 	else if (!ft_strcmp(cmd->name, "export"))
@@ -58,8 +56,6 @@ static void	output_manager(t_data *data, t_table_data *cmd)
  */
 void	parent_process_builtin_cmd(t_data *data, t_table_data *cmd)
 {
-	// ft_printf("BUILTIN COMMAND START\n");
 	final_cmd_execute(data, cmd);
 	output_manager(data, cmd);
-	// ft_printf("BUILTIN COMMAND END\n");
 }
