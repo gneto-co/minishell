@@ -6,7 +6,7 @@
 #    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/06/07 16:17:23 by yadereve         ###   ########.fr        #
+#    Updated: 2024/06/07 16:34:22 by yadereve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,5 +124,8 @@ fclean: clean
 	@echo "$(ORANGE)\n$(PECKED) program name and objects cleaned $(PECKED)$(NC)"
 
 re: fclean all
+
+v:	all
+	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes --track-origins=yes --suppressions=ignore_readline.supp ./minishell
 
 .PHONY: all clean fclean re
