@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/10 16:18:29 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:29:31 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ static void	wait_pid_loop(t_data *data)
 			if (WIFEXITED(status) && !data->process_status)
 				data->process_status = WEXITSTATUS(status);
 		}
-		ft_printf("%s\n", data->table[i]); // FIXME <<1 <<2 <<3
+		// MARK
+		// ft_printf("%s\n", data->table[i]);
 		if (data->table[i]->type == PIPE)
 		{
 			if (data->table[i]->pipe_fd[0] && data->table[i]->pipe_fd[1])
