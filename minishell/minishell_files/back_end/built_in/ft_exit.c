@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/06 11:52:46 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:33:26 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,13 @@ void	ft_exit(char **args, t_data *data)
 	{
 		if (!ft_isdigit(args[1][i]))
 		{
-			ft_putendl_fd(" numeric argument required", STDERR_FILENO);
-			data->process_status = 255;
+			error_msg(data, args, 2);
+			data->exit = true;
 			break ;
 		}
 		else if (args[1][i + 1] == '\0' && args[2])
 		{
-			ft_putendl_fd(" too many arguments", STDERR_FILENO);
-			data->process_status = 1;
+			error_msg(data, args, 1);
 			break ;
 		}
 		else if (args[1][i + 1] == '\0')
@@ -51,6 +50,6 @@ void	ft_exit(char **args, t_data *data)
 			data->exit = true;
 		}
 	}
-	if (args[0])
+	if (args[0] && args[1] == NULL)
 		data->exit = true;
 }

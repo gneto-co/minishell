@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_cmd_table.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 13:20:59 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/17 16:42:02 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:18:08 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ static t_table_data	*get_new_line(char **array, int *ii, t_data *data)
 	if (!array || !array[i])
 		return (NULL);
 	new_line = malloc(sizeof(t_table_data));
+	if (!new_line)
+		return (NULL);
+	ft_memset(new_line, 0, sizeof(t_table_data));
 	new_line->type = get_line_type(array, i);
 	new_line = get_name_args(new_line, array, &i, data);
 	*ii = i;

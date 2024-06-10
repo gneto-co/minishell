@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ex_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:58 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/05/21 13:51:13 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:29:17 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ex_pipe(t_data *data, int i)
 	if (i == 0)
 	{
 		data->error = (ft_error(2, "|"), true);
+		data->process_status = 2;
 		return ;
 	}
 	prev_cmd = data->table[i - 1];

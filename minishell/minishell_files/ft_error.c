@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:25:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/06 15:52:33 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:35:42 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	error_msg(t_data *data, char **arg, int process_status)
+{
+	char *msg;
+
+	msg = NULL;
+	if (!ft_strcmp(arg[0], "exit"))
+	{
+		if (process_status == 2)
+			msg = ft_multi_strjoin("\033[91m%s %s%s\033[0m\n", "minishell: exit:", arg , ": numeric argument required");
+		else if (process_status == 1)
+			msg = ft_multi_strjoin("\033[91m%s\033[0m\n", "minishell: exit: too many arguments");
+	}
+	data->process_status = process_status;
+	ft_putstr_fd(msg, STDERR_FILENO);
+	free(msg);
+}
 
 int	ft_error(int nb, char *str)
 {

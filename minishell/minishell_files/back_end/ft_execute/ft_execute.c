@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/06 14:24:33 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:18:29 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,14 @@ static void	wait_pid_loop(t_data *data)
 			if (WIFEXITED(status) && !data->process_status)
 				data->process_status = WEXITSTATUS(status);
 		}
+		ft_printf("%s\n", data->table[i]); // FIXME <<1 <<2 <<3
 		if (data->table[i]->type == PIPE)
 		{
-			close(data->table[i]->pipe_fd[0]);
-			close(data->table[i]->pipe_fd[1]);
+			if (data->table[i]->pipe_fd[0] && data->table[i]->pipe_fd[1])
+			{
+				close(data->table[i]->pipe_fd[0]);
+				close(data->table[i]->pipe_fd[1]);
+			}
 		}
 		i++;
 	}
@@ -77,6 +81,10 @@ static void	wait_pid_loop(t_data *data)
 /* reset std in/out */
 static void	reset_loop(t_data *data)
 {
+	if (data->in_fd)
+		close(data->in_fd);
+	if (data->out_fd)
+		close(data->out_fd);
 	data->in_fd = 0;
 	data->out_fd = 0;
 	unlink(LESSLESS_TEMP_FILE);
