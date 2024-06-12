@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:58 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/10 14:29:17 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:24:44 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ex_pipe(t_data *data, int i)
 	prev_cmd = data->table[i - 1];
 	pipe_line = data->table[i];
 	next_cmd = data->table[i + 1];
-	if (prev_cmd->type != CMD || !next_cmd || next_cmd->type != CMD)
+	if (prev_cmd->type != CMD || !next_cmd || next_cmd->type != CMD) // FIXME faz o commando: cat | << e0f
 		data->error = (ft_error(2, "|"), true);
 	else if (pipe(pipe_line->pipe_fd) == -1)
 		data->error = (perror("pipe failed"), true);
