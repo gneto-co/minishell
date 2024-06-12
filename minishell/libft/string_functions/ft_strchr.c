@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:31:16 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/04/29 11:27:07 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:11:59 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 //   return the char position on the str
 // if is not
 //   return 0
+// if !str
+//   return 0
 char	*ft_strchr(const char *s, int c)
 {
 	char		uc;
@@ -22,6 +24,8 @@ char	*ft_strchr(const char *s, int c)
 
 	uc = (char)c;
 	str = (const char *)s;
+	if (!s)
+		return (0);
 	while (*str)
 	{
 		if (*str == uc)

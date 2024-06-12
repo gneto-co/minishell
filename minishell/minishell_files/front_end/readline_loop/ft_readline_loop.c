@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline_loop.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/07 16:01:26 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/12 14:05:36 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ static void	input_use(char *input, t_data *data)
 	char	**input_array;
 
 	input_array = ft_token_split(input, data);
-	// MARK
-	// ft_print_array_tester(input_array);
+	// ft_print_array_tester(input_array); // MARK
 	if (data->error == false)
 	{
 		data->table = create_cmd_table(input_array, data);
-		// MARK
-		// ft_print_table(data->table);
+		// ft_print_table(data->table); // MARK
 		if (data->error == false)
 			ft_execute(data);
 		ft_free_table(data->table);
@@ -86,7 +84,7 @@ void	ft_readline_loop(t_data *data)
 		if (!input)
 		{
 			free(input);
-			// ft_printf("exit\n"); MARK
+			ft_printf("exit\n");
 			break ;
 		}
 		if (input[0])

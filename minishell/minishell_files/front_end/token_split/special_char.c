@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/06 16:20:37 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/12 14:05:30 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,29 +59,35 @@ static char	*special_char_4(char *str, int *ii, t_data *data)
 	char	*var_name;
 	char	*new_str;
 
+	(void)data;
+	(void)var_name;
 	i = *ii;
 	var_name = NULL;
 	new_str = NULL;
 	i++;
 	if (!str[i] || str[i] == ' ')
 		new_str = ft_strdup("$");
-	else if (str[i] == '?')
-	{
-		new_str = ft_itoa(data->process_status);
-		i++;
-	}
 	else
 	{
-		var_name = get_next_text(str, &i, 1);
-		if (var_name)
-		{
-			new_str = ft_get_system_var(var_name, data->env);
-			
-			// MARK
-			// dar split
-		}
-		free(var_name);
+		new_str = ft_strdup("$");
+		new_str = ft_strjoin_free(new_str, get_next_text(str, &i, 1));
 	}
+	// else if (str[i] == '?')
+	// {
+	// 	new_str = ft_itoa(data->process_status);
+	// 	i++;
+	// }
+	// else
+	// {
+	// new_str = get_next_text(str, &i, 1);
+	// 	if (var_name)
+	// 	{
+	// 		new_str = ft_get_system_var(var_name, data->env);
+	// 		// MARK
+	// 		// dar split
+	// 	}
+	// 	free(var_name);
+	// }
 	*ii = i;
 	return (new_str);
 }
@@ -97,6 +103,7 @@ typedef struct s_temp
 }			t_temp;
 typedef struct s_temp2
 {
+	char	*temp_str;
 	char	*new_str;
 	char	*text_read;
 	char	*var_read;
@@ -161,7 +168,12 @@ static char	*special_char_5_6(char *str, int *ii, t_data *data, char c)
 		}
 	}
 	*ii = i;
-	return (temp.new_str);
+	// ft_printf("new_str -> %s\n", temp.new_str); // MARK
+	if (!temp.new_str)
+		return (NULL);
+	temp.temp_str = ft_multi_strjoin("%c%s", c, temp.new_str);
+	free(temp.new_str);
+	return (temp.temp_str);
 }
 
 /*

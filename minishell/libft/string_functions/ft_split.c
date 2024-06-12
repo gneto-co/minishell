@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:03:51 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/03/08 10:31:22 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:17:48 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ char	**ft_split(char const *s, char c)
 	int		lineslen;
 	char	**lines;
 
+	if (!s)
+	{
+		lines = malloc(sizeof(char *) * 1);
+		lines[0] = NULL;
+		return (lines);
+	}
 	str = (char *)s;
 	lineslen = ft_count_words(str, c);
 	lines = malloc(sizeof(char *) * (lineslen + 1));
