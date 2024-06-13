@@ -179,7 +179,7 @@ TESTS:
 
 
 [ ] "echo $?" nao funciona
-[ ] "echo qwe" imprime 2 vezes '\n'
+[ ] "echo qwe" imprime 2 vezes '\n', (exempl: "echo -n qwe") imprime 1 '\n'
 
 
 // TODO: todo task

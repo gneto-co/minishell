@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_name_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:12:43 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/12 13:45:35 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/13 20:34:00 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,17 @@ static void	set_cmd_arg(t_data *data, t_table_data *new_line, char **array,
 	quote = array[i][0];
 	if (quote == '\'' || quote == '\"')
 		extra++;
+	// ft_printf("array[i] = %s\n", array[i]); //MARK
 	if (ft_strncmp(array[i] + extra, "$", 1) == 0 && (quote != '\''))
 	{
-		temp_str = ft_get_system_var(array[i] + extra + 1, data->env);
+		// ft_printf("array[i] = %s\n", array[i] + extra + 1); //MARK
+
+		/** //FIXME
+		 * erra bug, command: echo $US result: R=yadereve
+		 * temp_str = ft_get_system_var(array[i] + extra + 1, data->env);
+		*/
+
+		temp_str = ft_getenv(array[i] + extra + 1, data->env);
 		temp_split = ft_split(temp_str, ' ');
 		j = 0;
 		while (temp_split[j])
@@ -115,6 +123,8 @@ static void	cmd_manager(t_data *data, t_table_data *new_line, char **array,
 	// 	set_cmd_arg(data, new_line, array, i);
 	while (get_line_type(array, i) == CMD)
 	{
+		// FIXME cmd: echo $43, res: \n
+		// ft_print_array_tester(new_line->args); // MARK
 		set_cmd_arg(data, new_line, array, i);
 		i++;
 	}
