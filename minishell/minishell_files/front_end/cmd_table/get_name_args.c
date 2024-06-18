@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:12:43 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/13 20:34:00 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:22:36 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@ static void	new_line_initialize_data(t_table_data *new_line)
 	new_line->pid = 0;
 }
 
+char	*ft_corr(char *str)
+{
+	char *temp_str;
+
+	temp_str = NULL;
+	if (!ft_isdigit(ft_atoi(&str[1])))
+	{
+		temp_str = ft_substr(str, 2, ft_strlen(str));
+		free(str);
+	}
+	// ft_printf("str: %s\n", str); //MARK
+	// ft_printf("temp_str: %s\n", temp_str); // MARK
+	return (temp_str);
+}
+
 static void	set_cmd_arg(t_data *data, t_table_data *new_line, char **array,
 		int i)
 {
@@ -37,10 +52,14 @@ static void	set_cmd_arg(t_data *data, t_table_data *new_line, char **array,
 	quote = array[i][0];
 	if (quote == '\'' || quote == '\"')
 		extra++;
-	// ft_printf("array[i] = %s\n", array[i]); //MARK
-	if (ft_strncmp(array[i] + extra, "$", 1) == 0 && (quote != '\''))
+	// ft_printf("name: %s\n", new_line->name); //MARK
+	// ft_printf("args: %s\n", new_line->args[0]); //MARK
+	// ft_printf("array[i] = %s\n", array[i]); // MARK
+	if (!ft_strcmp(new_line->name, "echo") && ft_strncmp(array[i] + extra, "$", 1) == 0 && (quote != '\'') && ft_strcmp(array[i], "$"))
+		array[i] = ft_corr(array[i]);
+	if (ft_strncmp(array[i] + extra, "$", 1) == 0 && (quote != '\'') && ft_strcmp(array[i], "$"))
 	{
-		// ft_printf("array[i] = %s\n", array[i] + extra + 1); //MARK
+		// ft_printf("array[i] = %s\n", array[i] + extra + 1); // MARK
 
 		/** //FIXME
 		 * erra bug, command: echo $US result: R=yadereve
@@ -48,7 +67,10 @@ static void	set_cmd_arg(t_data *data, t_table_data *new_line, char **array,
 		*/
 
 		temp_str = ft_getenv(array[i] + extra + 1, data->env);
+		// ft_printf("env: %s\n", data->env[0]); //MARK
+		// ft_printf("temp_str: %s\n", temp_str); // MARK;
 		temp_split = ft_split(temp_str, ' ');
+		// ft_print_array_tester(temp_split); // MARK
 		j = 0;
 		while (temp_split[j])
 		{
@@ -103,6 +125,8 @@ static char	*get_name(char *str, t_data *data, int t)
 		return (ft_strdup(str));
 }
 
+
+
 /*
  * 	function : will transform tokens into a command
  *
@@ -123,7 +147,6 @@ static void	cmd_manager(t_data *data, t_table_data *new_line, char **array,
 	// 	set_cmd_arg(data, new_line, array, i);
 	while (get_line_type(array, i) == CMD)
 	{
-		// FIXME cmd: echo $43, res: \n
 		// ft_print_array_tester(new_line->args); // MARK
 		set_cmd_arg(data, new_line, array, i);
 		i++;
