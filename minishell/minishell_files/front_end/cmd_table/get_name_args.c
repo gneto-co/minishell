@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:12:43 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/18 16:22:36 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/19 20:31:29 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ char	*ft_corr(char *str)
 	char *temp_str;
 
 	temp_str = NULL;
-	if (!ft_isdigit(ft_atoi(&str[1])))
+	if (ft_isdigit(str[1]))
 	{
 		temp_str = ft_substr(str, 2, ft_strlen(str));
 		free(str);
 	}
+	else
+		temp_str = str;
 	// ft_printf("str: %s\n", str); //MARK
 	// ft_printf("temp_str: %s\n", temp_str); // MARK
 	return (temp_str);
@@ -55,7 +57,8 @@ static void	set_cmd_arg(t_data *data, t_table_data *new_line, char **array,
 	// ft_printf("name: %s\n", new_line->name); //MARK
 	// ft_printf("args: %s\n", new_line->args[0]); //MARK
 	// ft_printf("array[i] = %s\n", array[i]); // MARK
-	if (!ft_strcmp(new_line->name, "echo") && ft_strncmp(array[i] + extra, "$", 1) == 0 && (quote != '\'') && ft_strcmp(array[i], "$"))
+
+	if (!ft_strcmp(new_line->name, "echo") && ft_strncmp(array[i] + extra, "$", 1) == 0 && ft_strcmp(array[i], "$"))
 		array[i] = ft_corr(array[i]);
 	if (ft_strncmp(array[i] + extra, "$", 1) == 0 && (quote != '\'') && ft_strcmp(array[i], "$"))
 	{
@@ -67,10 +70,7 @@ static void	set_cmd_arg(t_data *data, t_table_data *new_line, char **array,
 		*/
 
 		temp_str = ft_getenv(array[i] + extra + 1, data->env);
-		// ft_printf("env: %s\n", data->env[0]); //MARK
-		// ft_printf("temp_str: %s\n", temp_str); // MARK;
 		temp_split = ft_split(temp_str, ' ');
-		// ft_print_array_tester(temp_split); // MARK
 		j = 0;
 		while (temp_split[j])
 		{
