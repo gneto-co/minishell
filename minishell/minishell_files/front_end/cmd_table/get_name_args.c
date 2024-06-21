@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_name_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:12:43 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/19 20:31:29 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/21 12:49:57 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,47 +44,77 @@ char	*ft_corr(char *str)
 static void	set_cmd_arg(t_data *data, t_table_data *new_line, char **array,
 		int i)
 {
-	char	*temp_str;
-	char	**temp_split;
 	int		j;
+	int		k;
 	char	quote;
-	int		extra;
+	char	*temp_str;
+	char 	*temp_var_name;
+	char	*final_str;
+	char	**temp_split;
 
-	extra = 0;
+	temp_str = NULL;
+	temp_var_name = NULL;
+	temp_split = NULL;
+	final_str = NULL;
+	j = 0;
+	k = 0;
 	quote = array[i][0];
-	if (quote == '\'' || quote == '\"')
-		extra++;
 	// ft_printf("name: %s\n", new_line->name); //MARK
 	// ft_printf("args: %s\n", new_line->args[0]); //MARK
 	// ft_printf("array[i] = %s\n", array[i]); // MARK
 
-	if (!ft_strcmp(new_line->name, "echo") && ft_strncmp(array[i] + extra, "$", 1) == 0 && ft_strcmp(array[i], "$"))
+	if (!ft_strcmp(new_line->name, "echo") && ft_strncmp(array[i] + 1, "$", 1) == 0 && ft_strcmp(array[i], "$"))
 		array[i] = ft_corr(array[i]);
-	if (ft_strncmp(array[i] + extra, "$", 1) == 0 && (quote != '\'') && ft_strcmp(array[i], "$"))
+	
+	if (quote == '\"') // se for " expande tudo
 	{
-		// ft_printf("array[i] = %s\n", array[i] + extra + 1); // MARK
-
-		/** //FIXME
-		 * erra bug, command: echo $US result: R=yadereve
-		 * temp_str = ft_get_system_var(array[i] + extra + 1, data->env);
-		*/
-
-		temp_str = ft_getenv(array[i] + extra + 1, data->env);
-		temp_split = ft_split(temp_str, ' ');
-		j = 0;
-		while (temp_split[j])
+		j = 1;
+		while (array[i][j])
 		{
-			new_line->args = split_str(new_line->args, &new_line->args_amount,
-					ft_strdup(temp_split[j]));
-			j++;
+			if (array[i][j] == '$')
+			{
+				j++;
+				temp_var_name = get_next_text(array[i], &j, 1);
+				temp_str = ft_getenv(temp_var_name, data->env);
+				temp_split = ft_split(temp_str, ' ');
+				k = 0;
+				while (temp_split[k])
+				{
+					// new_line->args = split_str(new_line->args, &new_line->args_amount,
+					// 		ft_strdup(temp_split[k]));
+					final_str = ft_strjoin_free(final_str, temp_split[k]);
+					k++;
+				}
+				free(temp_var_name);	
+				free(temp_str);
+				ft_free_array(temp_split);
+			}
+			else
+			{
+				temp_str = get_next_text(array[i], &j, '\"');
+				final_str = ft_strjoin_free(final_str, temp_str);
+				free(temp_str);
+			}
 		}
-		ft_free_array(temp_split);
-		free(temp_str);
+		new_line->args = split_str(new_line->args, &new_line->args_amount,
+					ft_strdup(final_str));
+		free(final_str);
+	}
+	else if (quote == '$') // se for $ expande esse
+	{
+		temp_str = ft_getenv(array[i] + 1, data->env);
+		new_line->args = split_str(new_line->args, &new_line->args_amount,
+				ft_strdup(temp_str));
+	}
+	else if (quote == '\'') // se for ' não expande nada
+	{
+		new_line->args = split_str(new_line->args, &new_line->args_amount,
+				ft_strdup(array[i] + 1));
 	}
 	else
 	{
 		new_line->args = split_str(new_line->args, &new_line->args_amount,
-				ft_strdup(array[i] + extra));
+				ft_strdup(array[i]));
 	}
 }
 
