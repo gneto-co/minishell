@@ -180,17 +180,17 @@ TESTS:
 
 [ ] multiple temp file
 // ------
-[ ] "echo $?" nao funciona
-[ ] "echo $" should print $
-[ ] error : export c="ls -a"
-[ ] error : export c="ls"
+[x] "echo $?" nao funciona
+[x] "echo $" should print $
+[x] error : export c="ls -a"
+[x] error : export c="ls"
 // ------
-[ ] memleak : echo $USER, echo $USE
+[x] memleak : echo $USER, echo $USE
 [ ] memleak : children process free()
 // ------
 [ ] error : cat & ctr+c
 // ------
-[ ] error : cd -
+[x] error : cd -
 // ------
 [x] "echo qwe" imprime 2 vezes '\n', (exempl: "echo -n qwe") imprime 1 '\n'
 

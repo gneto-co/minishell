@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 10:10:45 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/24 16:05:22 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:45:25 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,12 @@ char	**ft_token_split(char *str, t_data *data)
 	while (1)
 	{
 		temp_str = get_real_next_text(str, &i, data);
-		// ft_printf("temp_str -> %s\n", temp_str); // MARK
 		if (!temp_str)
 			return (free_new_str(&new_str), array);
 		new_str = ft_strjoin_free(new_str, temp_str);
 		free(temp_str);
-		// ft_printf("new_str1 -> %s\n", new_str); // MARK
-		if (!have_more_text(str, i) || array[0])
+		if (!have_more_text(str, i))
 		{
-			// ft_printf("new_str2 -> %s\n", new_str); // MARK
 			array = split_str(array, &str_nb, new_str);
 			new_str = NULL;
 		}
