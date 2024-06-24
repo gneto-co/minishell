@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/06 13:22:16 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/24 17:17:49 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	cd_dir(char **args, t_data *data)
 		path = ft_getenv("HOME", data->env);
 		if (!path)
 		{
-			ft_putstr_fd("minishel: cd: HOME not set", STDERR_FILENO);
+			ft_putendl_fd("minishel: cd: HOME not set", STDERR_FILENO);
 			data->process_status = 1;
 		}
 	}
@@ -82,8 +82,13 @@ void	cd_dir(char **args, t_data *data)
 		path = ft_getenv("OLDPWD", data->env);
 		if (!path)
 		{
-			ft_putstr_fd("minishel: cd: OLDPWD not set", STDERR_FILENO);
+			ft_putendl_fd("minishel: cd: OLDPWD not set", STDERR_FILENO);
 			data->process_status = 1;
+		}
+		else
+		{
+			ft_putout(path, data);
+			ft_putout("\n", data);
 		}
 	}
 	else
