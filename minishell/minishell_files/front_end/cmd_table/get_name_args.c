@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:12:43 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/21 12:49:57 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:17:42 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,13 @@ static void	set_cmd_arg(t_data *data, t_table_data *new_line, char **array,
 	quote = array[i][0];
 	// ft_printf("name: %s\n", new_line->name); //MARK
 	// ft_printf("args: %s\n", new_line->args[0]); //MARK
-	// ft_printf("array[i] = %s\n", array[i]); // MARK
+	
+	// ft_printf("1- array[i] = %s\n", array[i]); // MARK // 1- array[i]
 
-	if (!ft_strcmp(new_line->name, "echo") && ft_strncmp(array[i] + 1, "$", 1) == 0 && ft_strcmp(array[i], "$"))
+	if (!ft_strcmp(new_line->name, "echo") && ft_strncmp(array[i] + 1, "$", 1) == 0 /* && ft_strcmp(array[i], "$") */)
 		array[i] = ft_corr(array[i]);
+	
+	// ft_printf("2- array[i] = %s\n", array[i]); // MARK // 2- array[i]
 	
 	if (quote == '\"') // se for " expande tudo
 	{

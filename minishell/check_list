@@ -179,7 +179,8 @@ TESTS:
 
 
 [ ] "echo $?" nao funciona
-[ ] "echo qwe" imprime 2 vezes '\n', (exempl: "echo -n qwe") imprime 1 '\n'
+[x] "echo qwe" imprime 2 vezes '\n', (exempl: "echo -n qwe") imprime 1 '\n'
+[ ] multiple temp file
 
 
 // TODO: todo task
