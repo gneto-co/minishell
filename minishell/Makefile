@@ -6,7 +6,7 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/06/24 14:41:29 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/06/24 22:38:51 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ PECKED				=	----------
 #--------------------------------------------------------------------------------
 #--------------------------COMPILATION SPECIFICATIONS----------------------------
 #--------------------------------------------------------------------------------
-# -fsanitize=address
+# 
 
 CC					=	cc
 CFLAGS				=	-Wall -Wextra -Werror -g3 
-LDFLAGS				=	-L/opt/homebrew/opt/readline/lib -lreadline
+LDFLAGS				=	-L/opt/homebrew/opt/readline/lib -lreadline -fsanitize=address
 RM					=	rm -rf
 CFLAGS 				+= -I/opt/homebrew/opt/readline/include
 

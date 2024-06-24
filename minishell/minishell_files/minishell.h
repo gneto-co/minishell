@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/24 20:13:27 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/24 22:21:57 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 
 # define ENV_FILE ".env_file"
 
-#define PROMPT_STR "minishell> "
+# define PROMPT_STR "minishell> "
 
 typedef struct s_table_data
 {
@@ -78,8 +78,13 @@ typedef struct s_data
 	bool			error;
 	bool			infile_error;
 	char			**env;
+
+	char			*input_str;
+	char			**raw_input_array;
 	char			**input_array;
 	t_table_data	**table;
+
+	bool			ignore_env;
 
 	char			*output_string;
 }					t_data;
@@ -162,8 +167,6 @@ void				cd_dir(char **args, t_data *data);
 void				init_or_exit_update_env(char ***env, char *cmd);
 void				ft_putout(char *str, t_data *data);
 char				*ft_getenv(char *name, char **env);
-
-
 
 /* *********************************** */
 /*                                     */

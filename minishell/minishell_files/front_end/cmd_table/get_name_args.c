@@ -6,12 +6,17 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:12:43 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 15:17:38 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/24 22:41:36 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+static void	exception_manager(t_data *data, t_table_data *new_line,
+		char **array, int *ii)
+{
+	
+}
 static void	new_line_initialize_data(t_table_data *new_line)
 {
 	new_line->name = NULL;
@@ -30,22 +35,28 @@ static void	new_line_initialize_data(t_table_data *new_line)
  * 	· first token : name
  * 	· next tokens : args
  */
-static void	cmd_manager(t_table_data *new_line, char **array, int *ii)
+static void	cmd_manager(t_data *data, t_table_data *new_line, char **array,
+		int *ii)
 {
 	int	i;
 
 	i = *ii;
 	if (new_line->type == CMD)
 		new_line->name = ft_strdup(array[i - 1]);
-	new_line->args = split_str(new_line->args, &new_line->args_amount,
-			ft_strdup(new_line->name));
-	while (get_line_type(array, i) == CMD)
+	if (ft_strcmp(new_line->name, "echo") == 0)
+		exception_manager(data, new_line, array, &i);
+	else
 	{
 		new_line->args = split_str(new_line->args, &new_line->args_amount,
-				ft_strdup(array[i]));
-		i++;
+				ft_strdup(new_line->name));
+		while (get_line_type(array, i) == CMD)
+		{
+			new_line->args = split_str(new_line->args, &new_line->args_amount,
+					ft_strdup(array[i]));
+			i++;
+		}
+		*ii = i;
 	}
-	*ii = i;
 }
 
 /*
@@ -74,12 +85,13 @@ static void	redirection_manager(t_data *data, t_table_data *new_line,
 			type = ft_strdup(">");
 		if (t == GREATGREAT)
 			type = ft_strdup(">>");
-		data->error = true;
-		ft_error(2, type);
-		free(type);
+		data->error = (free(type), ft_error(2, type), true);
 		return ;
 	}
-	new_line->name = ft_strdup(array[i++]);
+	if (t == LESSLESS)
+		new_line->name = ft_strdup(data->raw_input_array[i++]);
+	else
+		new_line->name = ft_strdup(array[i++]);
 	*ii = i;
 }
 
@@ -95,8 +107,8 @@ static void	redirection_manager(t_data *data, t_table_data *new_line,
  * 	· if is a redirection : redirection_manager
  * 	· if is a command : cmd_manager
  */
-t_table_data	*get_name_args(t_table_data *new_line, char **array,
-		int *ii, t_data *data)
+t_table_data	*get_name_args(t_table_data *new_line, char **array, int *ii,
+		t_data *data)
 {
 	int	i;
 	int	t;
@@ -108,7 +120,7 @@ t_table_data	*get_name_args(t_table_data *new_line, char **array,
 		redirection_manager(data, new_line, array, &i);
 	else if (t == CMD)
 	{
-		cmd_manager(new_line, array, &i);
+		cmd_manager(data, new_line, array, &i);
 		if (data->error == true)
 			return (new_line);
 	}

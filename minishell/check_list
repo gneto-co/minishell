@@ -196,8 +196,8 @@ TESTS:
 // ------
 // ------
 [ ] bug : cat << a | cat << b | cat << c
-[ ] error : echo 12
-[ ] error : cat << $USER
+[x] error : cat << $USER
+[ ] error : echo $12
 [ ] error : export b=""
 [ ] error : export a="ls -l"       $a
 [ ] bug : cmd | cmd | ...(x100 cmd)... | cmd

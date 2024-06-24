@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/24 20:05:41 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/24 22:38:22 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ static char	*special_char_4(char *str, int *ii, t_data *data)
 		var_name = get_next_text(str, &i, 1);
 		if (var_name)
 		{
-			new_str = ft_getenv(var_name, data->env);
-			
+			if (data->ignore_env == false)
+				new_str = ft_getenv(var_name, data->env);
+			else
+				new_str = ft_multi_strjoin("$%s", var_name);
 			// MARK
 			// dar split
 		}

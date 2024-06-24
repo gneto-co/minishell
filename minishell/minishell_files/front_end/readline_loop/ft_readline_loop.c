@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/24 20:14:31 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/24 22:33:11 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,22 @@
  *	· reset error
  *	· free table and input_array
  */
-static void	input_use(char *input, t_data *data)
+static void	input_use(t_data *data)
 {
-	data->input_array = ft_token_split(input, data);
-	// ft_print_array_tester(input_array); // MARK print data array
+	ft_printf("%s\n", data->input_str); // MARK print data str
+	//
+	data->ignore_env = true;
+	data->raw_input_array = ft_token_split(data->input_str, data);
+	ft_print_array_tester(data->raw_input_array); // MARK print raw data array
+	//
+	data->ignore_env = false;
+	data->input_array = ft_token_split(data->input_str, data);
+	ft_print_array_tester(data->input_array); // MARK print data array
+	//
 	if (data->error == false)
 	{
 		data->table = create_cmd_table(data->input_array, data);
-		// ft_print_table(data->table); // MARK print data table
+		ft_print_table(data->table); // MARK print data table
 		if (data->error == false)
 			ft_execute(data);
 		ft_free_table(data->table);
@@ -36,6 +44,7 @@ static void	input_use(char *input, t_data *data)
 	}
 	data->error = false;
 	ft_free_array(data->input_array);
+	ft_free_array(data->raw_input_array);
 }
 
 /*
@@ -86,7 +95,10 @@ void	ft_readline_loop(t_data *data)
 			break ;
 		}
 		if (input[0])
-			input_use(input, data);
+		{
+			data->input_str = input;
+			input_use(data);
+		}
 		history_manager(input, &last_input);
 		free(input);
 	}
