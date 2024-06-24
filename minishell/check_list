@@ -177,7 +177,7 @@ TESTS:
 
 /bin/echo ""'totally logical'""
 
-
+// ------
 [ ] multiple temp file
 // ------
 [x] "echo $?" nao funciona
@@ -193,7 +193,14 @@ TESTS:
 [x] error : cd -
 // ------
 [x] "echo qwe" imprime 2 vezes '\n', (exempl: "echo -n qwe") imprime 1 '\n'
-
+// ------
+// ------
+[ ] bug : cat << a | cat << b | cat << c
+[ ] error : echo 12
+[ ] error : cat << $USER
+[ ] error : export b=""
+[ ] error : export a="ls -l"       $a
+[ ] bug : cmd | cmd | ...(x100 cmd)... | cmd
 
 // TODO: todo task
 // FIXME: fix bug

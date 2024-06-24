@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/24 20:06:39 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/24 20:14:31 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,11 @@
  */
 static void	input_use(char *input, t_data *data)
 {
-	char	**input_array;
-
-	input_array = ft_token_split(input, data);
+	data->input_array = ft_token_split(input, data);
 	// ft_print_array_tester(input_array); // MARK print data array
 	if (data->error == false)
 	{
-		data->table = create_cmd_table(input_array, data);
+		data->table = create_cmd_table(data->input_array, data);
 		// ft_print_table(data->table); // MARK print data table
 		if (data->error == false)
 			ft_execute(data);
@@ -37,7 +35,7 @@ static void	input_use(char *input, t_data *data)
 		free(data->table);
 	}
 	data->error = false;
-	ft_free_array(input_array);
+	ft_free_array(data->input_array);
 }
 
 /*

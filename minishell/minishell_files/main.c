@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/21 11:12:39 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/24 20:14:06 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	data_init(t_data *data)
 	data->out_fd = 0;
 	data->exit = false;
 	data->output_string = NULL;
+	data->input_array = NULL;
 }
 
 static void	data_free(t_data *data)
