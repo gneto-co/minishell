@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:12:43 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/24 14:17:42 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:53:10 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,76 @@ char	*ft_corr(char *str)
 	return (temp_str);
 }
 
+// se for " expande tudo
+static void quote_op1(t_data *data, t_table_data *new_line, char **array, int i)
+{
+	int j;
+	int		k;
+	char	*temp_str;
+	char	*final_str;
+	char 	*temp_var_name;
+	char	**temp_split;
+	
+	j = 1;
+	k = 0;
+	temp_str = NULL;
+	final_str = NULL;
+	temp_var_name = NULL;
+	temp_split = NULL;
+	while (array[i][j])
+	{
+		if (array[i][j] == '$')
+		{
+			j++;
+			temp_var_name = get_next_text(array[i], &j, 1);
+			temp_str = ft_getenv(temp_var_name, data->env);
+			temp_split = ft_split(temp_str, ' ');
+			k = 0;
+			while (temp_split[k])
+			{
+				final_str = ft_strjoin_free(final_str, temp_split[k]);
+				k++;
+			}
+			free(temp_var_name);
+			free(temp_str);
+			ft_free_array(temp_split);
+		}
+		else
+		{
+			temp_str = get_next_text(array[i], &j, '\"');
+			final_str = ft_strjoin_free(final_str, temp_str);
+			free(temp_str);
+		}
+	}
+	new_line->args = split_str(new_line->args, &new_line->args_amount,
+				ft_strdup(final_str));
+	free(final_str);
+}
+
+// se for $ expande só esse
+static void quote_op2(t_data *data, t_table_data *new_line, char **array, int i)
+{
+	char	*temp_str;
+	temp_str = NULL;
+	
+	temp_str = ft_getenv(array[i] + 1, data->env);
+	new_line->args = split_str(new_line->args, &new_line->args_amount,
+			ft_strdup(temp_str));
+}
+
+ // se for ' não expande nada
+static void quote_op3(t_table_data *new_line, char **array, int i)
+{
+	new_line->args = split_str(new_line->args, &new_line->args_amount,
+				ft_strdup(array[i] + 1));
+}
+
+
+
 static void	set_cmd_arg(t_data *data, t_table_data *new_line, char **array,
 		int i)
 {
-	int		j;
-	int		k;
 	char	quote;
-	char	*temp_str;
-	char 	*temp_var_name;
-	char	*final_str;
-	char	**temp_split;
-
-	temp_str = NULL;
-	temp_var_name = NULL;
-	temp_split = NULL;
-	final_str = NULL;
-	j = 0;
-	k = 0;
 	quote = array[i][0];
 	// ft_printf("name: %s\n", new_line->name); //MARK
 	// ft_printf("args: %s\n", new_line->args[0]); //MARK
@@ -69,51 +122,12 @@ static void	set_cmd_arg(t_data *data, t_table_data *new_line, char **array,
 	
 	// ft_printf("2- array[i] = %s\n", array[i]); // MARK // 2- array[i]
 	
-	if (quote == '\"') // se for " expande tudo
-	{
-		j = 1;
-		while (array[i][j])
-		{
-			if (array[i][j] == '$')
-			{
-				j++;
-				temp_var_name = get_next_text(array[i], &j, 1);
-				temp_str = ft_getenv(temp_var_name, data->env);
-				temp_split = ft_split(temp_str, ' ');
-				k = 0;
-				while (temp_split[k])
-				{
-					// new_line->args = split_str(new_line->args, &new_line->args_amount,
-					// 		ft_strdup(temp_split[k]));
-					final_str = ft_strjoin_free(final_str, temp_split[k]);
-					k++;
-				}
-				free(temp_var_name);	
-				free(temp_str);
-				ft_free_array(temp_split);
-			}
-			else
-			{
-				temp_str = get_next_text(array[i], &j, '\"');
-				final_str = ft_strjoin_free(final_str, temp_str);
-				free(temp_str);
-			}
-		}
-		new_line->args = split_str(new_line->args, &new_line->args_amount,
-					ft_strdup(final_str));
-		free(final_str);
-	}
-	else if (quote == '$') // se for $ expande esse
-	{
-		temp_str = ft_getenv(array[i] + 1, data->env);
-		new_line->args = split_str(new_line->args, &new_line->args_amount,
-				ft_strdup(temp_str));
-	}
-	else if (quote == '\'') // se for ' não expande nada
-	{
-		new_line->args = split_str(new_line->args, &new_line->args_amount,
-				ft_strdup(array[i] + 1));
-	}
+	if (quote == '\"')
+		quote_op1(data, new_line, array, i);
+	else if (quote == '$') 
+		quote_op2(data, new_line, array, i);
+	else if (quote == '\'')
+		quote_op3(new_line, array, i);
 	else
 	{
 		new_line->args = split_str(new_line->args, &new_line->args_amount,

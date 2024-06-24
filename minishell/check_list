@@ -178,9 +178,21 @@ TESTS:
 /bin/echo ""'totally logical'""
 
 
-[ ] "echo $?" nao funciona
-[x] "echo qwe" imprime 2 vezes '\n', (exempl: "echo -n qwe") imprime 1 '\n'
 [ ] multiple temp file
+// ------
+[ ] "echo $?" nao funciona
+[ ] "echo $" should print $
+[ ] error : export c="ls -a"
+[ ] error : export c="ls"
+// ------
+[ ] memleak : echo $USER, echo $USE
+[ ] memleak : children process free()
+// ------
+[ ] error : cat & ctr+c
+// ------
+[ ] error : cd -
+// ------
+[x] "echo qwe" imprime 2 vezes '\n', (exempl: "echo -n qwe") imprime 1 '\n'
 
 
 // TODO: todo task

@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/12 14:05:30 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:05:27 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ static char	*special_char_5_6(char *str, int *ii, t_data *data, char c)
 		}
 	}
 	*ii = i;
-	// ft_printf("new_str -> %s\n", temp.new_str); // MARK
+	ft_printf("new_str -> %s\n", temp.new_str); // MARK
 	if (!temp.new_str)
 		return (NULL);
 	temp.temp_str = ft_multi_strjoin("%c%s", c, temp.new_str);

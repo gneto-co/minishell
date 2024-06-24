@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
+#    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/06/12 16:46:51 by yadereve         ###   ########.fr        #
+#    Updated: 2024/06/24 14:41:29 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ PECKED				=	----------
 # -fsanitize=address
 
 CC					=	cc
-CFLAGS				=	-Wall -Wextra -Werror -g3
+CFLAGS				=	-Wall -Wextra -Werror -g3 
 LDFLAGS				=	-L/opt/homebrew/opt/readline/lib -lreadline
 RM					=	rm -rf
 CFLAGS 				+= -I/opt/homebrew/opt/readline/include
@@ -125,8 +125,10 @@ fclean: clean
 
 re: fclean all
 
+# --trace-children=yes
+
 v:	all
-	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes --track-origins=yes --suppressions=ignore_readline.supp ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --suppressions=ignore_readline.supp ./minishell
 
 run: all
 	./minishell
