@@ -6,17 +6,57 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:12:43 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/24 22:41:36 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:42:19 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+static char	*ft_corr(t_data *data, char *str)
+{
+	char	*temp_str;
+
+	temp_str = NULL;
+	
+	if (ft_isdigit(str[0]))
+	{
+		temp_str = ft_substr(str, 1, ft_strlen(str));
+		// free(str); // MARK comment
+	}
+	else
+	{
+		temp_str = ft_getenv(str, data->env);
+	}
+	return (temp_str);
+}
+
 static void	exception_manager(t_data *data, t_table_data *new_line,
 		char **array, int *ii)
 {
-	
+	int		i;
+	char	*new_str;
+	char	*temp_str;
+
+	i = *ii;
+	new_str = NULL;
+	temp_str = NULL;
+	while (get_line_type(array, i) == CMD)
+	{
+		new_str = ft_strdup(data->raw_input_array[i]);
+		if (new_str[0] == '$')
+		{
+			temp_str = ft_corr(data, (new_str + 1));
+			free(new_str);
+			new_str = temp_str;
+		}
+		new_line->args = split_str(new_line->args, &new_line->args_amount,
+				new_str);
+		ft_print_array(new_line->args);
+		i++;
+	}
+	*ii = i;
 }
+
 static void	new_line_initialize_data(t_table_data *new_line)
 {
 	new_line->name = NULL;
@@ -40,23 +80,24 @@ static void	cmd_manager(t_data *data, t_table_data *new_line, char **array,
 {
 	int	i;
 
+	(void)data;
 	i = *ii;
 	if (new_line->type == CMD)
 		new_line->name = ft_strdup(array[i - 1]);
+	new_line->args = split_str(new_line->args, &new_line->args_amount,
+			ft_strdup(new_line->name));
 	if (ft_strcmp(new_line->name, "echo") == 0)
 		exception_manager(data, new_line, array, &i);
 	else
 	{
-		new_line->args = split_str(new_line->args, &new_line->args_amount,
-				ft_strdup(new_line->name));
 		while (get_line_type(array, i) == CMD)
 		{
 			new_line->args = split_str(new_line->args, &new_line->args_amount,
 					ft_strdup(array[i]));
 			i++;
 		}
-		*ii = i;
 	}
+	*ii = i;
 }
 
 /*

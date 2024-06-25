@@ -6,7 +6,7 @@
 #    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/06/24 22:38:51 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/06/25 11:19:51 by gneto-co         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCPROJECT_SOURCES	=	$(addsuffix .c, \
 						front_end/token_split/ft_token_split \
 						front_end/token_split/special_char \
 						front_end/token_split/get_next_text \
+						front_end/token_split/special_char_5_6 \
 						\
 						front_end/cmd_table/create_cmd_table \
 						front_end/cmd_table/get_name_args \

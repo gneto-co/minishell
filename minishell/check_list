@@ -197,10 +197,11 @@ TESTS:
 // ------
 [ ] bug : cat << a | cat << b | cat << c
 [x] error : cat << $USER
-[ ] error : echo $12
+[x] error : echo $12
 [ ] error : export b=""
 [ ] error : export a="ls -l"       $a
 [ ] bug : cmd | cmd | ...(x100 cmd)... | cmd
+[ ] bug : ""
 
 // TODO: todo task
 // FIXME: fix bug

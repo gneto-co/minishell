@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/24 22:21:57 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/25 11:21:15 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ char				*get_next_text(char *str, int *ii, int mod);
 char				*special_char_manager(char *str, int *ii, t_data *data);
 char				**split_str(char **array, int *str_nb, char *new_str);
 char				*get_real_next_text(char *str, int *ii, t_data *data);
+char				*special_char_5_6(char *str, int *ii, t_data *data, char c);
+char				*special_char_4(char *str, int *ii, t_data *data);
 
 /*  ft_table  */
 t_table_data		**create_cmd_table(char **array, t_data *data);
