@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/10 17:33:26 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:18:19 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,17 @@ void	ft_exit(char **args, t_data *data)
 	int	i;
 
 	i = -1;
-	data->process_status = 0;
 	ft_printf("exit\n");
 	while (args[1] && args[1][++i])
 	{
+		if (args[1][i] == '+')
+			i++;
+		else if (args[1][i] == '-')
+		{
+			data->process_status = 256 + ft_atoi(args[1]);
+			data->exit = true;
+			break ;
+		}
 		if (!ft_isdigit(args[1][i]))
 		{
 			error_msg(data, args, 2);

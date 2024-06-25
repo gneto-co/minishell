@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:25:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/11 20:46:56 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:05:47 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	error_msg(t_data *data, char **arg, int process_status)
 	if (!ft_strcmp(arg[0], "exit"))
 	{
 		if (process_status == 2)
-			msg = ft_multi_strjoin("\033[91m%s %s%s\033[0m\n", "minishell: exit:", arg , ": numeric argument required");
+			msg = ft_multi_strjoin("\033[91m%s %s%s\033[0m\n", "minishell: exit:", arg[1] , ": numeric argument required");
 		else if (process_status == 1)
 			msg = ft_multi_strjoin("\033[91m%s\033[0m\n", "minishell: exit: too many arguments");
 	}
@@ -33,7 +33,7 @@ int	ft_error(int nb, char *str)
 {
 	char *msg;
 	char *final_msg;
-	
+
 	if (nb == 1)
 		msg = ft_multi_strjoin("%s", "minishell: syntax error, "
 			"quotes are never closed");

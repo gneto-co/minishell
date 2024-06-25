@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:20:02 by yadereve          #+#    #+#             */
-/*   Updated: 2024/06/05 16:26:56 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:10:36 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	ft_export(char **args, t_data *data)
 	int	i;
 
 	i = 1;
-	data->process_status = 0;
 	if (!args[1])
 		ft_print_export(data->env, data);
 	else
