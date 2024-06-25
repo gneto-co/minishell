@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parent_process_builtin_cmd.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/25 11:52:32 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/25 15:07:30 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	final_cmd_execute(t_data *data, t_table_data *cmd)
 	if (!ft_strcmp(cmd->name, "env"))
 		ft_env(data->env, data);
 	else if (!ft_strcmp(cmd->name, "export"))
+	
 		ft_export(cmd->args, data);
 	else if (!ft_strcmp(cmd->name, "unset"))
 		ft_unset(cmd->args, data);

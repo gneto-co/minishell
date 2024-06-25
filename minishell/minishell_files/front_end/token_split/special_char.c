@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/25 11:47:17 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/25 14:42:50 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ char	*special_char_4(char *str, int *ii, t_data *data)
 	var_name = NULL;
 	new_str = NULL;
 	i++;
-	if (!str[i] || str[i] == ' ')
+	if (!str[i] || str[i] == ' ' || ft_strchr(SPECIAL_CHAR, str[i]))
+	{
 		new_str = ft_strdup("$");
+	}
 	else if (str[i] == '?')
 	{
 		new_str = ft_itoa(data->process_status);
@@ -75,7 +77,7 @@ char	*special_char_4(char *str, int *ii, t_data *data)
 		var_name = get_next_text(str, &i, 1);
 		if (var_name)
 		{
-			if (data->ignore_env == false)
+			if (data->signal_mod == 0)
 			{
 				new_str = ft_getenv(var_name, data->env);
 				if (!new_str)
@@ -83,8 +85,6 @@ char	*special_char_4(char *str, int *ii, t_data *data)
 			}
 			else
 				new_str = ft_multi_strjoin("$%s", var_name);
-			// MARK
-			// dar split
 		}
 		free(var_name);
 	}

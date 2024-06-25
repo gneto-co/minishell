@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:14:00 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/25 11:36:18 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/25 14:05:53 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,31 @@ char	*special_char_5_6(char *str, int *ii, t_data *data, char c)
 				free(new_str);
 				free(text_read);
 				new_str = NULL;
-				b = (true);
+				b = true;
 			}
 			else if (str[i] == c)
 			{
 				i++;
-                if (!new_str)
-                    new_str = ft_strdup("");
+				if (!new_str)
+					new_str = ft_strdup("");
 				b = true;
 			}
-			else if (c == '\"' && str[i] == '$')
+			else if (str[i] == '$')
 			{
-				var_read = special_char_4(str, &i, data);
-				new_str = ft_strjoin_free(new_str, var_read);
-				free(var_read);
+				if (c == '\"')
+				{
+					var_read = special_char_4(str, &i, data);
+					new_str = ft_strjoin_free(new_str, var_read);
+					free(var_read);
+				}
 			}
 		}
 	}
 	*ii = i;
+	if (data->signal_mod == 2)
+	{
+		free(new_str);
+		new_str = ft_char_dup(c);
+	}
 	return (new_str);
 }

@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/25 11:21:15 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/25 13:59:31 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,15 @@ typedef struct s_data
 	char			**env;
 
 	char			*input_str;
+	char			**signal_input_array;
 	char			**raw_input_array;
 	char			**input_array;
 	t_table_data	**table;
 
-	bool			ignore_env;
+	int				signal_mod;
+	// 				0 = expand $VAR 
+	// 				1 = not expand $VAR 
+	// 				2 = get signal ( ' / " ) 
 
 	char			*output_string;
 }					t_data;

@@ -200,6 +200,7 @@ TESTS:
 [x] error : echo $12
 [ ] error : export b=""
 [ ] error : export a="ls -l"       $a
+[x] error : echo "'$USER'"
 [ ] bug : cmd | cmd | ...(x100 cmd)... | cmd
 [ ] bug : ""
 
