@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/10 18:29:31 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:41:12 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	second_loop(t_data *data)
 	i = 0;
 	while (data->table[i])
 	{
-		if (data->table[i]->type == CMD)
+		if (data->table[i]->type == CMD /* && data->error != true */)
+			// NOTE !pode estragar!
 			ex_cmd(data, i);
 		i++;
 	}
@@ -61,7 +62,10 @@ static void	wait_pid_loop(t_data *data)
 		if (data->table[i]->type == CMD)
 		{
 			if (data->table[i]->pid)
+			{
+				// ft_printf("\n cmd name -> %s\n", data->table[i]->name); // MARK print cmd name on waitpid
 				waitpid(data->table[i]->pid, &status, 0);
+			}
 			if (WIFEXITED(status) && !data->process_status)
 				data->process_status = WEXITSTATUS(status);
 		}

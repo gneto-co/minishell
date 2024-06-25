@@ -6,11 +6,25 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/25 15:07:30 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/25 15:13:55 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
+
+static bool	have_pipes(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->table[i])
+	{
+		if (data->table[i]->type == PIPE)
+			return (true);
+		i++;
+	}
+	return (false);
+}
 
 static void	final_cmd_execute(t_data *data, t_table_data *cmd)
 {
@@ -18,8 +32,12 @@ static void	final_cmd_execute(t_data *data, t_table_data *cmd)
 	if (!ft_strcmp(cmd->name, "env"))
 		ft_env(data->env, data);
 	else if (!ft_strcmp(cmd->name, "export"))
-	
-		ft_export(cmd->args, data);
+	{
+		if (!have_pipes(data))
+			ft_export(cmd->args, data);
+		else
+			data->process_status = 1;
+	}
 	else if (!ft_strcmp(cmd->name, "unset"))
 		ft_unset(cmd->args, data);
 	else if (!ft_strcmp(cmd->name, "pwd"))
