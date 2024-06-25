@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/06 13:22:16 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:16:19 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	ft_chdir(char *path, t_data *data)
 	if (chdir(path) != 0)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
-		ft_putstr_fd("no such file or directory: ", STDERR_FILENO);
-		ft_putendl_fd(path, STDERR_FILENO);
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 		data->process_status = 1;
 	}
 	else
@@ -107,7 +107,6 @@ void	ft_cd(char **args, t_data *data)
 	int	i;
 
 	i = 0;
-	data->process_status = 0;
 	while (args[i])
 		i++;
 	if (i > 2)

@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 19:31:19 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:10:33 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	ft_unset(char **args, t_data *data)
 	int	index_env;
 
 	i = 1;
-	data->process_status = 0;
 	while (args[i])
 	{
 		if (ft_strchr(args[i], '='))
