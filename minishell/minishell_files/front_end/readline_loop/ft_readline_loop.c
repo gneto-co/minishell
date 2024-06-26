@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/26 12:56:51 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/26 15:22:43 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void	input_use(t_data *data)
 		ft_free_table(data->table);
 		free(data->table);
 		ft_free_array(data->raw_input_array);
+		ft_free_array(data->signal_input_array);
 	}
 	data->error = false;
 	ft_free_array(data->input_array);

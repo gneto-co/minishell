@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/26 12:54:24 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:35:39 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static void	wait_pid_loop(t_data *data)
 		// ft_printf("%s\n", data->table[i]);
 		if (data->table[i]->type == PIPE)
 		{
+			data->process_status = 0;
 			if (data->table[i]->pipe_fd[0] && data->table[i]->pipe_fd[1])
 			{
 				close(data->table[i]->pipe_fd[0]);
