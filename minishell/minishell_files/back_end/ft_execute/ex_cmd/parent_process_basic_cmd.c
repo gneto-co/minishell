@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/05 15:11:07 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/26 13:01:21 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
 {
+	if ((!data->table[cmd->pos + 1] || (!data->table[cmd->pos + 2] && data->table[cmd->pos + 1]->type != PIPE)) && have_pipes(data) && cmd->args_amount == 1)
+		exit(0);
 	data->process_status = execve(cmd->path, cmd->args, envp);
 	perror("command process error");
 	data->error = true;

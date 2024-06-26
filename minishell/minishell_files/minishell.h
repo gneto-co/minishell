@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/25 13:59:31 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/26 12:44:15 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_table_data
 {
 	int				type;
 	char			*name;
+	int				pos;
 
 	int				pipe_fd[2];
 
@@ -71,13 +72,16 @@ typedef struct s_table_data
 
 typedef struct s_data
 {
+
 	int				in_fd;
 	int				out_fd;
+	
 	int				process_status;
+	char			**env;
+	
 	bool			exit;
 	bool			error;
 	bool			infile_error;
-	char			**env;
 
 	char			*input_str;
 	char			**signal_input_array;
@@ -86,9 +90,9 @@ typedef struct s_data
 	t_table_data	**table;
 
 	int				signal_mod;
-	// 				0 = expand $VAR 
-	// 				1 = not expand $VAR 
-	// 				2 = get signal ( ' / " ) 
+	// 				0 = expand $VAR
+	// 				1 = not expand $VAR
+	// 				2 = get signal ( ' / " )
 
 	char			*output_string;
 }					t_data;
@@ -144,6 +148,7 @@ void				ex_lessless(t_data *data, int i);
 void				ex_greatgreat(t_data *data, int i);
 void				parent_process_basic_cmd(t_data *data, t_table_data *cmd);
 void				parent_process_builtin_cmd(t_data *data, t_table_data *cmd);
+bool				have_pipes(t_data *data);
 
 /*  cmd  */
 char				*ft_find_cmd_path(char *cmd, char **env);

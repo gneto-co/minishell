@@ -6,13 +6,13 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/25 15:13:55 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/26 12:38:49 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-static bool	have_pipes(t_data *data)
+bool	have_pipes(t_data *data)
 {
 	int	i;
 
