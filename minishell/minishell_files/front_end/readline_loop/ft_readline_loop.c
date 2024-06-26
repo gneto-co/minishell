@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/25 14:43:48 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/26 12:03:52 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	input_use(t_data *data)
 		// ft_print_array_tester(data->signal_input_array); // MARK print raw data array
 		//
 		data->table = create_cmd_table(data->input_array, data);
-		// ft_print_table(data->table); // MARK print data table
+		ft_print_table(data->table); // MARK print data table
 		//
 		if (data->error == false)
 			ft_execute(data);

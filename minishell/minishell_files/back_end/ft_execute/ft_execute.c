@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/25 16:41:12 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/26 12:29:28 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ static void	wait_pid_loop(t_data *data)
 		{
 			if (data->table[i]->pid)
 			{
-				// ft_printf("\n cmd name -> %s\n", data->table[i]->name); // MARK print cmd name on waitpid
+				ft_printf("cmd name -> %s\n", data->table[i]->name); // MARK print cmd name on waitpid
+				ft_printf("cmd pid -> %s\n", data->table[i]->pid); // MARK print cmd name on waitpid
+
 				waitpid(data->table[i]->pid, &status, 0);
 			}
 			if (WIFEXITED(status) && !data->process_status)
