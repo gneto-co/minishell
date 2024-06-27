@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/27 13:13:26 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:21:07 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,15 @@
 # define ENV_FILE ".env_file"
 
 # define PROMPT_STR "minishell> "
+
+typedef struct s_individual_data
+{
+	int				i;
+	bool			b;
+	char			*new_str;
+	char			*text_read;
+
+}					t_individual_data;
 
 typedef struct s_table_data
 {

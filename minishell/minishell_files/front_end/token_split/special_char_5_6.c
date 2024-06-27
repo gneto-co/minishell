@@ -6,20 +6,11 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:14:00 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/27 12:30:54 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:20:55 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-typedef struct s_individual_data
-{
-	int		i;
-	bool	b;
-	char	*new_str;
-	char	*text_read;
-
-}			t_individual_data;
 
 static void	cs1(t_data *data, char *str, char c, t_individual_data *i_data)
 {
