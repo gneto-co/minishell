@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"sstream": "c",
-		"libft.h": "c",
-		"fcntl.h": "c"
-	},
-	"cmake.sourceDirectory": "/nfs/homes/yadereve/Desktop/eval/push_swap_daan/push_swap_visualizer",
-	"cmake.configureOnOpen": false
-}
