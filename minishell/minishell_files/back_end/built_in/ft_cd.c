@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:47 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/25 12:16:19 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/27 11:54:32 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
  * Updates the environment variables for the current working directory (PWD)
  * and the previous working directory (OLDPWD).
  */
-// FIXME not fix all error
 void	cd_update_env(t_data *data)
 {
 	char	**env;
@@ -67,7 +66,6 @@ void	cd_dir(char **args, t_data *data)
 {
 	char	*path;
 
-	path = NULL;
 	if (args[1] == NULL || !ft_strcmp(args[1], "~"))
 	{
 		path = ft_getenv("HOME", data->env);

@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/26 12:44:15 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 11:48:56 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,12 @@ typedef struct s_table_data
 
 typedef struct s_data
 {
-
 	int				in_fd;
 	int				out_fd;
-	
+
 	int				process_status;
 	char			**env;
-	
+
 	bool			exit;
 	bool			error;
 	bool			infile_error;
@@ -90,9 +89,6 @@ typedef struct s_data
 	t_table_data	**table;
 
 	int				signal_mod;
-	// 				0 = expand $VAR
-	// 				1 = not expand $VAR
-	// 				2 = get signal ( ' / " )
 
 	char			*output_string;
 }					t_data;

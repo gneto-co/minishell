@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 18:33:15 by yadereve          #+#    #+#             */
-/*   Updated: 2024/06/05 17:19:25 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 11:51:01 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	is_valid_identifier(const char *str)
  */
 char	**ft_create_env(char *new_var)
 {
-	char **new_env;
+	char	**new_env;
 
 	new_env = malloc(2 * sizeof(char *));
 	if (!new_env)
@@ -109,7 +109,7 @@ void	add_new_arg(char ***env, char *new_var)
 		}
 		new_env[i] = ft_strdup(new_var);
 		new_env[i + 1] = NULL;
-		free_array(env); //LEAK maybe, error malloc()
+		free_array(env);
 		*env = new_env;
 	}
 }

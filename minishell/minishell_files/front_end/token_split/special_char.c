@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:02:21 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/25 14:42:50 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 12:37:49 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,18 @@ static char	*special_char_1_2_3(char *str, int *ii)
 	return (new_str);
 }
 
+static void	cs1(t_data *data, char **new_str, char *var_name)
+{
+	if (data->signal_mod == 0)
+	{
+		*new_str = ft_getenv(var_name, data->env);
+		if (!*new_str)
+			*new_str = ft_strdup("");
+	}
+	else
+		*new_str = ft_multi_strjoin("$%s", var_name);
+}
+
 /*
  * 	works for:
  * 	· $
@@ -59,37 +71,21 @@ char	*special_char_4(char *str, int *ii, t_data *data)
 	char	*var_name;
 	char	*new_str;
 
-	i = *ii;
+	i = *ii + 1;
 	var_name = NULL;
 	new_str = NULL;
-	i++;
 	if (!str[i] || str[i] == ' ' || ft_strchr(SPECIAL_CHAR, str[i]))
-	{
 		new_str = ft_strdup("$");
-	}
 	else if (str[i] == '?')
-	{
-		new_str = ft_itoa(data->process_status);
-		i++;
-	}
+		new_str = (i++, ft_itoa(data->process_status));
 	else
 	{
 		var_name = get_next_text(str, &i, 1);
 		if (var_name)
-		{
-			if (data->signal_mod == 0)
-			{
-				new_str = ft_getenv(var_name, data->env);
-				if (!new_str)
-					new_str = ft_strdup("");	
-			}
-			else
-				new_str = ft_multi_strjoin("$%s", var_name);
-		}
+			cs1(data, &new_str, var_name);
 		free(var_name);
 	}
-	*ii = i;
-	return (new_str);
+	return (*ii = i, new_str);
 }
 
 /*

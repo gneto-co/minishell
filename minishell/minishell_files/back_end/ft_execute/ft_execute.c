@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/26 14:35:39 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 12:07:01 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,17 @@ static void	second_loop(t_data *data)
 	i = 0;
 	while (data->table[i])
 	{
-		if (data->table[i]->type == CMD /* && data->error != true */)
-			// NOTE !pode estragar!
+		if (data->table[i]->type == CMD)
 			ex_cmd(data, i);
 		i++;
 	}
 }
 
 /* waitpid loop : wait for all processes and close pipes */
-static void	wait_pid_loop(t_data *data)
+static void	wait_pid_loop(t_data *data, int i)
 {
-	int	i;
 	int	status;
 
-	i = 0;
 	while (data->table[i])
 	{
 		status = 0;
@@ -63,16 +60,11 @@ static void	wait_pid_loop(t_data *data)
 		{
 			if (data->table[i]->pid)
 			{
-				// ft_printf("cmd name -> %s\n", data->table[i]->name); // MARK print cmd name on waitpid
-				// ft_printf("cmd pid -> %d\n", data->table[i]->pid); // MARK print cmd name on waitpid
-
 				waitpid(data->table[i]->pid, &status, 0);
 			}
 			if (WIFEXITED(status) && !data->process_status)
 				data->process_status = WEXITSTATUS(status);
 		}
-		// MARK
-		// ft_printf("%s\n", data->table[i]);
 		if (data->table[i]->type == PIPE)
 		{
 			data->process_status = 0;
@@ -106,7 +98,7 @@ int	ft_execute(t_data *data)
 	{
 		first_loop(data);
 		second_loop(data);
-		wait_pid_loop(data);
+		wait_pid_loop(data, 0);
 		reset_loop(data);
 	}
 	return (0);

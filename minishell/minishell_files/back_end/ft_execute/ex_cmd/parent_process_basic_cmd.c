@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/26 14:59:40 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 11:43:26 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
 {
-	signal(SIGINT, SIG_DFL); // NOTE
-	if ((!data->table[cmd->pos + 1] || (!data->table[cmd->pos + 2] && data->table[cmd->pos + 1]->type != PIPE)) && have_pipes(data) && cmd->args_amount == 1)
+	signal(SIGINT, SIG_DFL);
+	if ((!data->table[cmd->pos + 1] || (!data->table[cmd->pos + 2]
+				&& data->table[cmd->pos + 1]->type != PIPE)) && have_pipes(data)
+		&& cmd->args_amount == 1)
 		exit(0);
 	if (ft_strcmp(cmd->name, "") == 0)
 		exit(0);
@@ -44,7 +46,6 @@ static void	child_process(t_data *data, t_table_data *cmd, char **envp)
 	}
 	final_cmd_execute(data, cmd, envp);
 }
-
 
 /*
  *

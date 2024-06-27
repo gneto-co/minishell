@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 22:05:25 by yadereve          #+#    #+#             */
-/*   Updated: 2024/06/05 19:22:55 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/06/27 11:50:23 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ char	*ft_getenv(char *name, char **env)
 	return (val);
 }
 
-void init_or_exit_update_env(char ***env, char *cmd)
+void	init_or_exit_update_env(char ***env, char *cmd)
 {
-	char *buff;
-	char *num;
-	int val;
-	int index;
+	char	*buff;
+	char	*num;
+	int		val;
+	int		index;
 
 	index = find_var((*env), "SHLVL");
 	if (index < 0)
@@ -51,7 +51,7 @@ void init_or_exit_update_env(char ***env, char *cmd)
 	free(num);
 }
 
-void ft_putout(char *str, t_data *data)
+void	ft_putout(char *str, t_data *data)
 {
 	data->output_string = ft_strjoin_free(data->output_string, str);
 }

@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:12:43 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/25 14:36:33 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 12:40:15 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,39 +36,18 @@ static void	exception_manager(t_data *data, t_table_data *new_line,
 {
 	int		i;
 	char	*new_str;
-	// char	*temp_str;
 
 	i = *ii;
 	new_str = NULL;
-	// temp_str = NULL;
 	while (get_line_type(array, i) == CMD)
 	{
 		new_str = ft_strdup(data->raw_input_array[i]);
-		// if (new_str[0] == '$')
-		// {
-		// 	temp_str = ft_corr(data, (new_str + 1), i);
-		// 	free(new_str);
-		// 	new_str = temp_str;
-		// }
 		new_str = ft_corr(data, (new_str), i);
 		new_line->args = split_str(new_line->args, &new_line->args_amount,
 				new_str);
-		// ft_print_array(new_line->args); // MARK print
 		i++;
 	}
 	*ii = i;
-}
-
-static void	new_line_initialize_data(t_table_data *new_line)
-{
-	new_line->name = NULL;
-	new_line->args = malloc(sizeof(char *));
-	new_line->args[0] = NULL;
-	new_line->args_amount = 0;
-	new_line->in_fd = 0;
-	new_line->out_fd = 0;
-	new_line->path = NULL;
-	new_line->pid = 0;
 }
 
 /*
@@ -158,7 +137,14 @@ t_table_data	*get_name_args(t_table_data *new_line, char **array, int *ii,
 
 	t = new_line->type;
 	i = *ii + 1;
-	new_line_initialize_data(new_line);
+	new_line->name = NULL;
+	new_line->args = malloc(sizeof(char *));
+	new_line->args[0] = NULL;
+	new_line->args_amount = 0;
+	new_line->in_fd = 0;
+	new_line->out_fd = 0;
+	new_line->path = NULL;
+	new_line->pid = 0;
 	if (t == LESS || t == LESSLESS || t == GREAT || t == GREATGREAT)
 		redirection_manager(data, new_line, array, &i);
 	else if (t == CMD)

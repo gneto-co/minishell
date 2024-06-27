@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/26 15:43:44 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 12:29:42 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ static void	env_init(t_data *data, char **env)
 		data->env = ft_file_to_array(ENV_FILE);
 	else
 	{
-		// 	if env == NULL
-		// 		buscar informação
-		// 	else
 		data->env = ft_array_dup(env);
 	}
 	init_or_exit_update_env(&(data->env), "init");
@@ -43,8 +40,7 @@ static void	data_init(t_data *data)
 
 static void	data_free(t_data *data)
 {
-	// init_or_exit_update_env(&(data->env), "exit"); // lvl-- MARK
-	unlink(ENV_FILE); // FIXME
+	unlink(ENV_FILE);
 	ft_free_array(data->env);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 10:10:45 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/24 22:22:07 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 11:44:30 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static bool	have_more_text(char *str, int i)
 		return (false);
 	if (str[i] == '$' || str[i] == '\'' || str[i] == '\"')
 		return (true);
-	else if (ft_strchr(SPECIAL_CHAR, str[i])
-		|| str[i] == ' ' || str[i] == '\0')
+	else if (ft_strchr(SPECIAL_CHAR, str[i]) || str[i] == ' '
+		|| str[i] == '\0')
 		return (false);
 	else
 		return (true);
