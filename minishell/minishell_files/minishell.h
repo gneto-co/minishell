@@ -6,7 +6,7 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/27 11:48:56 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:13:26 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_data
 
 int					ft_error(int nb, char *str);
 void				error_msg(t_data *data, char **arg, int process_status);
+char				**create_env(void);
 
 /*                   */
 /*     front_end     */

@@ -6,19 +6,44 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:33:55 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/27 12:29:42 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:12:45 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+char	**create_env(void)
+{
+	char	**array_env;
+	char	cwd[1024];
+
+	array_env = malloc(sizeof(char *) * 5);
+	if (getcwd(cwd, sizeof(cwd)))
+	{
+		array_env[0] = ft_strjoin("PWD=", cwd);
+		array_env[1] = ft_strjoin("OLDPWD=", cwd);
+		array_env[2] = ft_strdup("SHLVL=0");
+		array_env[3] = ft_strdup("_=/usr/bin/env");
+		array_env[4] = NULL;
+	}
+	return (array_env);
+}
+
 static void	env_init(t_data *data, char **env)
 {
+	char	**array_env;
+
+	array_env = NULL;
 	if (access(ENV_FILE, F_OK) != -1)
 		data->env = ft_file_to_array(ENV_FILE);
 	else
 	{
-		data->env = ft_array_dup(env);
+		if (!*env)
+			array_env = create_env();
+		else
+			array_env = ft_array_dup(env);
+		data->env = ft_array_dup(array_env);
+		free_array(&array_env);
 	}
 	init_or_exit_update_env(&(data->env), "init");
 	ft_array_to_file(data->env, ENV_FILE);
