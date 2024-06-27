@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/26 12:44:15 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/06/27 12:23:58 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ typedef struct s_data
 
 	int				in_fd;
 	int				out_fd;
-	
+
 	int				process_status;
 	char			**env;
-	
+
 	bool			exit;
 	bool			error;
 	bool			infile_error;
@@ -105,6 +105,7 @@ typedef struct s_data
 
 int					ft_error(int nb, char *str);
 void				error_msg(t_data *data, char **arg, int process_status);
+char				**create_env(void);
 
 /*                   */
 /*     front_end     */
