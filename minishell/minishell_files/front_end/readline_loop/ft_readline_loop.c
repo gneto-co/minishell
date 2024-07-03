@@ -6,11 +6,22 @@
 /*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/27 11:44:53 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:40:04 by gneto-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+static char	*get_input(void)
+{
+	char	*input;
+
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
+	input = readline(PROMPT_STR);
+	signal(SIGQUIT, SIG_DFL);
+	return (input);
+}
 
 /*
  *	· use the raw input:
@@ -78,12 +89,10 @@ void	ft_readline_loop(t_data *data)
 	char	*input;
 	char	*last_input;
 
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
 	last_input = (using_history(), NULL);
 	while (!data->exit)
 	{
-		input = readline(PROMPT_STR);
+		input = get_input();
 		if (!input)
 		{
 			free(input);
