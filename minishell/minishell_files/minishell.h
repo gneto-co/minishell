@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/27 13:21:07 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/07/16 13:33:01 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@
 # define ENV_FILE ".env_file"
 
 # define PROMPT_STR "minishell> "
+
+// signals
+# define ignor -1
+# define def 41
+# define child 42
 
 typedef struct s_individual_data
 {
@@ -184,6 +189,8 @@ void				cd_dir(char **args, t_data *data);
 void				init_or_exit_update_env(char ***env, char *cmd);
 void				ft_putout(char *str, t_data *data);
 char				*ft_getenv(char *name, char **env);
+void				signals(int sig);
+
 
 /* *********************************** */
 /*                                     */

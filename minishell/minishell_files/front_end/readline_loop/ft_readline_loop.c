@@ -3,23 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline_loop.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/07/03 16:40:04 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/07/16 13:34:50 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static char	*get_input(void)
+/* static char	*get_input(void)
 {
 	char	*input;
+	// static int n = 0;
 
+	input = NULL;
+	// printf("n = %d\t", ++n); // MARK n=
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
 	input = readline(PROMPT_STR);
+	// signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_DFL);
+	return (input);
+} */
+
+static char	*get_input(void)
+{
+	char	*input;
+	// static int n = 0;
+
+	input = NULL;
+	// printf("n = %d\t", ++n); // MARK n=
+	signals(def);
+	input = readline(PROMPT_STR);
+	// signal(SIGINT, SIG_IGN);
 	return (input);
 }
 

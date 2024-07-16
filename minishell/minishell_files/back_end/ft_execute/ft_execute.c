@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:23:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/06/27 12:07:01 by gneto-co         ###   ########.fr       */
+/*   Updated: 2024/07/16 12:37:37 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ static void	wait_pid_loop(t_data *data, int i)
 		if (data->table[i]->type == CMD)
 		{
 			if (data->table[i]->pid)
-			{
 				waitpid(data->table[i]->pid, &status, 0);
-			}
 			if (WIFEXITED(status) && !data->process_status)
 				data->process_status = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+				data->process_status = 128 + WTERMSIG(status);
 		}
 		if (data->table[i]->type == PIPE)
 		{

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gneto-co <gneto-co@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 10:09:55 by gabriel           #+#    #+#              #
-#    Updated: 2024/06/25 12:47:20 by gneto-co         ###   ########.fr        #
+#    Updated: 2024/07/16 13:45:18 by yadereve         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ PECKED				=	----------
 # -fsanitize=address
 
 CC					=	cc
-CFLAGS				=	-Wall -Wextra -Werror -g3 
-LDFLAGS				=	-L/opt/homebrew/opt/readline/lib -lreadline 
+CFLAGS				=	-Wall -Wextra -Werror -g3
+LDFLAGS				=	-L/opt/homebrew/opt/readline/lib -lreadline
 RM					=	rm -rf
 CFLAGS 				+= -I/opt/homebrew/opt/readline/include
 
@@ -42,6 +42,7 @@ SRCPROJECT_SOURCES	=	$(addsuffix .c, \
 						\
 						front_end/readline_loop/ft_readline_loop \
 						front_end/readline_loop/handle_signals \
+						front_end/readline_loop/signals \
 						\
 						front_end/token_split/ft_token_split \
 						front_end/token_split/special_char \
