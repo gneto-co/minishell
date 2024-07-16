@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/07/16 13:42:48 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:22:57 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
  */
 static void	child_process(t_data *data, t_table_data *cmd, char **envp)
 {
-	signals(child);
+	signals(CHILD);
 	if (cmd->in_fd)
 	{
 		dup2(cmd->in_fd, STDIN_FILENO);
@@ -67,7 +67,7 @@ void	parent_process_basic_cmd(t_data *data, t_table_data *cmd)
 	envp[0] = ft_strdup("TERM=xterm");
 	envp[1] = NULL;
 	cmd->pid = fork();
-	signals(ignor);
+	signals(IGNOR);
 	if (cmd->pid == -1)
 	{
 		perror("command process error");

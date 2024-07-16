@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 13:13:37 by yadereve          #+#    #+#             */
-/*   Updated: 2024/07/16 13:47:57 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:32:04 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	sigint_handle(int sig)
 void	signals(int sig)
 {
 	signal(SIGQUIT, SIG_IGN);
-	if (sig == ignor)
+	if (sig == IGNOR)
 		signal(SIGINT, SIG_IGN);
-	else if (sig == child)
+	else if (sig == CHILD)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 	}
-	else if (def)
+	else if (DEF)
 		signal(SIGINT, sigint_handle);
 }

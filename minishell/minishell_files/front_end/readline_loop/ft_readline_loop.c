@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/07/16 13:34:50 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:22:07 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*get_input(void)
 
 	input = NULL;
 	// printf("n = %d\t", ++n); // MARK n=
-	signals(def);
+	signals(DEF);
 	input = readline(PROMPT_STR);
 	// signal(SIGINT, SIG_IGN);
 	return (input);

@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 15:22:31 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/07/16 13:33:01 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:22:03 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@
 # define PROMPT_STR "minishell> "
 
 // signals
-# define ignor -1
-# define def 41
-# define child 42
+# define IGNOR -1
+# define DEF 41
+# define CHILD 42
 
 typedef struct s_individual_data
 {
