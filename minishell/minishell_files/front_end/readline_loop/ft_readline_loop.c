@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:25:48 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/07/16 17:22:07 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:24:34 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,11 @@
 /* static char	*get_input(void)
 {
 	char	*input;
-	// static int n = 0;
 
 	input = NULL;
-	// printf("n = %d\t", ++n); // MARK n=
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
 	input = readline(PROMPT_STR);
-	// signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_DFL);
 	return (input);
 } */
@@ -30,13 +27,10 @@
 static char	*get_input(void)
 {
 	char	*input;
-	// static int n = 0;
 
 	input = NULL;
-	// printf("n = %d\t", ++n); // MARK n=
 	signals(DEF);
 	input = readline(PROMPT_STR);
-	// signal(SIGINT, SIG_IGN);
 	return (input);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yadereve <yadereve@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:20:22 by gneto-co          #+#    #+#             */
-/*   Updated: 2024/07/16 17:22:57 by yadereve         ###   ########.fr       */
+/*   Updated: 2024/07/22 17:43:33 by yadereve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
 {
-	signal(SIGINT, SIG_DFL);
+	// signal(SIGINT, SIG_DFL); //NOTE signal(INT, DFL)
 	if ((!data->table[cmd->pos + 1] || (!data->table[cmd->pos + 2]
 				&& data->table[cmd->pos + 1]->type != PIPE)) && have_pipes(data)
 		&& cmd->args_amount == 1)
@@ -67,7 +67,6 @@ void	parent_process_basic_cmd(t_data *data, t_table_data *cmd)
 	envp[0] = ft_strdup("TERM=xterm");
 	envp[1] = NULL;
 	cmd->pid = fork();
-	signals(IGNOR);
 	if (cmd->pid == -1)
 	{
 		perror("command process error");
@@ -78,6 +77,7 @@ void	parent_process_basic_cmd(t_data *data, t_table_data *cmd)
 		child_process(data, cmd, envp);
 	else
 	{
+		signals(IGNOR);
 		if (cmd->in_fd)
 			close(cmd->in_fd);
 		if (cmd->out_fd)
