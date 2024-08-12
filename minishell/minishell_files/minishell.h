@@ -191,7 +191,6 @@ void				ft_putout(char *str, t_data *data);
 char				*ft_getenv(char *name, char **env);
 void				signals(int sig);
 
-
 /* *********************************** */
 /*                                     */
 /*                 END                 */

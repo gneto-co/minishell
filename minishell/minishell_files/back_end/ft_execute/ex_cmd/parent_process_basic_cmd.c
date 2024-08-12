@@ -14,7 +14,6 @@
 
 static void	final_cmd_execute(t_data *data, t_table_data *cmd, char **envp)
 {
-	// signal(SIGINT, SIG_DFL); //NOTE signal(INT, DFL)
 	if ((!data->table[cmd->pos + 1] || (!data->table[cmd->pos + 2]
 				&& data->table[cmd->pos + 1]->type != PIPE)) && have_pipes(data)
 		&& cmd->args_amount == 1)

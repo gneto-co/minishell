@@ -23,7 +23,6 @@
 void	handle_sigint(int sig)
 {
 	(void)sig;
-
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	printf("\n");
